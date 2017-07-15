@@ -35,11 +35,18 @@ const config = {
         include: [resolve('src'), resolve('test')]
       },
       {
+        test:/\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         use: [{
           loader: 'file-loader',
           options: {
-            name: '[name].[ext]?[chunkhash:5]'
           }
         }]
       }
