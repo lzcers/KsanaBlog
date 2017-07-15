@@ -1,15 +1,24 @@
 <template>
-  <footer class="footer">
-    Copyright © {{ thisYear }} | Powered by <a href="https://github.com/viko16/vue-ghpages-blog" target="_blank">vue-ghpages-blog</a>
-  </footer>
+<footer class="footer-bar flex-center">
+  Copyright © Ksana 
+</footer>
 </template>
+
+<style>
+  .footer-bar {
+      z-index: 10;
+      position: fixed;
+      width: 100%;
+      background: white;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      bottom: 0;
+      left: 0;
+  }
+</style>
 
 <script>
   export default {
-    data () {
-      return {
-        thisYear: new Date().getFullYear()
-      }
-    }
+
   }
 </script>
