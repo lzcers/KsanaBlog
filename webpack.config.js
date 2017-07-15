@@ -44,11 +44,7 @@ const config = {
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-          }
-        }]
+        use: ['file-loader?name=[name].[ext]']
       }
     ]
   },
@@ -80,7 +76,7 @@ if (isProd) {
     new CopyWebpackPlugin([
       {
         from: resolve('src/assets'),
-        to: resolve('dist'),
+        to: resolve('dist/assets'),
         ignore: ['.*']
       }
     ])
