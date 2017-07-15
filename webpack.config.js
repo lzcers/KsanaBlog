@@ -47,7 +47,6 @@ const config = {
         use: [{
           loader: 'file-loader',
           options: {
-            name: '[name].[ext]?[chunkhash:5]'
           }
         }]
       }
