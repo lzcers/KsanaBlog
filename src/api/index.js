@@ -23,7 +23,8 @@ function getPostList () {
     return new Promise(resolve => resolve(cache.get('postList')));
   }
   // 根据labels过滤
-  return axios.get(issueUrl, {params: {access_token: config.access_token, state: "open", labels: "post", filter: "created"}})
+  // todo: access_token: config.access_token, github会做代码扫描,token会被干掉,暂时不加这个参数
+  return axios.get(issueUrl, {params: { state: "open", labels: "post", filter: "created" }})
     .then(res => res.data)
     .then(arr => arr.map(i => ({
         id: i.id,
