@@ -1,13 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import VueImg from 'v-img';
 
-import App from './App.vue';
-import routes from './routers';
-import 'mobi.css/dist/mobi.css';
+import App from './views/App.vue';
+import routes from './router';
+import 'mobi.css';
+import 'mobi-theme-dark';
 
  Vue.use(VueRouter);
- Vue.use(VueImg);
 
 const router = new VueRouter({ routes });
 
