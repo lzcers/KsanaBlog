@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 const resolve = (...dir) => path.resolve(__dirname, ...dir);
@@ -26,6 +27,16 @@ const config = {
         use: {
           loader: 'vue-loader',
           options: {
+           loaders: {
+              css: ExtractTextPlugin.extract({
+                use: 'css-loader',
+                fallback: 'vue-style-loader'
+              }),
+              scss: ExtractTextPlugin.extract({
+                use: 'css-loader!sass-loader',
+                fallback: 'vue-style-loader'
+              })
+           }
           }
         }
       },
@@ -36,16 +47,21 @@ const config = {
       },
       {
         test:/\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ExtractTextPlugin.extract({
+          use: 'css-loader',
+          fallback: 'style-loader'
+        })
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', {
-          loader: "sass-loader",
-          options: {
-            includePaths: ["node_modules"]
-          }
-        }],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', {
+            loader: "sass-loader",
+            options: {
+              includePaths: ["node_modules"]
+            }}]
+        })
       },
       {
         test: /\.(txt|md)$/,
@@ -68,6 +84,12 @@ const config = {
         collapseWhitespace: true
       },
       chunksSortMode: 'dependency'
+    }),
+    new ExtractTextPlugin({      
+      // filename: isProd ? 'build.[chunkhash:5].css' : 'build-css.css',
+      filename: 'styles.css',
+      disable: false,
+      allChunks: true
     })
   ]
 };
