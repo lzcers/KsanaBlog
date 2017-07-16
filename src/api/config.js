@@ -1,4 +1,6 @@
+const token1 = "d3638c9330705ab286d1";
+const token2 = "87e4f883b6b658051883";
 export default {
   repo:  'lzcers/KsanaBlog',
-  access_token: "5ea05b6e6"+"f421f0816fd9208a681498110b21d23"
+  access_token: token1 + token2
 };
