@@ -1,5 +1,5 @@
 <template>
-  <div class="post-list">
+  <div class="container post-list">
       <post  v-for="(post, index) in postList" :key="index" :date="post.date" :title="post.title" :body="post.body"></post>
   </div>
 </template>

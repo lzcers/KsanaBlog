@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import App from './views/App.vue';
+import App from './App.vue';
 import routes from './router';
 import 'mobi.css';
 import 'mobi-theme-dark';

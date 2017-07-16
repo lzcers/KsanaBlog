@@ -1,20 +1,32 @@
 <template>
-  <section class="flex-left">
-    <div class="timeline">
+  <section class="flex-center">
+     <div class="timeline hide-on-mobile">
       <a class="ci"></a>
-      <div class="date">{{new Date(date).toLocaleDateString()}}</div>
-    </div>
-    <article class="post-view" v-html="markedownResult"></article>
+      <div class="date">{{ new Date(date).toLocaleDateString() }}</div>
+    </div> 
+    <article class="post-view">
+      <h3 class="post-title">{{ title }}</h3>
+      <a class="post-date show-on-mobile">{{ new Date(date).toLocaleDateString() }}</a>
+      <div class="post-body" v-html="markedownResult"></div>
+    </article>
   </section>
 </template>
 
 <style>
    .post-title {
-    margin-top: 0;
+    margin-top: 5px;
+  } 
+  a.post-date {
+    color: #777;
+    text-decoration: none;
+    font-weight: normal;
+  }
+  .post-body p{
+    margin-top: 5px;
   } 
   .post-view {
     margin-bottom: 20px;
-    width: 600px;
+    max-width: 600px;
     padding: 0 15px 15px 15px;
     border: 1px solid #eee;
   }
@@ -24,7 +36,7 @@
   }
   .timeline {
     position: relative;
-    right: 100px;
+    right: 90px;
     border: 1px solid #777;
   }
   .timeline .ci {

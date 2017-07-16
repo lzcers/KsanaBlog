@@ -1,6 +1,6 @@
 <template>
 <footer class="footer-bar flex-center">
-  Copyright © Ksana 
+  Copyright © Ksana 2017
 </footer>
 </template>
 
