@@ -40,7 +40,16 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ['style-loader', 'css-loader', {
+          loader: "sass-loader",
+          options: {
+            includePaths: ["node_modules"]
+          }
+        }],
+      },
+      {
+        test: /\.(txt|md)$/,
+        use: 'raw-loader'
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
