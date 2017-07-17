@@ -26,13 +26,12 @@
   } 
   .post-view {
     margin-bottom: 20px;
-    max-width: 600px;
+    width: 500px;
     padding: 0 15px 15px 15px;
     border: 1px solid #eee;
   }
   .post-view img{
-    max-width: 400px;
-    max-height: 400px; 
+    display: block;
   }
   .timeline {
     position: relative;
