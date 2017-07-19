@@ -17,7 +17,7 @@ const config = {
   },
   output: {
     path: resolve('dist'),
-    publicPath: '/',
+    publicPath: './dist/',
     filename: 'build.js'
   },
   module: {
