@@ -1,15 +1,18 @@
 <template>
-  <section class="flex-center">
-     <div class="timeline hide-on-mobile">
-      <a class="ci"></a>
-      <div class="date">{{ new Date(date).toLocaleString('zh-Hans-CN', {hour12: false}) }}</div>
-    </div> 
-    <article class="post-view">
-      <h3 class="post-title">{{ title }}</h3>
-      <a class="post-date show-on-mobile">{{ new Date(date).toLocaleString('zh-Hans-CN', {hour12: false}) }}</a>
-      <div class="post-body" v-html="markedownResult"></div>
-    </article>
-  </section>
+  <transition name="slide-fade">
+    <section class="flex-center">
+      <div class="timeline hide-on-mobile">
+        <a class="ci"></a>
+        <div class="date">{{ new Date(date).toLocaleString('zh-Hans-CN', {hour12: false}) }}</div>
+      </div> 
+      <article class="post-view">
+        <h3 class="post-title">{{ title }}</h3>
+        <a class="post-date show-on-mobile">{{ new Date(date).toLocaleString('zh-Hans-CN', {hour12: false}) }}</a>
+        <div class="post-body" v-html="markedownResult">
+        </div>
+      </article>
+    </section>
+  </transition>
 </template>
 
 <style>
@@ -57,6 +60,17 @@
     left: 10px;
     top: -2px; 
   }
+.slide-fade-enter-active {
+  transition: all .5s ease;
+}
+.slide-fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for <2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
 </style>
 
 <script>
@@ -66,6 +80,9 @@ import 'highlight.js/styles/Tomorrow.css';
 export default {
   name: 'postList',
   props: ["date", "title", "body"],
+  data: () => ({
+
+  }),
   computed: {
     markedownResult() {
       return marked(this.body);
