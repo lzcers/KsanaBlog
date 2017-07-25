@@ -5,7 +5,6 @@ import config from './config.js';
 const issueUrl = `https://api.github.com/repos/${config.repo}/issues`;
 const filesListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}`;
 const postUrl = `https://api.github.com/repos/${config.repo}/git/blobs/`;
-
 const cache = {
   get: (key) => {
     if (!window.sessionStorage) return false
@@ -37,7 +36,7 @@ function getPostListFromFiles() {
 
 function getPostBySHA(sha) {
   if (cache.has(sha)) {
-   return Promise.resolve(cache.get(sha))
+    return Promise.resolve(cache.get(sha))
   }
   const httpParam = {
     // https://developer.github.com/v3/media/#raw-1
@@ -45,8 +44,9 @@ function getPostBySHA(sha) {
   }
   return axios.get(postUrl+sha, httpParam)
     .then(res => res.data)
-    .then(raw => fm(raw.content))
+    .then(raw => fm(raw))
     .then(content => {
+      console.log(content);
       cache.set(sha, content);
       return content;
     }); 

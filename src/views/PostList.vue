@@ -27,10 +27,18 @@ export default {
   }),
   created() {
     getPostListFromFiles().then(postList => {
-      postList.forEach(p => {
-        getPostBySHA(p.sha).then(post => {
-          console.log(post);
+      Promise.all(postList.map(p => {
+        return getPostBySHA(p.sha).then(({attributes, body}) => {
+          const post = {
+            title: attributes.Title,
+            date: attributes.Date,
+            body: body
+          };
+          this.postList.push(post);
+          return post;
         });
+      })).then(result => {
+        this.postListRenderFlag = false;
       });
     });
 
