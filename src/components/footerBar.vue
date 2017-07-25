@@ -7,7 +7,7 @@
 <style>
   .footer-bar {
       z-index: 10;
-      position: fixed;
+      position: absolute;
       width: 100%;
       background: white;
       padding-top: 15px;
