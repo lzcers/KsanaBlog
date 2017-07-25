@@ -3,11 +3,11 @@
     <section class="flex-center">
       <div class="timeline hide-on-mobile">
         <a class="ci"></a>
-        <div class="date">{{ new Date(date).toLocaleString('zh-Hans-CN', {hour12: false}) }}</div>
+        <div class="date">{{ date }}</div>
       </div> 
       <article class="post-view">
         <h3 class="post-title">{{ title }}</h3>
-        <a class="post-date show-on-mobile">{{ new Date(date).toLocaleString('zh-Hans-CN', {hour12: false}) }}</a>
+        <a class="post-date show-on-mobile">{{ date }}</a>
         <div class="post-body" v-html="markedownResult">
         </div>
       </article>

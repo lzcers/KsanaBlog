@@ -1,7 +1,7 @@
 <template>
     <div class="container post-list">
         <img src="../assets/loading.gif" class="loading" v-if="postListRenderFlag" ></img>  
-        <post v-for="(post, index) in postList" :key="index" :date="post.date" :title="post.title" :body="post.body"></post>   
+        <post v-for="(post, index) in sortPostList" :key="index" :date="post.date" :title="post.title" :body="post.body"></post>   
     </div>
 </template>
 
@@ -25,6 +25,15 @@ export default {
     postList: [],
     postListRenderFlag: true
   }),
+  computed: {
+    sortPostList() {
+      let sortList = this.postList.sort((a, b) => {
+        console.log(a);
+        return new Date(a.date) < new Date(b.date) ? 1 : -1;
+      });
+      return sortList;
+    }
+  },
   created() {
     getPostListFromFiles().then(postList => {
       Promise.all(postList.map(p => {
