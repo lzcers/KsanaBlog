@@ -15,7 +15,7 @@
 
 <script>
 import post from '@/components/post.vue';
-import {getPostList} from '@/api';
+import {getPostListFromFiles,  getPostBySHA} from '@/api';
 export default {
   name: 'postList',
   components: {
@@ -26,10 +26,14 @@ export default {
     postListRenderFlag: true
   }),
   created() {
-    getPostList().then(result => {
-      this.postList = result;
-      this.postListRenderFlag =  false;
+    getPostListFromFiles().then(postList => {
+      postList.forEach(p => {
+        getPostBySHA(p.sha).then(post => {
+          console.log(post);
+        });
+      });
     });
+
   }
 }
 </script>

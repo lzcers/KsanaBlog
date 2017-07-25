@@ -1,7 +1,10 @@
 import axios from 'axios';
 import config from './config.js';
+  import fm from 'front-matter';
 
 const issueUrl = `https://api.github.com/repos/${config.repo}/issues`;
+const filesListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}`;
+const postUrl = `https://api.github.com/repos/${config.repo}/git/blobs/`;
 
 const cache = {
   get: (key) => {
@@ -18,7 +21,40 @@ const cache = {
   }
 }
 
-function getPostList () {
+
+function getPostListFromFiles() {
+  if (cache.has('postList')) {
+    return Promise.resolve(cache.get('postList'))
+  } else {
+    return axios.get(filesListUrl)
+      .then(res => res.data)
+      .then(arr => {
+        const list = arr.map(({ name, sha }) => ({ name, sha }));
+        return list
+      })
+  }
+}
+
+function getPostBySHA(sha) {
+  if (cache.has(sha)) {
+   return Promise.resolve(cache.get(sha))
+  }
+  const httpParam = {
+    // https://developer.github.com/v3/media/#raw-1
+    headers: { Accept: 'application/vnd.github.v3.raw' }
+  }
+  return axios.get(postUrl+sha, httpParam)
+    .then(res => res.data)
+    .then(raw => fm(raw.content))
+    .then(content => {
+      cache.set(sha, content);
+      return content;
+    }); 
+}
+
+
+// 从git ISSUES获取文章列表
+function getPostListFromIssues () {
   if (cache.has('postList')) {
     return new Promise(resolve => resolve(cache.get('postList')));
   }
@@ -40,5 +76,7 @@ function getPostList () {
 }
 
 export {
-  getPostList
+  getPostListFromIssues,
+  getPostListFromFiles,
+  getPostBySHA
 };

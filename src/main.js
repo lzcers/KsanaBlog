@@ -3,8 +3,7 @@ import VueRouter from 'vue-router';
 
 import App from './App.vue';
 import routes from './router';
-import 'mobi.css';
-import 'mobi-theme-dark';
+import 'mobi.css/dist/mobi.css';
 
  Vue.use(VueRouter);
 

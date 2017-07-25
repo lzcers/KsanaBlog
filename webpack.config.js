@@ -3,7 +3,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const isProd = process.env.NODE_ENV === 'production';
 const resolve = (...dir) => path.resolve(__dirname, ...dir);
 
@@ -17,7 +17,7 @@ const config = {
   },
   output: {
     path: resolve('dist'),
-    publicPath: './dist/',
+    publicPath: isProd ? './dist/' : "",
     filename: 'build.js'
   },
   module: {
@@ -33,7 +33,11 @@ const config = {
                 fallback: 'vue-style-loader'
               }),
               scss: ExtractTextPlugin.extract({
-                use: 'css-loader!sass-loader',
+                use: ['css-loader', {
+                  loader: 'sass-loader',
+                  options: {
+                    includePaths: ['node_modules']
+                  }}],
                 fallback: 'vue-style-loader'
               })
            }
@@ -55,12 +59,15 @@ const config = {
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', {
-            loader: "sass-loader",
-            options: {
-              includePaths: ["node_modules"]
-            }}]
+          use:  [{
+                loader: "css-loader"
+            }, {
+                loader: "sass-loader",
+                options: {
+                    includePaths: ["node_modules"]
+                }
+          }],
+          fallback: 'style-loader'
         })
       },
       {
@@ -96,7 +103,7 @@ const config = {
 
 if (isProd) {
   config.plugins = (config.plugins || []).concat([
-    new webpack.optimize.UglifyJsPlugin({
+    new UglifyJSPlugin({
       compress: {
         warnings: false
       },
