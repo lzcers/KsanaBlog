@@ -1,10 +1,11 @@
 import axios from 'axios';
 import config from './config.js';
-  import fm from 'front-matter';
+import fm from 'front-matter';
 
 const issueUrl = `https://api.github.com/repos/${config.repo}/issues`;
 const filesListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}`;
 const postUrl = `https://api.github.com/repos/${config.repo}/git/blobs/`;
+const tk = 'WlRJM1lqTm1Zak0yTVRFd01qUXdOV05tTW1NMk1qQmtNekF5WW1ZMVlUVXlORGs1Wm1FMk9BPT0=';
 const cache = {
   get: (key) => {
     if (!window.sessionStorage) return false
@@ -25,7 +26,11 @@ function getPostListFromFiles() {
   if (cache.has('postList')) {
     return Promise.resolve(cache.get('postList'))
   } else {
-    return axios.get(filesListUrl)
+    return axios.get(filesListUrl, { 
+        params: {
+          access_token: atob(atob(tk))
+        }
+      })
       .then(res => res.data)
       .then(arr => {
         const list = arr.map(({ name, sha }) => ({ name, sha }));
@@ -40,13 +45,15 @@ function getPostBySHA(sha) {
   }
   const httpParam = {
     // https://developer.github.com/v3/media/#raw-1
-    headers: { Accept: 'application/vnd.github.v3.raw' }
+    headers: { Accept: 'application/vnd.github.v3.raw' },
+    params: {
+      access_token: atob(atob(tk))
+    }
   }
   return axios.get(postUrl+sha, httpParam)
     .then(res => res.data)
     .then(raw => fm(raw))
     .then(content => {
-      console.log(content);
       cache.set(sha, content);
       return content;
     }); 

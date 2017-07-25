@@ -1,13 +1,13 @@
 <template>
 <footer class="footer-bar flex-center">
-  Copyright © Ksana 2017
+  Copyright © 2017 by Ksana
 </footer>
 </template>
 
 <style>
   .footer-bar {
       z-index: 10;
-      position: absolute;
+      position: relative;
       width: 100%;
       background: white;
       padding-top: 15px;
