@@ -28,7 +28,6 @@ export default {
   computed: {
     sortPostList() {
       let sortList = this.postList.sort((a, b) => {
-        console.log(a);
         return new Date(a.date) < new Date(b.date) ? 1 : -1;
       });
       return sortList;
