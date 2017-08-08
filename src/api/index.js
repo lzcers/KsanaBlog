@@ -6,6 +6,7 @@ const issueUrl = `https://api.github.com/repos/${config.repo}/issues`;
 const filesListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}`;
 const postUrl = `https://api.github.com/repos/${config.repo}/git/blobs/`;
 const tk = 'WlRJM1lqTm1Zak0yTVRFd01qUXdOV05tTW1NMk1qQmtNekF5WW1ZMVlUVXlORGs1Wm1FMk9BPT0=';
+
 const cache = {
   get: (key) => {
     if (!window.sessionStorage) return false
