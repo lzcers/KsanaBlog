@@ -40,7 +40,7 @@ export default {
         window.addEventListener('scroll', el.handler);
       },
       unbind: function(el, binding) {
-        btnOne.removeEventListener('scroll', el.handler);
+        window.removeEventListener('scroll', el.handler);
       }
     }
   },
