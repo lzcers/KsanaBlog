@@ -6,6 +6,9 @@
 </template>
 
 <style>
+  .container {
+    overflow: visible !important;
+  }
   .loading {
     width: 150px;
     display: block;
@@ -18,7 +21,7 @@ import post from '@/components/post.vue';
 import {getPostListFromFiles,  getPostBySHA} from '@/api';
 import { debounce } from 'lodash';
 export default {
-  name: 'postList',
+  name: 'Home',
   components: {
     post
   },

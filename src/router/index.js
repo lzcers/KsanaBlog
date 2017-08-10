@@ -1,8 +1,8 @@
-import PostList from '@/views/PostList.vue';
+import Home from '@/views/Home.vue';
 import AboutMe from '@/views/aboutMe.vue';
 
 const routes = [
-  { path: '/', component: PostList },
+  { path: '/', component: Home },
   { path: '/aboutme', component: AboutMe }
 ]
 

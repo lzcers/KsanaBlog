@@ -10,8 +10,6 @@
 
 <style>
   .main-wrap  {
-    padding-top: 102px;
-    padding-bottom: 54px;
   }
 </style>
 

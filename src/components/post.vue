@@ -29,7 +29,7 @@
   } 
   .post-view {
     margin-bottom: 20px;
-    width: 500px;
+    width: 100%;
     padding: 0 15px 15px 15px;
     border: 1px solid #eee;
   }

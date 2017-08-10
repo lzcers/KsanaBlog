@@ -16,13 +16,9 @@
 
 <style>
   .site-header {
-    position: fixed;
     width: 100%;
     background: white;
     padding: 15px;
-    top: 0;
-    left: 0;
-    z-index: 10;
   }
   .site-name {
     margin-top: 0;
