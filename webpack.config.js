@@ -97,7 +97,14 @@ const config = {
       filename: 'styles.css',
       disable: false,
       allChunks: true
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: resolve('src/assets'),
+        to: resolve('dist/assets'),
+        ignore: ['.*']
+      }
+    ])
   ]
 };
 
@@ -110,14 +117,7 @@ if (isProd) {
       output: {
         comments: false
       }
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: resolve('src/assets'),
-        to: resolve('dist/assets'),
-        ignore: ['.*']
-      }
-    ])
+    })
   ])
 }
 
