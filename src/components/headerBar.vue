@@ -7,9 +7,8 @@
           </router-link>
         </div>
           <nav class="site-nav flex-center units-gap-big">
-            <div class="unit">
-               <router-link to="/aboutme" class="site-text-plain">About</router-link>
-            </div>
+            <router-link class="site-text-plain unit" to="/project">Project</router-link>
+            <router-link class="site-text-plain unit" to="/aboutme">About</router-link>
           </nav>
   </header>
 </template>

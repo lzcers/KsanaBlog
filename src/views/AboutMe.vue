@@ -3,7 +3,8 @@
       人总是孤独 <br />
       回忆总是痛苦 <br />
       以此来感受存在 <br />
-      <i>lzcers@gmail.com</i>
+      <a class="site-text-plain unit" href="https://github.com/lzcers">Github</a> <br />
+      <i>Email: lzcers@gmail.com</i> <br />
     </p>
 </template>
 
