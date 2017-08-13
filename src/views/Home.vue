@@ -1,23 +1,25 @@
 <template>
+  <div class="postsContainer">
     <div class="post-list">
-        <li class="post-item" v-for="(item, index) in currentPagePost" :key="index">
-          <router-link class="site-text-plain" :to="'/post/'+item.sha">
-          {{ item.name }}
-          <i class="post-date">{{ item.date }}</i>
-          </router-link>
-        </li>
-        <img src="../assets/loading.gif" class="loading" v-if="postListRenderFlag" ></img>
-        <div class="post-pages">
-          <a @click="loadPagePosts(pageNumber--)" class="post-pages-newer site-text-plain">
-            <span class="post-pages-left"></span>
-            <span>Newer</span>
-          </a>
-          <a @click="loadPagePosts(pageNumber++)" class="post-pages-older site-text-plain">
-            <span>Older</span>
-            <span class="post-pages-right"></span>
-          </a>
-        </div>
+      <li class="post-item" v-for="(item, index) in currentPagePost" :key="index">
+        <router-link class="site-text-plain" :to="'/post/'+item.sha">
+        {{ item.name }}
+        <i class="post-list-date">{{ item.date }}</i>
+        </router-link>
+      </li>
+      <img src="../assets/loading.gif" class="loading" v-if="postListRenderFlag" ></img>
     </div>
+    <div class="post-pages">
+      <a @click="loadPagePosts(-1)" class="post-pages-newer site-text-plain">
+        <span class="post-pages-left"></span>
+        <span>Newer</span>
+      </a>
+      <a @click="loadPagePosts(1)" class="post-pages-older site-text-plain">
+        <span>Older</span>
+        <span class="post-pages-right"></span>
+      </a>
+    </div>
+  </div>
 </template>
 
 <style>
@@ -65,7 +67,7 @@
     width: 0;
     height: 0;
   }  
-  .post-date {
+  .post-list-date {
     float: right;
     margin-left: 50px;
   }
@@ -85,7 +87,7 @@ export default {
     postList: [],
     currentPagePost: [],
     postListRenderFlag: true,
-    eachPage: 10,
+    eachPage: 3,
     xpageNumber: 0
   }),
   computed: {
@@ -104,7 +106,9 @@ export default {
         return new Date(a.date) < new Date(b.date) ? 1 : -1;
       });
     },
-    loadPagePosts(pageNumber) {
+    loadPagePosts(number) {
+      this.pageNumber += number;
+      const pageNumber = this.pageNumber;
       const postList = this.postList;
       const eachPage = this.eachPage;
       this.currentPagePost = postList.slice(pageNumber * eachPage, (pageNumber * eachPage) + eachPage);
