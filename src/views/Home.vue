@@ -28,6 +28,11 @@ export default {
   computed: {
   },
   methods: {
+    sortPostList(postList) {
+      return postList.sort((a, b) => {
+        return new Date(a.date) < new Date(b.date) ? 1 : -1;
+      });
+    },
     loadMore() {
       const eachPage = 10;
       this.pageNumber++;
@@ -36,7 +41,11 @@ export default {
   },
   created() {
     getPostListFromFiles().then(postList => {
-      this.postList = postList;
+      // 取标题中的日期然后排序
+      this.postList = this.sortPostList(postList.map(i => {
+        i.date = /\d{4}-\d{1,2}-\d{1,2}/.exec(i.name.trim());
+        return i;
+      }));
       this.postListRenderFlag = false;
     })
     .catch(e => console.log(e)) ;

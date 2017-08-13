@@ -8,7 +8,7 @@
         </div>
           <nav class="site-nav flex-center units-gap-big">
             <div class="unit">
-               <router-link to="/aboutme" class="site-text-plain">About me</router-link>
+               <router-link to="/aboutme" class="site-text-plain">About</router-link>
             </div>
           </nav>
   </header>
@@ -21,6 +21,7 @@
     padding: 15px;
   }
   .site-name {
+    color: #000;
     margin-top: 0;
   }
 .site-text-plain {

@@ -2,8 +2,8 @@
   <transition name="slide-fade">
     <section class="flex-center container">
       <article class="post-view" v-if="post">
-        <h3 class="post-title">{{ post.title }}</h3>
-        <a class="post-date show-on-mobile">{{ post.date }}</a>
+        <h3 class="post-title flex-center">{{ post.title }}</h3>
+        <a class="post-date flex-center">{{ post.date }}</a>
         <div class="post-body" v-html="markedownResult">
         </div>
       </article> 
@@ -24,21 +24,21 @@
   .post-body p{
     margin-top: 5px;
   } 
+  .post-body img {
+    display: block;
+  }
   .post-view {
     margin-bottom: 20px;
     width: 100%;
     padding: 0 15px 15px 15px;
     border: 1px solid #eee;
   }
-  .post-view img{
-    display: block;
-  }
 </style>
 
 <script>
 import { getPostBySHA } from '@/api';
 import marked from '@/utils/render.js';
-import 'highlight.js/styles/Tomorrow.css';
+import 'highlight.js/styles/tomorrow.css';
 
 export default {
   name: 'Post',

@@ -6,14 +6,15 @@
 
 <style>
   .footer-bar {
-      z-index: 10;
-      position: relative;
-      width: 100%;
-      background: white;
-      padding-top: 15px;
-      padding-bottom: 15px;
-      bottom: 0;
-      left: 0;
+    color: #000;
+    z-index: 10;
+    position: relative;
+    width: 100%;
+    background: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    bottom: 0;
+    left: 0;
   }
 </style>
 
