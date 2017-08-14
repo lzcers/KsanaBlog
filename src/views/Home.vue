@@ -93,7 +93,7 @@ export default {
   computed: {
     pageNumber: {
       set: function(val) {
-        val >= 0 && val < Math.round(this.postList.length / this.eachPage) ? this.xpageNumber = val : this.xpageNumber;
+        val >= 0 && val <= Math.round(this.postList.length / this.eachPage) ? this.xpageNumber = val : this.xpageNumber;
       },
       get: function() {
         return this.xpageNumber;
