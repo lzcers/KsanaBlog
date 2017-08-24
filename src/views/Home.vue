@@ -152,6 +152,13 @@ export default {
         return i;
       }));
       this.constPostList = this.postList;
+
+      const tagName = this.$route.params.tagName;
+      if (tagName) {
+        const tags = tagsList[tagName].map(p => p.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""));
+        this.postList = this.constPostList.filter(i => tags.includes(i.name));
+      }
+      
       this.loadPagePosts(this.pageNumber);
       this.postListRenderFlag = false;
     })
