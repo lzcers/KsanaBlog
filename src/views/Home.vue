@@ -87,7 +87,7 @@ export default {
     postList: [],
     currentPagePost: [],
     postListRenderFlag: true,
-    eachPage: 10,
+    eachPage: 15,
     xpageNumber: 0
   }),
   computed: {
