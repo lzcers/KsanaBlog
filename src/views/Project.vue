@@ -9,7 +9,7 @@
 
 <style>
   .project-list {
-    width: 400px;
+    min-width: 400px;
   }
 </style>
 

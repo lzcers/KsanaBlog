@@ -24,6 +24,7 @@
 
 <style>
   .post-list {
+    padding: 10px 20px;
     min-width: 400px;
   }
   .post-item {
