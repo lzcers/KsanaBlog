@@ -2,12 +2,14 @@
   <div class="flex-center">
     <div class="tags">
       <div class="flex-left">
-        <h3 class="tags-title">Tags</h3>
+        <h3 class="tags-title"><i>Tags</i></h3>
       </div>
       <ul class="flex-left tags-list">
-        <li class="tag-name"><a class="site-text-plain">编码</a></li>
-        <li class="tag-name"><a class="site-text-plain">哲思</a></li>
-        <li class="tag-name"><a class="site-text-plain">碎念</a></li>
+        <li v-for="(tagName, index) in tags" :key="index" class="tag-name">
+          <router-link class="site-text-plain" :to="'/tags/'+tagName">
+            {{ tagName }}
+          </router-link>
+        </li>
       </ul>
     </div>
   </div>
@@ -19,6 +21,7 @@
   }
   .tag-name {
     margin: 0 5px;
+    cursor: pointer;
   }
   .tags-list {
     padding-left: 15px;
@@ -30,6 +33,12 @@
 </style>
 
 <script>
-  export default {
+import tagsList from './tags.json';
+export default {
+  computed: {
+    tags: () => Object.keys(tagsList)
+  },
+  methods: {
   }
+}
 </script>

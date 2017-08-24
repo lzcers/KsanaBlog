@@ -1,5 +1,9 @@
 <template>
   <div class="postsContainer">
+    <tags-bar></tags-bar>  
+    <div class="flex-center">
+      <h3 class="posts-title"><i>Posts</i></h3>
+    </div>
     <div class="post-list">
       <li class="post-item" v-for="(item, index) in currentPagePost" :key="index">
         <router-link class="site-text-plain" :to="'/post/'+item.sha">
@@ -23,6 +27,10 @@
 </template>
 
 <style>
+  .posts-title {
+    margin-top: 10px;
+    width: 400px;
+  }
   .post-list {
     padding: 10px 20px;
     min-width: 400px;
@@ -82,9 +90,16 @@
 
 <script>
 import { getPostListFromFiles } from '@/api';
+import tagsList from '@/components/tags.json';
+import tagsBar from '@/components/tagsBar.vue';
+
 export default {
   name: 'Home',
+  components: {
+    tagsBar
+  },
   data: () => ({
+    constPostList: [],
     postList: [],
     currentPagePost: [],
     postListRenderFlag: true,
@@ -94,11 +109,24 @@ export default {
   computed: {
     pageNumber: {
       set: function(val) {
-        val >= 0 && val <= Math.round(this.postList.length / this.eachPage) ? this.xpageNumber = val : this.xpageNumber;
+        val >= 0 && val <= Math.floor(this.postList.length / this.eachPage) ? this.xpageNumber = val : this.xpageNumber;
       },
       get: function() {
         return this.xpageNumber;
       }
+    }
+  },
+  watch: {
+    $route: function(to, from) {
+      const tagName = to.params.tagName;
+      if (tagName != undefined) {
+        const tags = tagsList[tagName].map(p => p.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""));
+        this.postList = this.constPostList.filter(i => tags.includes(i.name));
+      } else {
+        this.postList = this.constPostList;
+      }
+      this.pageNumber = 0;      
+      this.loadPagePosts(this.pageNumber);
     }
   },
   methods: {
@@ -123,10 +151,11 @@ export default {
         i.name = i.name.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, "").replace(".md", "")
         return i;
       }));
+      this.constPostList = this.postList;
       this.loadPagePosts(this.pageNumber);
       this.postListRenderFlag = false;
     })
-    .catch(e => console.log(e)) ;
+    .catch(e => console.log(e));
   }
 }
 </script>
