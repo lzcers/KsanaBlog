@@ -9,6 +9,8 @@ const buildProcess = exec('cross-env NODE_ENV=production webpack -p --progress -
 buildProcess.stdout.on('data', data => console.log(data));
 buildProcess.stderr.on('data', data => console.log(data)); 
 buildProcess.on('close', (code, signal) => {
+  console.log('build success...');
+  console.log('start publish...');
   console.log(execSync('git add -A', {encoding: "utf8"}));
   console.log(execSync('git commit -m "update posts"', {encoding: "utf8"}));
   console.log(execSync('git push origin develop:master', {encoding: "utf8"}));
