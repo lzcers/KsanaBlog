@@ -120,7 +120,7 @@ export default {
     $route: function(to, from) {
       const tagName = to.params.tagName;
       if (tagName != undefined) {
-        const tags = tagsList[tagName].map(p => p.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""));
+        const tags = tagsList[tagName];
         this.postList = this.constPostList.filter(i => tags.includes(i.name));
       } else {
         this.postList = this.constPostList;

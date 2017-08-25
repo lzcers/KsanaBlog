@@ -1,6 +1,7 @@
 ---
 Title: 通过gitHub与Issues构建博客
 Date: 2017/7/16 19:20:56
+Tags: 碎念
 ---
 
 ![](http://imglf0.nosdn.127.net/img/UUcvQWZBZk9URHhUNmthQzQxSXpDWlhMeitBckdwOVhzNEZtb05xSndtaXowOHpKNEJyREd3PT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg)  
