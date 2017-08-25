@@ -38,5 +38,8 @@ Promise.all(getFrontMatters)
   fs.writeFile(path.format({dir: path.resolve(), base: 'src/components/tags.json'}), 
   JSON.stringify(tagsList), 
   'utf8',
-  err => {if(err) throw err});
+  err => {
+    if(err) throw err 
+    console.log('tagsList created success...');
+  });
 })
