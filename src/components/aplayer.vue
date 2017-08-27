@@ -8,7 +8,7 @@
 
 <style>
   .aplayer {
-    min-width: 380px;
+    min-width: 100%;
   }
   .music-title {
     margin-top: 10px;
