@@ -31,7 +31,7 @@
   }
   .post-list {
     list-style: none;
-    padding-left: 20px;
+    padding: 0 20px;
   }
   .post-item {
     margin: 5px 0px;
@@ -42,10 +42,10 @@
   }
   .post-pages {
     overflow: hidden;
-    padding-left: 20px; 
+    padding: 0 20px; 
   }
   .post-pages-line {
-    margin-top: 10px;
+    margin: 10px 0;
     border-top: 1px solid #777;
   }
   .post-pages-newer {
