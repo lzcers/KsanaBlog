@@ -5,7 +5,7 @@
     </div>
     <ul class="flex-left tags-list">
       <li v-for="(tagName, index) in tags" :key="index" class="tag-name">
-        <router-link class="site-text-plain" :to="'/tags/'+tagName">
+        <router-link class="site-text-plain" :to="encodeURI('/tags/'+tagName)">
           {{ tagName }}
         </router-link>
       </li>
