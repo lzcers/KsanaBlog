@@ -1,5 +1,5 @@
 <template>
-  <div class="aboutme">
+  <div class="container aboutme">
     <blockquote>
       <p>
       如果说艺术解释了我们的梦想，那么计算机就是以程序的名义执行着它们。<br />
@@ -23,9 +23,6 @@
 </template>
 
 <style>
-  .aboutme {
-    width: 30%;
-  }
 </style>
 
 <script>

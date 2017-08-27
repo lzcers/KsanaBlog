@@ -19,7 +19,6 @@
   }
   .tag-name {
     margin: 0 5px;
-    cursor: pointer;
   }
   .tags-list {
     padding-left: 15px;
