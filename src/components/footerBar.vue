@@ -11,10 +11,9 @@
     position: relative;
     width: 100%;
     background: white;
-    padding-top: 15px;
+    padding-top: 40px;
     padding-bottom: 15px;
-    bottom: 0;
-    left: 0;
+    bottom: 0px;
   }
 </style>
 

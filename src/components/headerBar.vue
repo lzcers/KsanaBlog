@@ -10,7 +10,7 @@
           <router-link class="site-text-plain unit" to="/project">Project</router-link>
           <router-link class="site-text-plain unit" to="/aboutme">About</router-link>
         </nav>
-        <i>朝露昙花，咫尺天涯。</i>
+        <i>朝露昙花 咫尺天涯</i>
   </header>
 </template>
 
