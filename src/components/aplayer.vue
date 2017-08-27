@@ -1,7 +1,7 @@
 <template>
   <div class="flex-center flex-vertical">
     <h3 class="music-title"><i>Musics</i></h3>
-    <a-player autoplay :showlrc="false" :music="musics">
+    <a-player autoplay narrow mode="random" listmaxheight="65px" :showlrc="false" :music="musics">
     </a-player>
   </div>
 </template>
