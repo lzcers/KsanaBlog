@@ -113,8 +113,9 @@ export default {
   watch: {
     $route: function(to, from) {
       const tagName = to.params.tagName;
-      alert(tagName);
       if (tagName != undefined) {
+        alert(tagName);
+        alert(typeof tagsList)
         const tags = tagsList[tagName];
         this.postList = this.constPostList.filter(i => tags.includes(i.name));
       } else {
@@ -154,7 +155,7 @@ export default {
         const tags = tagsList[tagName].map(p => p.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""));
         this.postList = this.constPostList.filter(i => tags.includes(i.name));
       }
-      
+
       this.loadPagePosts(this.pageNumber);
       this.postListRenderFlag = false;
     })
