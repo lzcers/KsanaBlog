@@ -1,7 +1,7 @@
 <template>
   <div class="root-wrap">
       <headerBar></headerBar> 
-      <musics></musics>
+      <music></music>
       <div class="main-wrap flex-center">
         <router-view></router-view>
       </div>  
@@ -16,7 +16,7 @@
 
 <script>
 import headerBar from '@/components/headerBar.vue';
-import musics from '@/components/aplayer.vue';
+import music from '@/components/aplayer.vue';
 import footerBar from '@/components/footerBar.vue';
 
 export default {
@@ -24,7 +24,7 @@ export default {
   components: {
     headerBar,
     footerBar,
-    musics
+    music
   },
   data: () => ({
 
