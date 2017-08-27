@@ -89,8 +89,9 @@
 </style>
 
 <script>
-import tagsList from '@/components/tags.json';
+import rawTagsList from '@/components/tags.json';
 import { getPostListFromFiles } from '@/api';
+const tagsList = JSON.parse(JSON.stringify(rawTagsList));
 export default {
   data: () => ({
     constPostList: [],
@@ -114,9 +115,8 @@ export default {
     $route: function(to, from) {
       const tagName = to.params.tagName;
       if (tagName != undefined) {
-        alert(tagName);
-        alert(typeof tagsList)
         const tags = tagsList[tagName];
+        alert(tags[0]);
         this.postList = this.constPostList.filter(i => tags.includes(i.name));
       } else {
         this.postList = this.constPostList;
@@ -132,7 +132,6 @@ export default {
       });
     },
     loadPagePosts(number) {
-      alert(number);
       this.pageNumber += number;
       const pageNumber = this.pageNumber;
       const postList = this.postList;
