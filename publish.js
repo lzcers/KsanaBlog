@@ -5,7 +5,7 @@ const exec = require('child_process').exec;
 const genTagsListProcess = execSync('node ./src/utils/genTagsList.js', {encoding: "utf8"});
 console.log(genTagsListProcess);
 
-const buildProcess = exec('cross-env NODE_ENV=production webpack -p --progress --hide-modules');
+const buildProcess = exec('npm run build');
 buildProcess.stdout.on('data', data => console.log(data));
 buildProcess.stderr.on('data', data => console.log(data)); 
 buildProcess.on('close', (code, signal) => {
