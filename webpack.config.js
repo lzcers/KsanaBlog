@@ -23,7 +23,8 @@ const config = {
   },
   output: {
     path: resolve('dist'),
-    publicPath: isProd ? './dist/' : "",
+    // 配置七牛云镜像CDN加速
+    publicPath: isProd ? 'http://ovcmkko4f.bkt.clouddn.com/' : "",
     filename: '[name].build.js'
   },
   module: {

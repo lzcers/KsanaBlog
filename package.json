@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --hot",
     "build": "cross-env NODE_ENV=production webpack -p --progress --hide-modules",
-    "analyz": "cross-env NODE_ENV=production npm_config_report=true npm run build",
     "publish": "node publish.js"
   },
   "author": "",

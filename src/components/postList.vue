@@ -1,6 +1,6 @@
 <template>
   <div class="posts">
-    <h3 class="post-title"><i>Posts</i></h3>
+    <h3 class="post-header"><i>Posts</i></h3>
     <ol class="post-list">
       <li class="post-item" v-for="(item, index) in currentPagePost" :key="index">
         <router-link class="site-text-plain" :to="'/post/'+item.sha">
@@ -25,7 +25,7 @@
 </template>
 
 <style>
-  .post-title {
+  .post-header {
     margin-top: 10px;
     width: 400px;
   }
