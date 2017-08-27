@@ -4,11 +4,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 const isProd = process.env.NODE_ENV === 'production';
 const resolve = (...dir) => path.resolve(__dirname, ...dir);
 
 const config = {
-  entry: './src/main.js',
+  entry: ["babel-polyfill", "./src/main.js"],
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
@@ -104,7 +106,8 @@ const config = {
         to: resolve('dist/assets'),
         ignore: ['.*']
       }
-    ])
+    ]),
+    // new BundleAnalyzerPlugin()
   ]
 };
 
