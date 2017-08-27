@@ -89,9 +89,8 @@
 </style>
 
 <script>
-import rawTagsList from '@/components/tags.json';
+import tagsList from '@/components/tags.json';
 import { getPostListFromFiles } from '@/api';
-const tagsList = JSON.parse(JSON.stringify(rawTagsList));
 export default {
   data: () => ({
     constPostList: [],
@@ -116,7 +115,6 @@ export default {
       const tagName = to.params.tagName;
       if (tagName != undefined) {
         const tags = tagsList[tagName];
-        alert(tags[0]);
         this.postList = this.constPostList.filter(i => tags.includes(i.name));
       } else {
         this.postList = this.constPostList;
@@ -132,11 +130,13 @@ export default {
       });
     },
     loadPagePosts(number) {
+      alert(4); 
       this.pageNumber += number;
       const pageNumber = this.pageNumber;
-      const postList = this.postList;
       const eachPage = this.eachPage;
-      this.currentPagePost = postList.slice(pageNumber * eachPage, (pageNumber * eachPage) + eachPage);
+      alert(5)
+      this.currentPagePost = this.postList.slice(pageNumber * eachPage, (pageNumber * eachPage) + eachPage);
+      alert(6); 
     }
   },
   created() {
@@ -148,14 +148,17 @@ export default {
         return i;
       }));
       this.constPostList = this.postList;
-
       const tagName = this.$route.params.tagName;
       if (tagName) {
+        alert(1);
         const tags = tagsList[tagName].map(p => p.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""));
+        alert(2);        
         this.postList = this.constPostList.filter(i => tags.includes(i.name));
+        alert(3);
       }
-
+      alert(7); 
       this.loadPagePosts(this.pageNumber);
+      alert(8); 
       this.postListRenderFlag = false;
     })
     .catch(e => console.log(e));
