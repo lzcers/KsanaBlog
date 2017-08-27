@@ -112,6 +112,7 @@ export default {
   },
   watch: {
     $route: function(to, from) {
+      alert(to);
       const tagName = to.params.tagName;
       if (tagName != undefined) {
         const tags = tagsList[tagName];
@@ -130,6 +131,7 @@ export default {
       });
     },
     loadPagePosts(number) {
+      alert(number);
       this.pageNumber += number;
       const pageNumber = this.pageNumber;
       const postList = this.postList;
