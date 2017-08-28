@@ -10,7 +10,6 @@
     z-index: 10;
     position: relative;
     width: 100%;
-    background: white;
     padding-top: 40px;
     padding-bottom: 15px;
     bottom: 0px;

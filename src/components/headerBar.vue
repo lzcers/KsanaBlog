@@ -17,7 +17,6 @@
 <style>
   .site-header {
     width: 100%;
-    background: white;
     padding: 15px;
   }
   .site-name {
