@@ -294,14 +294,18 @@
     color: #fff !important;
   }
   .post-pages-right {
-    border-right-color: #fff !important;
+    border-left-color: #fff !important;
+    border-right-color: transparent !important;
+    border-top-color: transparent !important;
+    border-bottom-color: transparent !important;
   }
   .post-pages-left {
-    border-left-color: #fff !important;
+    border-left-color: transparent !important;
+    border-top-color: transparent !important;
+    border-bottom-color: transparent !important;
+    border-right-color: #fff !important;
   }
-  .post-pages-right, .post-pages-left {
-    border: 10px solid transparent !important;
-  }
+
   /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
   /*Sakura animation using WebGL. No images are used. The framerate might be slow or the demo might not play at all in some older systems so you can watch this video: http://www.screenr.com/BFZ8. Let me make it clear that I did not make this and just thought is was very cool and wanted to share it.
   */
@@ -312,8 +316,6 @@
     position: fixed;
     top: 0;
     left: 0;
-  }
-  #sakura {
   }
   canvas {
       padding: 0;
@@ -641,7 +643,8 @@ export default {
         pointFlower.fader = Vector3.create(0.0, 10.0, 0.0);
         
         // paramerters: velocity[3], rotate[3]
-        pointFlower.numFlowers = 1600;
+        // 樱花数量
+        pointFlower.numFlowers = 350;
         pointFlower.particles = new Array(pointFlower.numFlowers);
         // vertex attributes {position[3], euler_xyz[3], size[1]}
         pointFlower.dataArray = new Float32Array(pointFlower.numFlowers * (3 + 3 + 2));

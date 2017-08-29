@@ -1,17 +1,31 @@
 <template>
   <div class="root-wrap">
       <sakura></sakura>
-      <headerBar></headerBar> 
-      <music></music>
-      <div class="main-wrap flex-center">
-        <router-view></router-view>
-      </div>  
-      <footerBar></footerBar> 
+      <div class="main-wrap">
+        <headerBar></headerBar> 
+        <music></music>
+        <div class="flex-center">
+          <router-view></router-view>
+        </div>  
+        <footerBar></footerBar> 
+      </div>
   </div>
 </template>
 
 <style>
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+  .root-wrap {
+    height: inherit;
+  }
   .main-wrap {
+    z-index: 999;
+    /* height: inherit;
+    min-width: 440px;
+    max-width: 640px;
+    margin: 0 auto; */
   }
 </style>
 
