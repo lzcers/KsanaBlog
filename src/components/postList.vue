@@ -89,8 +89,7 @@
 </style>
 
 <script>
-import tagsList from '@/components/tags.json';
-import { getPostListFromFiles } from '@/api';
+import { getPostListFromFiles, getTags } from '@/api';
 export default {
   data: () => ({
     constPostList: [],
@@ -112,15 +111,17 @@ export default {
   },
   watch: {
     $route: function(to, from) {
-      const tagName = to.params.tagName;
-      if (tagName != undefined) {
-        const tags = tagsList[tagName];
-        this.postList = this.constPostList.filter(i => tags.includes(i.name));
-      } else {
-        this.postList = this.constPostList;
-      }
-      this.pageNumber = 0;      
-      this.loadPagePosts(this.pageNumber);
+      getTags().then(tagsList => {
+        const tagName = to.params.tagName;
+        if (tagName != undefined) {
+          const tags = tagsList[tagName];
+          this.postList = this.constPostList.filter(i => tags.includes(i.name));
+        } else {
+          this.postList = this.constPostList;
+        }
+        this.pageNumber = 0;      
+        this.loadPagePosts(this.pageNumber);
+      })
     }
   },
   methods: {
@@ -144,12 +145,13 @@ export default {
         i.name = i.name.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, "").replace(".md", "");
         return i;
       }));
-      console.log(this.postList);
       this.constPostList = this.postList;
       const tagName = this.$route.params.tagName;
       if (tagName) {
-        const tags = tagsList[tagName].map(p => p.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""));
-        this.postList = this.constPostList.filter(i => tags.includes(i.name));
+          getTags().then(tagsList => {
+            const tags = tagsList[tagName].map(p => p.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""));
+            this.postList = this.constPostList.filter(i => tags.includes(i.name));
+          });
       }
       this.loadPagePosts(this.pageNumber);
       this.postListRenderFlag = false;

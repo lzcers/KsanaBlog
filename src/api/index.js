@@ -4,6 +4,7 @@ import fm from 'front-matter';
 
 const issueUrl = `https://api.github.com/repos/${config.repo}/issues`;
 const filesListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}`;
+const tagsListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.tags}?ref=${config.branch}`;
 const postUrl = `https://api.github.com/repos/${config.repo}/git/blobs/`;
 const tk = 'WlRJM1lqTm1Zak0yTVRFd01qUXdOV05tTW1NMk1qQmtNekF5WW1ZMVlUVXlORGs1Wm1FMk9BPT0=';
 
@@ -23,11 +24,11 @@ const cache = {
 }
 
 
-function getPostListFromFiles() {
+function getPostListFromFiles(url = filesListUrl) {
   if (cache.has('postList')) {
     return Promise.resolve(cache.get('postList'))
   } else {
-    return axios.get(filesListUrl, { 
+    return axios.get(url, { 
         params: {
           access_token: atob(atob(tk))
         }
@@ -35,7 +36,6 @@ function getPostListFromFiles() {
       .then(res => res.data)
       .then(arr => {
         const list = arr.map(({ name, sha, size }) => ({ name, sha, size })).filter(i => i.size != 0);
-        console.log(list);
         return list;
       })
   }
@@ -61,6 +61,11 @@ function getPostBySHA(sha) {
     }); 
 }
 
+function getTags() {
+  getPostListFromFiles(tagsListUrl)
+  .then(files => files.find(i => i.name == 'tags.json'))
+  .then(tags => tags.sha == undefined ? [] : getPostBySHA(tags.sha));
+}
 
 // 从git ISSUES获取文章列表
 function getPostListFromIssues () {
@@ -87,5 +92,6 @@ function getPostListFromIssues () {
 export {
   getPostListFromIssues,
   getPostListFromFiles,
-  getPostBySHA
+  getPostBySHA,
+  getTags
 };

@@ -31,12 +31,11 @@
 </style>
 
 <script>
-import tagsList from './tags.json';
+import { getTags } from '@/api';
+
 export default {
   computed: {
-    tags: () => Object.keys(tagsList)
-  },
-  methods: {
+    tags: () => getTags().then(tags => resolve(Object.keys(tags)))
   }
 }
 </script>
