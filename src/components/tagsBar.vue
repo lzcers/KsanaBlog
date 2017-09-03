@@ -34,8 +34,13 @@
 import { getTags } from '@/api';
 
 export default {
-  computed: {
-    tags: () => getTags().then(tags => resolve(Object.keys(tags)))
+  data: () => ({
+    tags: []
+  }),
+  created() {
+    getTags().then(tags => {
+      this.tags = Object.keys(tags);
+    });
   }
 }
 </script>

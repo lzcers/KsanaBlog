@@ -40,8 +40,7 @@ function getPostListFromFiles(url = filesListUrl) {
       })
   }
 }
-
-function getPostBySHA(sha) {
+function getFileBySHA(sha) {
   if (cache.has(sha)) {
     return Promise.resolve(cache.get(sha))
   }
@@ -54,17 +53,20 @@ function getPostBySHA(sha) {
   }
   return axios.get(postUrl+sha, httpParam)
     .then(res => res.data)
-    .then(raw => fm(raw))
-    .then(content => {
-      cache.set(sha, content);
-      return content;
+    .then(raw => {
+      cache.set(sha, raw);
+      return raw;
     }); 
+}
+function getPostBySHA(sha) {
+  return getFileBySHA(sha)
+  .then(raw => fm(raw))
 }
 
 function getTags() {
-  getPostListFromFiles(tagsListUrl)
+  return getPostListFromFiles(tagsListUrl)
   .then(files => files.find(i => i.name == 'tags.json'))
-  .then(tags => tags.sha == undefined ? [] : getPostBySHA(tags.sha));
+  .then(tags => tags.sha == undefined ? new Promise((resolve, reject) => {resolve([])}) : getFileBySHA(tags.sha));
 }
 
 // 从git ISSUES获取文章列表

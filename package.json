@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server --inline --hot",
-    "build": "cross-env NODE_ENV=production webpack -p --progress --hide-modules",
+    "build": "node src/utils/genTagsList.js & cross-env NODE_ENV=production webpack -p --progress --hide-modules",
     "tags": "node src/utils/genTagsList.js",
     "publish": "node publish.js"
   },
