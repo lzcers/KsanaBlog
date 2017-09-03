@@ -1,6 +1,6 @@
 <template>
   <div class="root-wrap">
-      <sakura></sakura>
+      <!-- <sakura></sakura> -->
       <div class="main-wrap">
         <headerBar></headerBar> 
         <music></music>
@@ -33,14 +33,14 @@
 import headerBar from '@/components/headerBar.vue';
 import music from '@/components/aplayer.vue';
 import footerBar from '@/components/footerBar.vue';
-import sakura from '@/components/sakura.vue';
+// import sakura from '@/components/sakura.vue';
 export default {
   name: "App",
   components: {
     headerBar,
     footerBar,
     music,
-    sakura
+    // sakura
   },
   data: () => ({
 

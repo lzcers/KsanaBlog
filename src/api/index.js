@@ -34,8 +34,9 @@ function getPostListFromFiles() {
       })
       .then(res => res.data)
       .then(arr => {
-        const list = arr.map(({ name, sha }) => ({ name, sha }));
-        return list
+        const list = arr.map(({ name, sha, size }) => ({ name, sha, size })).filter(i => i.size != 0);
+        console.log(list);
+        return list;
       })
   }
 }

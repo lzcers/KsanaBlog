@@ -140,11 +140,11 @@ export default {
     getPostListFromFiles().then(postList => {
       // 取标题中的日期然后排序
       this.postList = this.sortPostList(postList.map(i => {
-        if (i.size == 0) return; 
         i.date = /\d{4}-\d{1,2}-\d{1,2}/.exec(i.name.trim())[0];
-        i.name = i.name.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, "").replace(".md", "")
+        i.name = i.name.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, "").replace(".md", "");
         return i;
       }));
+      console.log(this.postList);
       this.constPostList = this.postList;
       const tagName = this.$route.params.tagName;
       if (tagName) {
