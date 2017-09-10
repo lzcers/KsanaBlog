@@ -120,7 +120,7 @@ const config = {
 
 if (isProd) {
   config.plugins = (config.plugins || []).concat([
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new UglifyJSPlugin({
       compress: {
         warnings: false,
