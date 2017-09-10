@@ -1,6 +1,6 @@
 <template>
 <footer class="footer-bar flex-center">
-  Copyright © 2017 by Ksana
+  <p>© 2017 Ksana Hosted by <a href="https://pages.coding.me">Coding Pages</a></p>
 </footer>
 </template>
 
