@@ -3,7 +3,7 @@
       <!-- <sakura></sakura> -->
       <div class="main-wrap">
         <headerBar></headerBar> 
-        <music></music>
+        <!-- <music></music> -->
         <div class="flex-center">
           <router-view></router-view>
         </div>  
@@ -31,15 +31,15 @@
 
 <script>
 import headerBar from '@/components/headerBar.vue';
-import music from '@/components/aplayer.vue';
 import footerBar from '@/components/footerBar.vue';
+// import music from '@/components/aplayer.vue';
 // import sakura from '@/components/sakura.vue';
 export default {
   name: "App",
   components: {
     headerBar,
-    footerBar,
-    music,
+    footerBar
+    // music,
     // sakura
   },
   data: () => ({
