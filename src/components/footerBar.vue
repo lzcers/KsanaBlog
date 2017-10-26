@@ -1,6 +1,6 @@
 <template>
 <footer class="footer-bar flex-center">
-  <p>© 2017 Ksana Hosted by <a href="https://pages.coding.me">Coding Pages</a></p>
+  <p>© 2017 Ksana</p>
 </footer>
 </template>
 
