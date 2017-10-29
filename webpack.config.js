@@ -90,7 +90,7 @@ const config = {
       }
     ]
   },
-  devtool: "#source-map",
+  devtool: isProd ? "" : "#source-map",
   plugins: [
     new HtmlWebpackPlugin({
       template: resolve('src', 'index.html'),
