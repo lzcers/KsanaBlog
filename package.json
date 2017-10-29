@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot",
+    "dev": "webpack-dev-server --inline --hot content-base ./dist/",
     "build": "node src/utils/genTagsList.js & cross-env NODE_ENV=production webpack -p --progress --hide-modules",
     "tags": "node src/utils/genTagsList.js"
   },
