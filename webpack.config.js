@@ -3,7 +3,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJSPlugin = webpack.optimize.UglifyJsPlugin;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const isProd = process.env.NODE_ENV === 'production';
@@ -12,12 +12,15 @@ const resolve = (...dir) => path.resolve(__dirname, ...dir);
 const config = {
   entry: {
     hilight: "highlight.js",
-    vendor: ["babel-polyfill", "vue", "vue-router"],
+    vue: ["vue", "vue-router"],
+    vendor: ["babel-polyfill"],
     main: "./src/main.js"
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
+      // 'vue$': 'vue/dist/vue.esm.js',
+      // 只用运行时版本
+      'vue$': 'vue/dist/vue.runtime.esm.js',
       '@': resolve('src')
     }
   },
@@ -87,6 +90,7 @@ const config = {
       }
     ]
   },
+  devtool: "#source-map",
   plugins: [
     new HtmlWebpackPlugin({
       template: resolve('src', 'index.html'),
@@ -113,24 +117,28 @@ const config = {
       }
     ]),
     new CommonsChunkPlugin({
-      names: ["hilight", "vendor"]
+      names: ["hilight", "vendor", 'vue']
     })
   ]
 };
 
 if (isProd) {
   config.plugins = (config.plugins || []).concat([
-    // new BundleAnalyzerPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': 'production'
+    }),
     new UglifyJSPlugin({
       compress: {
         warnings: false,
         drop_console: true,
-        pure_funcs: ['console.log']
+        pure_funcs: ['console.log'],
       },
+      sourceMap: true,
       output: {
         comments: false
       }
-    })
+    }),
+    // new BundleAnalyzerPlugin(),
   ])
 }
 
