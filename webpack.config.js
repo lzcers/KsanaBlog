@@ -27,7 +27,7 @@ const config = {
   output: {
     path: resolve('dist'),
     // 配置七牛云镜像CDN加速
-    publicPath: isProd ? '/dist/' : "",
+    publicPath: "",
     filename: '[name].build.js'
   },
   module: {
