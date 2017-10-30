@@ -13,7 +13,6 @@ const config = {
   entry: {
     hilight: "highlight.js",
     vue: ["vue", "vue-router"],
-    vendor: ["babel-polyfill"],
     main: "./src/main.js"
   },
   resolve: {
@@ -22,7 +21,8 @@ const config = {
       // 只用运行时版本
       'vue$': 'vue/dist/vue.runtime.esm.js',
       '@': resolve('src')
-    }
+    },
+    extensions: [".tsx", ".ts", ".js"]    
   },
   output: {
     path: resolve('dist'),
@@ -52,6 +52,13 @@ const config = {
               })
            }
           }
+        }
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
         }
       },
       {
@@ -117,7 +124,7 @@ const config = {
       }
     ]),
     new CommonsChunkPlugin({
-      names: ["hilight", "vendor", 'vue']
+      names: ["hilight", 'vue']
     })
   ]
 };
