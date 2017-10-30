@@ -122,6 +122,11 @@ const config = {
         from: resolve('src/assets'),
         to: resolve('dist/assets'),
         ignore: ['.*']
+      },
+      {
+        from: resolve('posts'),
+        to: resolve('dist/posts'),
+        ignore: ['.*']
       }
     ]),
     new CommonsChunkPlugin({
