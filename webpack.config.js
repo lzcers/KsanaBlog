@@ -13,6 +13,7 @@ const config = {
   entry: {
     hilight: "highlight.js",
     vue: ["vue", "vue-router"],
+    vendor: ["babel-polyfill/dist/polyfill.min.js"],
     main: "./src/main.js"
   },
   resolve: {
@@ -124,7 +125,7 @@ const config = {
       }
     ]),
     new CommonsChunkPlugin({
-      names: ["hilight", 'vue']
+      names: ["hilight", "vendor", 'vue']
     })
   ]
 };
