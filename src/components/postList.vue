@@ -89,7 +89,7 @@
 </style>
 
 <script>
-import { getPostListFromFiles, getTags } from '@/api';
+import { getPostListFromFiles, getTags } from '../api';
 export default {
   data: () => ({
     constPostList: [],

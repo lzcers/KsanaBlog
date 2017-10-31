@@ -31,7 +31,7 @@
 </style>
 
 <script>
-import { getTags } from '@/api';
+import { getTags } from '../api';
 
 export default {
   data: () => ({

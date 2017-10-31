@@ -36,8 +36,8 @@
 </style>
 
 <script>
-import { getPostBySHA } from '@/api';
-import marked from '@/utils/render.js';
+import { getPostBySHA } from '../api';
+import marked from '../utils/render.js';
 import 'highlight.js/styles/tomorrow.css';
 
 export default {

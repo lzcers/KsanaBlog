@@ -14,14 +14,13 @@ const config = {
     hilight: "highlight.js",
     vue: ["vue", "vue-router"],
     vendor: ["babel-polyfill/dist/polyfill.min.js"],
-    main: "./src/main.js"
+    main: "./src/main.ts"
   },
   resolve: {
     alias: {
       // 'vue$': 'vue/dist/vue.esm.js',
       // 只用运行时版本
-      'vue$': 'vue/dist/vue.runtime.esm.js',
-      '@': resolve('src')
+      'vue$': 'vue/dist/vue.runtime.esm.js'
     },
     extensions: [".tsx", ".ts", ".js"]    
   },
@@ -35,25 +34,7 @@ const config = {
     rules: [
       {
         test: /\.vue$/,
-        use: {
-          loader: 'vue-loader',
-          options: {
-           loaders: {
-              css: ExtractTextPlugin.extract({
-                use: 'css-loader',
-                fallback: 'vue-style-loader'
-              }),
-              scss: ExtractTextPlugin.extract({
-                use: ['css-loader', {
-                  loader: 'sass-loader',
-                  options: {
-                    includePaths: ['node_modules']
-                  }}],
-                fallback: 'vue-style-loader'
-              })
-           }
-          }
-        }
+        loader: 'vue-loader'
       },
       {
         test: /\.tsx?$/,
@@ -63,29 +44,10 @@ const config = {
         }
       },
       {
-        test: /\.js$/,
-        use: ['babel-loader'],
-        include: [resolve('src'), resolve('test')]
-      },
-      {
         test:/\.css$/,
-        use: ExtractTextPlugin.extract({
+        loader: ExtractTextPlugin.extract({
           use: 'css-loader',
-          fallback: 'style-loader'
-        })
-      },
-      {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use:  [{
-                loader: "css-loader"
-            }, {
-                loader: "sass-loader",
-                options: {
-                    includePaths: ["node_modules"]
-                }
-          }],
-          fallback: 'style-loader'
+          fallback: 'vue-style-loader'
         })
       },
       {
@@ -143,8 +105,7 @@ if (isProd) {
     new UglifyJSPlugin({
       compress: {
         warnings: false,
-        drop_console: true,
-        pure_funcs: ['console.log'],
+        drop_console: true
       },
       sourceMap: true,
       output: {

@@ -10,8 +10,8 @@
 </style>
 
 <script>
-import tagsBar from '@/components/tagsBar.vue';
-import postList from '@/components/postList.vue';
+import tagsBar from '../components/tagsBar.vue';
+import postList from '../components/postList.vue';
 export default {
   name: 'Home',
   components: {

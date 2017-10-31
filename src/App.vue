@@ -30,8 +30,8 @@
 </style>
 
 <script>
-import headerBar from '@/components/headerBar.vue';
-import footerBar from '@/components/footerBar.vue';
+import headerBar from './components/headerBar.vue';
+import footerBar from './components/footerBar.vue';
 // import music from '@/components/aplayer.vue';
 // import sakura from '@/components/sakura.vue';
 export default {
