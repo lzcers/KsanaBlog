@@ -1,16 +1,14 @@
 <template>
-<footer class="footer-bar flex-center">
+<footer class="footer-bar">
   <p>© 2017 Ksana</p>
 </footer>
 </template>
 
 <style>
   .footer-bar {
+    text-align: center;
     color: #000;
-    position: relative;
-    padding-top: 20px;
-    padding-bottom: 15px;
-    bottom: 0px;
+    height: 50px;
   }
 </style>
 

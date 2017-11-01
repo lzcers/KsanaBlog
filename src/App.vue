@@ -1,35 +1,39 @@
 <template>
-  <div class="root-wrap">
-      <!-- <sakura></sakura> -->
-      <div class="main-wrap">
-        <headerBar></headerBar> 
-        <!-- <music></music> -->
-        <div class="flex-center">
-          <router-view></router-view>
-        </div>  
-        <footerBar></footerBar> 
+  <!-- <sakura></sakura> -->
+  <div class="wrap">
+    <headerBar></headerBar> 
+    <!-- <music></music> -->
+    <div class="main">
+      <div class="content">
+      <router-view></router-view>
       </div>
+      <footerBar></footerBar> 
+    </div>  
   </div>
 </template>
 
 <style>
-  html, body {
+  html, body, .wrap {
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
   }
-  .root-wrap {
-    height: inherit;
+  .wrap {
+    display: flex;
+    flex-flow: row nowrap;
   }
-  .main-wrap {
-    z-index: 999;
-    /* height: inherit;
-    min-width: 440px;
-    max-width: 640px;
-    margin: 0 auto; */
+  .main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .content {
+    min-height: calc(100vh - 50px);
   }
 </style>
 
-<script>
+<script lang="ts">
 import headerBar from './components/headerBar.vue';
 import footerBar from './components/footerBar.vue';
 // import music from '@/components/aplayer.vue';

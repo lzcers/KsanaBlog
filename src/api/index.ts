@@ -1,28 +1,27 @@
-import axios from 'axios';
-import config from './config.js';
-import fm from 'front-matter';
+import axios from 'axios'
+import config from './config'
+import fm from 'front-matter'
 
-const issueUrl = `https://api.github.com/repos/${config.repo}/issues`;
-const filesListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}`;
-const tagsListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.tags}?ref=${config.branch}`;
-const postUrl = `https://api.github.com/repos/${config.repo}/git/blobs/`;
-const tk = 'WlRJM1lqTm1Zak0yTVRFd01qUXdOV05tTW1NMk1qQmtNekF5WW1ZMVlUVXlORGs1Wm1FMk9BPT0=';
+const issueUrl = `https://api.github.com/repos/${config.repo}/issues`
+const filesListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}`
+const tagsListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.tags}?ref=${config.branch}`
+const postUrl = `https://api.github.com/repos/${config.repo}/git/blobs/`
+const tk = 'WlRJM1lqTm1Zak0yTVRFd01qUXdOV05tTW1NMk1qQmtNekF5WW1ZMVlUVXlORGs1Wm1FMk9BPT0='
 
 const cache = {
-  get: (key) => {
+  get: (key: string) => {
     if (!window.sessionStorage) return false
-    return JSON.parse(window.sessionStorage.getItem(key))
+    return JSON.parse(window.sessionStorage.getItem(key) || "")
   },
-  set: (key, data) => {
+  set: (key: string, data: string) => {
     if (!window.sessionStorage) return false
     window.sessionStorage.setItem(key, JSON.stringify(data))
     return true
   },
-  has: (key) => {
+  has: (key: string) => {
     return Boolean(window.sessionStorage && window.sessionStorage.hasOwnProperty(key))
   }
 }
-
 
 function getPostListFromFiles(url = filesListUrl) {
   if (cache.has('postList')) {
@@ -35,12 +34,12 @@ function getPostListFromFiles(url = filesListUrl) {
       })
       .then(res => res.data)
       .then(arr => {
-        const list = arr.map(({ name, sha, size }) => ({ name, sha, size })).filter(i => i.size != 0);
-        return list;
+        const list = arr.map(({ name, sha, size }: any) => ({ name, sha, size })).filter((i:any) => i.size != 0)
+        return list
       })
   }
 }
-function getFileBySHA(sha) {
+function getFileBySHA(sha: string) {
   if (cache.has(sha)) {
     return Promise.resolve(cache.get(sha))
   }
@@ -58,15 +57,15 @@ function getFileBySHA(sha) {
       return raw;
     }); 
 }
-function getPostBySHA(sha) {
+function getPostBySHA(sha: string) {
   return getFileBySHA(sha)
   .then(raw => fm(raw))
 }
 
 function getTags() {
   return getPostListFromFiles(tagsListUrl)
-  .then(files => files.find(i => i.name == 'tags.json'))
-  .then(tags => tags.sha == undefined ? new Promise((resolve, reject) => {resolve([])}) : getFileBySHA(tags.sha));
+  .then(files => files.find((i: any) => i.name == 'tags.json'))
+  .then(tags => tags.sha == undefined ? new Promise((resolve, reject) => {resolve([])}) : getFileBySHA(tags.sha))
 }
 
 // 从git ISSUES获取文章列表
@@ -78,7 +77,7 @@ function getPostListFromIssues () {
   // todo: access_token: config.access_token, github会做代码扫描,token会被干掉,暂时不加这个参数
   return axios.get(issueUrl, {params: { state: "open", labels: "post", filter: "created" }})
     .then(res => res.data)
-    .then(arr => arr.map(i => ({
+    .then(arr => arr.map((i: any) => ({
         id: i.id,
         title: i.title,
         date: i.created_at,
@@ -86,8 +85,8 @@ function getPostListFromIssues () {
     })))
     .then(postList => {
       // 保存至sessionStorage
-      cache.set('postList', postList);
-      return postList;
+      cache.set('postList', postList)
+      return postList
     })
 }
 
