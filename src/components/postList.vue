@@ -12,11 +12,11 @@
     <img src="../assets/loading.gif" class="loading" v-if="postListRenderFlag" ></img>
     <div class="post-pages">
       <div class="post-pages-line"></div>
-      <a @click="loadPagePosts(-1)" class="post-pages-newer site-text-plain">
+      <a @click="loadPagePosts(-1)" class="post-pages-newer">
         <span class="post-pages-left"></span>
         <span>Newer</span>
       </a>
-      <a @click="loadPagePosts(1)" class="post-pages-older site-text-plain">
+      <a @click="loadPagePosts(1)" class="post-pages-older">
         <span>Older</span>
         <span class="post-pages-right"></span>
       </a>
@@ -25,6 +25,12 @@
 </template>
 
 <style>
+  .posts {
+    background: #fff;
+    border: 1px solid #eee;
+    box-shadow: 1px 1px 3px #eee;
+    padding: 10px;
+  }
   .post-header {
     margin-top: 10px;
     width: 400px;
@@ -96,7 +102,7 @@ export default {
     postList: [],
     currentPagePost: [],
     postListRenderFlag: true,
-    eachPage: 15,
+    eachPage: 20,
     xpageNumber: 0
   }),
   computed: {

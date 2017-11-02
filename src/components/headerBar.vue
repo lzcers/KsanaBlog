@@ -27,9 +27,10 @@
     color: #000;  
   }
   .header {
+    background: #fff;
     width: 25%;
     height: 100%;
-    border-right: 1px solid #eee;
+    box-shadow: 0.5px 0 2px #eee;
   }
   .header-box {
     margin: 150px auto;

@@ -1,11 +1,9 @@
 <template>
   <div class="tags">
-    <div class="flex-left">
-      <h3 class="tags-title"><i>Tags</i></h3>
-    </div>
-    <ul class="flex-left tags-list">
+    <h3 class="tags-title"><i>Tags</i></h3>
+    <ul class="tags-list">
       <li v-for="(tagName, index) in tags" :key="index" class="tag-name">
-        <router-link class="site-text-plain" :to="'/tags/'+tagName">
+        <router-link :to="'/tags/'+tagName">
           {{ tagName }}
         </router-link>
       </li>
@@ -18,6 +16,7 @@
     margin-top: 10px;
   }
   .tag-name {
+    display: inline-block;
     margin: 0 5px;
   }
   .tags-list {
@@ -25,8 +24,11 @@
     list-style: none;
   }
   .tags {
-    min-width: 400px;
+    padding: 10px;
     margin-bottom: 30px;
+    border: 1px solid #eee;
+    background: #fff;
+    box-shadow: 1px 1px 3px #eee;
   }
 </style>
 

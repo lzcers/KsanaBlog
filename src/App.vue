@@ -5,7 +5,7 @@
     <!-- <music></music> -->
     <div class="main">
       <div class="content">
-      <router-view></router-view>
+        <router-view></router-view>
       </div>
       <footerBar></footerBar> 
     </div>  
@@ -18,10 +18,18 @@
     padding: 0;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
+    font-family: "Lucida Grande","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif;
+  }
+  .content {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
   }
   .wrap {
     display: flex;
     flex-flow: row nowrap;
+    background: #f9f9f9;
   }
   .main {
     width: 100%;

@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-fade">
-    <section class="flex-center container">
+    <section class="post-container">
       <article class="post-view" v-if="post">
         <h3 class="post-title flex-center">{{ post.title }}</h3>
         <a class="post-date flex-center">{{ post.date }}</a>
@@ -13,6 +13,13 @@
 </template>
 
 <style>
+  .post-container {
+    width: 50%;
+    background: #fff;
+    border: 1px solid #eee;
+    box-shadow: 1px 1px 3px #eee;
+    padding: 10px;
+  }
   .post-title {
     margin-top: 5px;
   } 
@@ -26,12 +33,6 @@
   } 
   .post-body img {
     display: block;
-  }
-  .post-view {
-    margin-bottom: 20px;
-    width: 100%;
-    padding: 0 15px 15px 15px;
-    border: 1px solid #eee;
   }
 </style>
 
