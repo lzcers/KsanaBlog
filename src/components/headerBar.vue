@@ -8,9 +8,9 @@
           </router-link>
         </div>
         <nav class="header-nav">
-          <li><router-link to="/post">Post</router-link></li>
+          <!-- <li><router-link to="/post">Post</router-link></li> -->
           <li><router-link to="/project">Project</router-link></li>
-          <li><router-link to="/project">Galleray</router-link></li>
+          <!-- <li><router-link to="/project">Galleray</router-link></li> -->
           <li><router-link to="/aboutme">About</router-link></li>
         </nav>
         <aside class="header-p">朝露昙花 咫尺天涯</aside>
@@ -19,14 +19,8 @@
 </template>
 
 <style>
-  li {
-    list-style: none;
-  }
-  a:hover, a:visited, a:link, a:active {
-    text-decoration: none;
-    color: #000;  
-  }
   .header {
+    position: fixed;
     background: #fff;
     width: 25%;
     height: 100%;
@@ -43,9 +37,6 @@
   .header-nav {
     line-height: 50px;
     text-align: center;
-  }
-  .header-nav a:hover {
-    color: #ccc;
   }
 </style>
 

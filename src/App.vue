@@ -17,14 +17,24 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
     box-sizing: border-box;
     font-family: "Lucida Grande","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif;
+  }
+    li {
+    list-style: none;
+  }
+  a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+    color: #000;  
+  }
+  a:hover {
+    color: #eee;
   }
   .content {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
+    padding-top: 10px;
   }
   .wrap {
     display: flex;
@@ -32,12 +42,13 @@
     background: #f9f9f9;
   }
   .main {
+    margin-left: 25%;
     width: 100%;
     display: flex;
     flex-direction: column;
   }
   .content {
-    min-height: calc(100vh - 50px);
+    min-height: calc(100vh - 60px);
   }
 </style>
 
