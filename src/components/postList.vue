@@ -94,10 +94,26 @@
   }
 </style>
 
-<script>
-import { getPostListFromFiles, getTags } from '../api';
-export default {
-  data: () => ({
+<script lang="ts">
+import Vue from 'vue' 
+import { getPostListFromFiles, getTags } from '../api'
+
+interface Post {
+  name: string,
+  date: string,
+  sha: string
+}
+interface Data {
+  constPostList: Post[],
+  postList: Post[],
+  currentPagePost: Post[],
+  postListRenderFlag: boolean,
+  eachPage: number,
+  xpageNumber: number
+}
+
+export default Vue.extend({
+  data: (): Data => ({
     constPostList: [],
     postList: [],
     currentPagePost: [],
@@ -107,62 +123,63 @@ export default {
   }),
   computed: {
     pageNumber: {
-      set: function(val) {
-        val >= 0 && val <= Math.floor(this.postList.length / this.eachPage) ? this.xpageNumber = val : this.xpageNumber;
+      set: function(val: number) {
+        val >= 0 && val <= Math.floor(this.postList.length / this.eachPage) ? this.xpageNumber = val : this.xpageNumber
       },
-      get: function() {
-        return this.xpageNumber;
+      get: function(): number {
+        return this.xpageNumber
       }
     }
   },
   watch: {
     $route: function(to, from) {
       getTags().then(tagsList => {
-        const tagName = to.params.tagName;
+        const tagName = to.params.tagName
         if (tagName != undefined) {
-          const tags = tagsList[tagName];
-          this.postList = this.constPostList.filter(i => tags.includes(i.name));
+          const tags = tagsList[tagName]
+          this.postList = this.constPostList.filter((i: Post) => tags.includes(i.name))
         } else {
-          this.postList = this.constPostList;
+          this.postList = this.constPostList
         }
-        this.pageNumber = 0;      
-        this.loadPagePosts(this.pageNumber);
+        this.pageNumber = 0     
+        this.loadPagePosts(this.pageNumber)
       })
     }
   },
   methods: {
-    sortPostList(postList) {
+    sortPostList(postList: Post[]): Post[] {
       return postList.sort((a, b) => {
-        return new Date(a.date) < new Date(b.date) ? 1 : -1;
-      });
+        return new Date(a.date) < new Date(b.date) ? 1 : -1
+      })
     },
-    loadPagePosts(number) {
-      this.pageNumber += number;
-      const pageNumber = this.pageNumber;
-      const eachPage = this.eachPage;
-      this.currentPagePost = this.postList.slice(pageNumber * eachPage, (pageNumber * eachPage) + eachPage);
+    loadPagePosts(number: number) {
+      this.pageNumber += number
+      const pageNumber = this.pageNumber
+      const eachPage = this.eachPage
+      this.currentPagePost = this.postList.slice(pageNumber * eachPage, (pageNumber * eachPage) + eachPage)
     }
   },
   created() {
-    getPostListFromFiles().then(postList => {
+    getPostListFromFiles().then((postList: Post[]) => {
       // 取标题中的日期然后排序
       this.postList = this.sortPostList(postList.map(i => {
-        i.date = /\d{4}-\d{1,2}-\d{1,2}/.exec(i.name.trim())[0];
-        i.name = i.name.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, "").replace(".md", "");
-        return i;
-      }));
-      this.constPostList = this.postList;
-      const tagName = this.$route.params.tagName;
+        const matchDate = /\d{4}-\d{1,2}-\d{1,2}/.exec(i.name.trim())
+        i.date = matchDate == null ? "" : matchDate[0]
+        i.name = i.name.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, "").replace(".md", "")
+        return i
+      }))
+      this.constPostList = this.postList
+      const tagName = this.$route.params.tagName
       if (tagName) {
           getTags().then(tagsList => {
-            const tags = tagsList[tagName].map(p => p.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""));
-            this.postList = this.constPostList.filter(i => tags.includes(i.name));
-          });
+            const tags = tagsList[tagName].map((p: string) => p.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""))
+            this.postList = this.constPostList.filter((i: Post) => tags.includes(i.name))
+          })
       }
-      this.loadPagePosts(this.pageNumber);
-      this.postListRenderFlag = false;
+      this.loadPagePosts(this.pageNumber)
+      this.postListRenderFlag = false
     })
-    .catch(e => console.log(e));
+    .catch(e => console.log(e))
   }  
-}
+})
 </script>

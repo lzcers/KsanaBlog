@@ -4,7 +4,7 @@ const fm = require('front-matter');
 
 const postsDir = path.format({
   dir: path.resolve(),
-  base: 'posts'
+  base: '/dist/posts'
 });
 
 // 拿到所有的文章
@@ -35,7 +35,7 @@ Promise.all(getFrontMatters)
 })
 // 把结果写入tags.json
 .then(tagsList => {
-  fs.writeFile(path.format({dir: path.resolve(), base: 'posts/assets/tags.json'}), 
+  fs.writeFile(path.format({dir: path.resolve(), base: postsDir + '/tags.json'}), 
   JSON.stringify(tagsList, null,"  "), 
   'utf8',
   err => {

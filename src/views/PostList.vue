@@ -13,13 +13,14 @@
 </style>
 
 <script>
-import postList from '../components/postList.vue';
-import tagsBar from '../components/tagsBar.vue';
-export default {
+import Vue from 'vue'
+import postList from '../components/postList.vue'
+import tagsBar from '../components/tagsBar.vue'
+export default Vue.extend({
   name: 'Home',
   components: {
     postList,
     tagsBar
   }
-}
+})
 </script>

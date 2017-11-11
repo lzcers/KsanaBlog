@@ -32,17 +32,22 @@
   }
 </style>
 
-<script>
-import { getTags } from '../api';
+<script lang="ts">
+import Vue from 'vue'
+import { getTags } from '../api'
 
-export default {
-  data: () => ({
+interface Data {
+  tags: string[]
+}
+
+export default Vue.extend({
+  data: (): Data => ({
     tags: []
   }),
   created() {
     getTags().then(tags => {
-      this.tags = Object.keys(tags);
-    });
+      this.tags = Object.keys(tags)
+    })
   }
-}
+})
 </script>

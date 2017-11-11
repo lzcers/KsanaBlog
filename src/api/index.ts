@@ -53,9 +53,9 @@ function getFileBySHA(sha: string) {
   return axios.get(postUrl+sha, httpParam)
     .then(res => res.data)
     .then(raw => {
-      cache.set(sha, raw);
-      return raw;
-    }); 
+      cache.set(sha, raw)
+      return raw
+    })
 }
 function getPostBySHA(sha: string) {
   return getFileBySHA(sha)
@@ -71,7 +71,7 @@ function getTags() {
 // 从git ISSUES获取文章列表
 function getPostListFromIssues () {
   if (cache.has('postList')) {
-    return new Promise(resolve => resolve(cache.get('postList')));
+    return new Promise(resolve => resolve(cache.get('postList')))
   }
   // 根据labels过滤
   // todo: access_token: config.access_token, github会做代码扫描,token会被干掉,暂时不加这个参数
@@ -95,4 +95,4 @@ export {
   getPostListFromFiles,
   getPostBySHA,
   getTags
-};
+}

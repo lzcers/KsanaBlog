@@ -31,6 +31,7 @@
     color: #eee;
   }
   .content {
+    min-height: calc(100vh - 60px);
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -47,17 +48,15 @@
     display: flex;
     flex-direction: column;
   }
-  .content {
-    min-height: calc(100vh - 60px);
-  }
 </style>
 
 <script lang="ts">
-import headerBar from './components/headerBar.vue';
-import footerBar from './components/footerBar.vue';
-// import music from '@/components/aplayer.vue';
-// import sakura from '@/components/sakura.vue';
-export default {
+import Vue from 'vue'
+import headerBar from './components/headerBar.vue'
+import footerBar from './components/footerBar.vue'
+// import music from '@/components/aplayer.vue'
+// import sakura from '@/components/sakura.vue'
+export default Vue.extend({
   name: "App",
   components: {
     headerBar,
@@ -68,5 +67,5 @@ export default {
   data: () => ({
 
   })
-}
+})
 </script>

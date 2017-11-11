@@ -12,6 +12,8 @@ const resolve = (...dir) => path.resolve(__dirname, ...dir);
 const config = {
   entry: {
     hilight: "highlight.js",
+    frontMatter: "front-matter",
+    marked: "marked",
     vue: ["vue", "vue-router"],
     main: "./src/main.ts"
   },
@@ -51,15 +53,27 @@ const config = {
       },
       {
         test: /\.(txt|md)$/,
-        use: 'raw-loader'
+        loader: 'raw-loader'
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        use: ['file-loader?name=[name].[ext]']
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'assets/'
+        }
       }
     ]
   },
   devtool: isProd ? "" : "#source-map",
+  devServer: {
+    proxy: {
+      '/posts/assets/': {
+        target: '',
+        secure: false
+      }
+    }
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: resolve('src', 'index.html'),
@@ -74,7 +88,7 @@ const config = {
     }),
     new ExtractTextPlugin({      
       // filename: isProd ? 'build.[chunkhash:5].css' : 'build-css.css',
-      filename: 'styles.css',
+      filename: 'assets/styles.[chunkhash:5].css',
       disable: false,
       allChunks: true
     }),
@@ -83,15 +97,10 @@ const config = {
         from: resolve('src/assets'),
         to: resolve('dist/assets'),
         ignore: ['.*']
-      },
-      {
-        from: resolve('posts'),
-        to: resolve('dist/posts'),
-        ignore: ['.*']
       }
     ]),
     new CommonsChunkPlugin({
-      names: ["hilight", 'vue']
+      names: ["hilight", 'vue', 'frontMatter', 'marked']
     })
   ]
 };
@@ -111,7 +120,7 @@ if (isProd) {
         comments: false
       }
     }),
-    // new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin()
   ])
 }
 

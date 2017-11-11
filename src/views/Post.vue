@@ -18,7 +18,7 @@
     background: #fff;
     border: 1px solid #eee;
     box-shadow: 1px 1px 3px #eee;
-    padding: 10px;
+    padding: 30px;
   }
   .post-title {
     margin-top: 5px;
@@ -36,34 +36,41 @@
   }
 </style>
 
-<script>
-import { getPostBySHA } from '../api';
-import marked from '../utils/render.js';
-import 'highlight.js/styles/tomorrow.css';
+<script lang="ts">
+import Vue from 'vue'
+import { getPostBySHA } from '../api'
+import marked from '../utils/render'
+import 'highlight.js/styles/tomorrow.css'
 
-export default {
+interface Post {
+  title: string,
+  date: string,
+  body: string
+}
+
+export default Vue.extend({
   name: 'Post',
-  data: () => ({
-    post: undefined
+  data: (): {post: Post | null} => ({
+    post: null
   }),
   computed: {
-    markedownResult() {
-      return marked(this.post.body);
+    markedownResult(): string {
+      return this.post != null ? marked(this.post.body) : ""
     }
   },
   methods: {
-    loadPost(sha) {
-      return getPostBySHA(sha).then(({attributes, body}) => ({
+    loadPost(sha: string) {
+      return getPostBySHA(sha).then(({attributes, body}: any) => ({
         title: attributes.Title,
         date: attributes.Date,
         body: body
-      }));
+      }))
     }
   },
   created() {
     this.loadPost(this.$route.params.sha)
-    .then(post => this.post = post)
-    .catch(e => console.log(e));
+    .then((post: Post) => this.post = post)
+    .catch(e => console.log(e))
   }
-}
+})
 </script>
