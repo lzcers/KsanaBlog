@@ -35,7 +35,7 @@ Promise.all(getFrontMatters)
 })
 // 把结果写入tags.json
 .then(tagsList => {
-  fs.writeFile(path.format({dir: path.resolve(), base: postsDir + '/tags.json'}), 
+  fs.writeFile(path.format({dir: postsDir, base: 'tags.json'}), 
   JSON.stringify(tagsList, null,"  "), 
   'utf8',
   err => {

@@ -66,14 +66,6 @@ const config = {
     ]
   },
   devtool: isProd ? "" : "#source-map",
-  devServer: {
-    proxy: {
-      '/posts/assets/': {
-        target: '',
-        secure: false
-      }
-    }
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: resolve('src', 'index.html'),
