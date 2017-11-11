@@ -28,7 +28,7 @@
     color: #000;  
   }
   a:hover {
-    color: #eee;
+    font-weight: bold;
   }
   .content {
     min-height: calc(100vh - 60px);
