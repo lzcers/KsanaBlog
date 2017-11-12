@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const fm = require('front-matter');
+const marked = require('marked');
 
 const postsDir = path.format({
   dir: path.resolve(),
@@ -23,6 +24,7 @@ const getFrontMatters = arrPosts.filter(p => /.md/.test(p))
   })
 });
 
+
 Promise.all(getFrontMatters)
 .then(data => {
   // 构造tagsList
@@ -30,7 +32,7 @@ Promise.all(getFrontMatters)
     // 拿到每篇文章的所有tags
     const tags = cur.attributes.Tags.split('|').map(i => i.trim());
     const slice = cur.body.slice(0, 500);
-    tags.forEach(e => pre[e] != undefined ? pre[e].push({ name: cur.attributes.Title, slice: slice }) : pre[e] = new Array({ name: cur.attributes.Title, slice: slice }));
+    tags.forEach(e => pre[e] != undefined ? pre[e].push({ name: cur.attributes.Title, slice: marked(slice).replace(/(<[^>]+>)|(\n)/g,"") }) : pre[e] = new Array({ name: cur.attributes.Title, slice: marked(slice).replace(/(<[^>]+>)|(\n)/g,"") }));
     return pre;
   }, {}); 
 })

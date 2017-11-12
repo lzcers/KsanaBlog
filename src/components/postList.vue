@@ -4,10 +4,10 @@
     <ol class="post-list">
       <li class="post-item" v-for="(item, index) in currentPagePost" :key="index">
         <router-link class="site-text-plain" :to="'/post/'+item.sha">
-          {{ item.name }}
+          <h3>{{ item.name }}</h3>
         </router-link>
-        <i class="post-list-date">{{ item.date }}</i>
         <p closs="post-body-slice">{{ item.slice }}</p>
+        <p class="post-list-date">{{ item.date }}</p>
       </li>
     </ol>
     <img src="../assets/loading.gif" class="loading" v-if="postListRenderFlag" ></img>
@@ -44,7 +44,6 @@
     margin: 5px 0px;
   }
   .post-list-date {
-    margin-left: 50px;
   }
   .post-pages {
     overflow: hidden;
