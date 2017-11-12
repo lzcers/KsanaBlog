@@ -169,7 +169,6 @@ export default Vue.extend({
         i.slice = ""
         return i
       }))
-      this.constPostList = this.postList
       getTags().then(tagList => {
         this.tagList = tagList;
         this.postList.map(i => {
@@ -185,14 +184,16 @@ export default Vue.extend({
             }
           }
         })
+        this.constPostList = this.postList        
         const tagName = this.$route.params.tagName
         if (tagName) {
           const tag = tagList[tagName].map((p: any) => p.name.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""))
           this.postList = this.constPostList.filter((i: Post) => tag.find((p: any) => p.name == i.name) != undefined ? true : false)
         }
+        
+        this.loadPagePosts(this.pageNumber)
+        this.postListRenderFlag = false
       });
-      this.loadPagePosts(this.pageNumber)
-      this.postListRenderFlag = false
     })
     .catch(e => console.log(e))
   }  

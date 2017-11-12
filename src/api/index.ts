@@ -13,7 +13,7 @@ const cache = {
     if (!window.sessionStorage) return false
     return JSON.parse(window.sessionStorage.getItem(key) || "")
   },
-  set: (key: string, data: string) => {
+  set: (key: string, data: any) => {
     if (!window.sessionStorage) return false
     window.sessionStorage.setItem(key, JSON.stringify(data))
     return true
@@ -35,6 +35,7 @@ function getPostListFromFiles(url = filesListUrl) {
       .then(res => res.data)
       .then(arr => {
         const list = arr.map(({ name, sha, size }: any) => ({ name, sha, size })).filter((i:any) => i.size != 0)
+        cache.set('postList', list)
         return list
       })
   }
