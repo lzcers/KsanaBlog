@@ -1,20 +1,17 @@
 <template>
-  <transition name="slide-fade">
-    <section class="post-container">
-      <article class="post-view" v-if="post">
-        <h3 class="post-title flex-center">{{ post.title }}</h3>
-        <a class="post-date flex-center">{{ post.date }}</a>
-        <div class="post-body" v-html="markedownResult">
-        </div>
-      </article> 
-        <img src="../assets/loading.gif" class="loading" v-if="!post" ></img>  
-    </section>
-  </transition>
+  <section class="post-container">
+    <article class="post-view" v-if="post">
+      <h3 class="post-title flex-center">{{ post.title }}</h3>
+      <a class="post-date flex-center">{{ post.date }}</a>
+      <div class="post-body" v-html="markedownResult">
+      </div>
+    </article> 
+      <img src="../assets/loading.gif" class="loading" v-if="!post" ></img>  
+  </section>
 </template>
 
 <style>
   .post-container {
-    width: 50%;
     background: #fff;
     border: 1px solid #eee;
     box-shadow: 1px 1px 3px #eee;

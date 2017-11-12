@@ -22,7 +22,7 @@
   .header {
     position: fixed;
     background: #fff;
-    width: 25%;
+    width: 600px;
     height: 100%;
     box-shadow: 0.5px 0 2px #eee;
     background-image: url(../assets/header-background.jpg);

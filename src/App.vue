@@ -5,7 +5,9 @@
     <!-- <music></music> -->
     <div class="main">
       <div class="content">
-        <router-view></router-view>
+        <!-- <transition name="slide-fade"> -->
+          <router-view></router-view>
+        <!-- </transition> -->
       </div>
       <footerBar></footerBar> 
     </div>  
@@ -20,7 +22,7 @@
     box-sizing: border-box;
     font-family: "Lucida Grande","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif;
   }
-    li {
+  li {
     list-style: none;
   }
   a:hover, a:visited, a:link, a:active {
@@ -30,12 +32,11 @@
   a:hover {
     font-weight: bold;
   }
-  .content {
+  .content { 
     min-height: calc(100vh - 60px);
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-    padding-top: 10px;
   }
   .wrap {
     display: flex;
@@ -43,11 +44,23 @@
     background: #f9f9f9;
   }
   .main {
-    margin-left: 25%;
+    margin-left: 600px;
     width: 100%;
     display: flex;
     flex-direction: column;
   }
+  
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .2s ease;  
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  opacity: 0;
+}
+  
 </style>
 
 <script lang="ts">

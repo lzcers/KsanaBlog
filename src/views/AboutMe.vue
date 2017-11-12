@@ -28,7 +28,7 @@
     background: #fff;
     border: 1px solid #eee;
     box-shadow: 1px 1px 3px #eee;
-    padding: 10px;
+    padding: 30px;
   }
 </style>
 

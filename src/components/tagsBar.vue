@@ -1,7 +1,12 @@
 <template>
   <div class="tags">
-    <h3 class="tags-title"><i>Tags</i></h3>
+    <!-- <h3 class="tags-title"><i>Tags</i></h3> -->
     <ul class="tags-list">
+      <li class="tag-name">
+        <router-link to="/">
+          全部
+        </router-link>
+      </li>
       <li v-for="(tagName, index) in tags" :key="index" class="tag-name">
         <router-link :to="'/tags/'+tagName">
           {{ tagName }}

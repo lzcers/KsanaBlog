@@ -18,7 +18,7 @@ const getFrontMatters = arrPosts.filter(p => /.md/.test(p))
     fs.readFile(path.format({dir: postsDir, base: i}), 'utf8', (err, data) => {
       if (err) reject(err);
       const { attributes, body } = fm(data);
-      resolve(attributes);
+      resolve({attributes, body});
     })    
   })
 });
@@ -28,8 +28,9 @@ Promise.all(getFrontMatters)
   // 构造tagsList
   return data.reduce((pre, cur) => {
     // 拿到每篇文章的所有tags
-    const tags = cur.Tags.split('|').map(i => i.trim());
-    tags.forEach(e => pre[e] != undefined ? pre[e].push(cur.Title) : pre[e] = new Array(cur.Title));
+    const tags = cur.attributes.Tags.split('|').map(i => i.trim());
+    const slice = cur.body.slice(0, 500);
+    tags.forEach(e => pre[e] != undefined ? pre[e].push({ name: cur.attributes.Title, slice: slice }) : pre[e] = new Array({ name: cur.attributes.Title, slice: slice }));
     return pre;
   }, {}); 
 })

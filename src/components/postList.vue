@@ -1,12 +1,13 @@
 <template>
   <div class="posts">
-    <h3 class="post-header"><i>Posts</i></h3>
+    <!-- <h3 class="post-header"><i>Posts</i></h3> -->
     <ol class="post-list">
       <li class="post-item" v-for="(item, index) in currentPagePost" :key="index">
         <router-link class="site-text-plain" :to="'/post/'+item.sha">
-        {{ item.name }}
-        <i class="post-list-date">{{ item.date }}</i>
+          {{ item.name }}
         </router-link>
+        <i class="post-list-date">{{ item.date }}</i>
+        <p closs="post-body-slice">{{ item.slice }}</p>
       </li>
     </ol>
     <img src="../assets/loading.gif" class="loading" v-if="postListRenderFlag" ></img>
@@ -43,7 +44,6 @@
     margin: 5px 0px;
   }
   .post-list-date {
-    float: right;
     margin-left: 50px;
   }
   .post-pages {
@@ -101,11 +101,13 @@ import { getPostListFromFiles, getTags } from '../api'
 interface Post {
   name: string,
   date: string,
-  sha: string
+  sha: string,
+  slice: string
 }
 interface Data {
   constPostList: Post[],
   postList: Post[],
+  tagList: any,
   currentPagePost: Post[],
   postListRenderFlag: boolean,
   eachPage: number,
@@ -116,6 +118,7 @@ export default Vue.extend({
   data: (): Data => ({
     constPostList: [],
     postList: [],
+    tagList: {},
     currentPagePost: [],
     postListRenderFlag: true,
     eachPage: 20,
@@ -133,17 +136,15 @@ export default Vue.extend({
   },
   watch: {
     $route: function(to, from) {
-      getTags().then(tagsList => {
-        const tagName = to.params.tagName
-        if (tagName != undefined) {
-          const tags = tagsList[tagName]
-          this.postList = this.constPostList.filter((i: Post) => tags.includes(i.name))
-        } else {
-          this.postList = this.constPostList
-        }
-        this.pageNumber = 0     
-        this.loadPagePosts(this.pageNumber)
-      })
+      const tagName = to.params.tagName
+      if (tagName != undefined) {
+        const tag = this.tagList[tagName]
+        this.postList = this.constPostList.filter((i: Post) => tag.find((p: any) => p.name == i.name) != undefined ? true : false)
+      } else {
+        this.postList = this.constPostList
+      }
+      this.pageNumber = 0     
+      this.loadPagePosts(this.pageNumber)
     }
   },
   methods: {
@@ -162,20 +163,35 @@ export default Vue.extend({
   created() {
     getPostListFromFiles().then((postList: Post[]) => {
       // 取标题中的日期然后排序
-      this.postList = this.sortPostList(postList.map(i => {
+      this.postList = this.sortPostList(postList.filter(i => i.name != "tags.json").map(i => {
         const matchDate = /\d{4}-\d{1,2}-\d{1,2}/.exec(i.name.trim())
         i.date = matchDate == null ? "" : matchDate[0]
         i.name = i.name.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, "").replace(".md", "")
+        i.slice = ""
         return i
       }))
       this.constPostList = this.postList
-      const tagName = this.$route.params.tagName
-      if (tagName) {
-          getTags().then(tagsList => {
-            const tags = tagsList[tagName].map((p: string) => p.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""))
-            this.postList = this.constPostList.filter((i: Post) => tags.includes(i.name))
-          })
-      }
+      getTags().then(tagList => {
+        this.tagList = tagList;
+        this.postList.map(i => {
+          for (const tagName of Object.keys(tagList)) {
+            let findFlag = false
+            if (findFlag) break
+            for (const p of tagList[tagName]) {
+              if (p.name == i.name) {
+                i.slice = p.slice
+                findFlag = true
+                break
+              }
+            }
+          }
+        })
+        const tagName = this.$route.params.tagName
+        if (tagName) {
+          const tag = tagList[tagName].map((p: any) => p.name.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""))
+          this.postList = this.constPostList.filter((i: Post) => tag.find((p: any) => p.name == i.name) != undefined ? true : false)
+        }
+      });
       this.loadPagePosts(this.pageNumber)
       this.postListRenderFlag = false
     })
