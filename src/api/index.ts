@@ -1,6 +1,8 @@
 import axios from 'axios'
 import config from './config'
 import fm from 'front-matter'
+import promise from 'es6-promise'
+promise.polyfill()
 
 const issueUrl = `https://api.github.com/repos/${config.repo}/issues`
 const filesListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}`
