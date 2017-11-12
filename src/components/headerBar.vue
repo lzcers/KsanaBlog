@@ -19,15 +19,28 @@
 </template>
 
 <style>
-  .header {
-    position: fixed;
-    background: #fff;
-    width: 600px;
-    height: 100%;
-    box-shadow: 0.5px 0 2px #eee;
-    background-image: url(../assets/header-background.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
+  @media screen and (min-device-width: 1280px) {
+      .header { 
+      width: 600px;
+      height: 100%;  
+      position: fixed;
+      background: #fff;
+      box-shadow: 0.5px 0 2px #eee;
+      background-image: url(../assets/header-background.jpg);
+      background-repeat: no-repeat;
+      background-position: center;       
+      }
+  }
+  @media screen and (max-device-width: 1280px) {
+      .header { 
+      width: 100%;
+      height: 400px;  
+      background: #fff;
+      box-shadow: 0.5px 0 2px #eee;
+      background-image: url(../assets/header-background.jpg);
+      background-repeat: no-repeat;
+      background-position: center;       
+      }
   }
   .header-box {
     margin: 150px auto;

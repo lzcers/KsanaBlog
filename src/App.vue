@@ -40,27 +40,26 @@
   }
   .wrap {
     display: flex;
-    flex-flow: row nowrap;
     background: #f9f9f9;
   }
   .main {
-    margin-left: 600px;
     width: 100%;
     display: flex;
     flex-direction: column;
   }
-  
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .2s ease;  
-}
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active for below version 2.1.8 */ {
-  opacity: 0;
-}
-  
+  @media screen and (max-device-width: 1280px) {
+    .wrap {
+      flex-flow: column nowrap;
+    }
+  }
+  @media screen and (min-device-width: 1280px) {
+    .main {
+      margin-left: 600px;
+    }
+    .wrap {
+      flex-flow: row nowrap;
+    }
+  }
 </style>
 
 <script lang="ts">
