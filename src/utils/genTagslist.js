@@ -31,7 +31,7 @@ Promise.all(getFrontMatters)
   return data.reduce((pre, cur) => {
     // 拿到每篇文章的所有tags
     const tags = cur.attributes.Tags.split('|').map(i => i.trim());
-    const slice = marked(cur.body).replace(/(<[^>]+>)|(\n)/g,"").slice(0, 500).trim();
+    const slice = marked(cur.body).replace(/(<[^>]+>)|(\n)/g,"").slice(0, 250).trim();
     tags.forEach(e => pre[e] != undefined ? pre[e].push({ name: cur.attributes.Title, slice: slice }) : pre[e] = new Array({ name: cur.attributes.Title, slice: slice }));
     return pre;
   }, {}); 

@@ -12,6 +12,8 @@
 
 <style>
   .post-container {
+    color: #333;
+    width: 100%;
     background: #fff;
     border: 1px solid #eee;
     box-shadow: 1px 1px 3px #eee;
@@ -19,14 +21,15 @@
   }
   .post-title {
     margin-top: 5px;
+    margin-bottom: 5px;
   } 
   a.post-date {
     color: #777;
     text-decoration: none;
     font-weight: normal;
   }
-  .post-body p{
-    margin-top: 5px;
+  .post-body {
+    margin-top: 5px
   } 
   .post-body img {
     display: block;

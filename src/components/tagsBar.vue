@@ -29,11 +29,10 @@
     list-style: none;
   }
   .tags {
-    padding: 10px;
-    margin-bottom: 30px;
     border: 1px solid #eee;
     background: #fff;
-    box-shadow: 1px 1px 3px #eee;
+    box-shadow: 1px 3px 5px #eee;
+    margin-bottom: 20px;
   }
 </style>
 

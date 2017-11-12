@@ -7,6 +7,7 @@
 
 <style>
   .postsContainer {
+    color: #333;
     width: 100%;
   }
 </style>

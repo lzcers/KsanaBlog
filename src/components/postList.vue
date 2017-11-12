@@ -4,15 +4,14 @@
     <ol class="post-list">
       <li class="post-item" v-for="(item, index) in currentPagePost" :key="index">
         <router-link class="site-text-plain" :to="'/post/'+item.sha">
-          <h3>{{ item.name }}</h3>
+          <h4 class="post-list-title">{{ item.name }}</h4>
         </router-link>
-        <p closs="post-body-slice">{{ item.slice }}</p>
-        <p class="post-list-date">{{ item.date }}</p>
+        <i class="post-list-date">{{ item.date }}</i>
+        <p closs="post-body-slice">{{ item.slice + '……' }}</p>
       </li>
     </ol>
     <img src="../assets/loading.gif" class="loading" v-if="postListRenderFlag" ></img>
     <div class="post-pages">
-      <div class="post-pages-line"></div>
       <a @click="loadPagePosts(-1)" class="post-pages-newer">
         <span class="post-pages-left"></span>
         <span>Newer</span>
@@ -28,7 +27,6 @@
 <style>
   .posts {
     background: #fff;
-    border: 1px solid #eee;
     box-shadow: 1px 1px 3px #eee;
     padding: 10px;
   }
@@ -42,16 +40,18 @@
   }
   .post-item {
     margin: 5px 0px;
+    border-bottom: 1px solid #eee;
+  }
+  .post-list-title {
+    color: #5f5f5f;
+    margin-bottom: 5px;
   }
   .post-list-date {
+    color: #757575;
   }
   .post-pages {
     overflow: hidden;
     padding: 0 20px; 
-  }
-  .post-pages-line {
-    margin: 10px 0;
-    border-top: 1px solid #777;
   }
   .post-pages-newer {
     cursor: pointer;    
@@ -120,7 +120,7 @@ export default Vue.extend({
     tagList: {},
     currentPagePost: [],
     postListRenderFlag: true,
-    eachPage: 20,
+    eachPage: 11,
     xpageNumber: 0
   }),
   computed: {
