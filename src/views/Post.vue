@@ -29,9 +29,11 @@
     font-weight: normal;
   }
   .post-body {
+    width: 100%;
     margin-top: 5px
   } 
   .post-body img {
+    width: 100%;
     display: block;
   }
 </style>
