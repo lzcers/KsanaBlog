@@ -24,7 +24,7 @@
 
 <style>
   .aboutme-container {
-    width: 50%;
+    width: 100%;
     background: #fff;
     border: 1px solid #eee;
     box-shadow: 1px 1px 3px #eee;
