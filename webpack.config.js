@@ -13,6 +13,7 @@ const config = {
   entry: {
     hilight: "highlight.js",
     frontMatter: "front-matter",
+    coreJs: 'core-js',
     marked: "marked",
     vue: ["vue", "vue-router"],
     main: "./src/main.ts"
@@ -92,7 +93,7 @@ const config = {
       }
     ]),
     new CommonsChunkPlugin({
-      names: ["hilight", 'vue', 'frontMatter', 'marked']
+      names: ["hilight", 'vue', 'frontMatter', 'marked', 'coreJs']
     })
   ]
 };

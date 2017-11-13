@@ -170,7 +170,7 @@ export default Vue.extend({
         return i
       }))
       getTags().then(tagList => {
-        this.tagList = tagList;
+        this.tagList = tagList
         this.postList.map(i => {
           for (const tagName of Object.keys(tagList)) {
             let findFlag = false

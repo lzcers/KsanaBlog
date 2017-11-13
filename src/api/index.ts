@@ -1,8 +1,7 @@
 import axios from 'axios'
 import config from './config'
 import fm from 'front-matter'
-import promise from 'es6-promise'
-promise.polyfill()
+import 'core-js'
 
 const issueUrl = `https://api.github.com/repos/${config.repo}/issues`
 const filesListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}`
@@ -68,7 +67,7 @@ function getPostBySHA(sha: string) {
 function getTags() {
   return getPostListFromFiles(tagsListUrl)
   .then(files => files.find((i: any) => i.name == 'tags.json'))
-  .then(tags => tags == undefined ? new Promise((resolve, reject) => {resolve([])}) : getFileBySHA(tags.sha))
+  .then(tags => tags == undefined ? Promise.resolve([]) : getFileBySHA(tags.sha))
 }
 
 // 从git ISSUES获取文章列表
