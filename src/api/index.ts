@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from './config'
 import fm from 'front-matter'
-import 'core-js'
+import 'core-js/shim'
 
 const issueUrl = `https://api.github.com/repos/${config.repo}/issues`
 const filesListUrl = `https://api.github.com/repos/${config.repo}/contents/${config.path}?ref=${config.branch}`

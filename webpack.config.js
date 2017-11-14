@@ -57,11 +57,11 @@ const config = {
         loader: 'raw-loader'
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]',
-          outputPath: 'assets/'
+          outputPath: '/assets/'
         }
       }
     ]
@@ -85,13 +85,13 @@ const config = {
       disable: false,
       allChunks: true
     }),
-    new CopyWebpackPlugin([
-      {
-        from: resolve('src/assets'),
-        to: resolve('dist/assets'),
-        ignore: ['.*']
-      }
-    ]),
+    // new CopyWebpackPlugin([
+    //   {
+    //     from: resolve('src/assets'),
+    //     to: resolve('dist/assets'),
+    //     ignore: ['.*']
+    //   }
+    // ]),
     new CommonsChunkPlugin({
       names: ["hilight", 'vue', 'frontMatter', 'marked', 'coreJs']
     })

@@ -6,7 +6,7 @@
         <router-link class="site-text-plain" :to="'/post/'+item.sha">
           <h4 class="post-list-title">{{ item.name }}</h4>
         </router-link>
-        <i class="post-list-date">{{ item.date }}</i>
+        <div class="post-list-date"><i class="icon ion-calendar"></i> {{ item.date }}</div>
         <p closs="post-body-slice">{{ item.slice + '……' }}</p>
       </li>
     </ol>
