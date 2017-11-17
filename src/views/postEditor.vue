@@ -3,8 +3,8 @@
       <div class="post-toolbar">
       </div>
       <div class="post-editor-box">
-        <textarea class="post-markdown-editor scroll-style"></textarea>
-        <div class="post-markdown-preview"></div>
+        <textarea ref="mdEditor" @scroll="scroll('mdEditor', $event)" class="post-markdown-editor scroll-style" v-model="mdText"></textarea>
+        <div ref="mdPreview"  @scroll="scroll('mdPreview', $event)" class="post-markdown-preview scroll-style" v-html="markdownText"></div>
       </div>
     </div>
 </template>
@@ -22,6 +22,8 @@
     width: 100%;
   }
   .post-markdown-editor, .post-markdown-preview {
+    overflow-y: scroll;
+    overflow-x: hidden;
     background: #fff;
     padding: 15px;
     border: none;
@@ -51,6 +53,7 @@
 
   .post-markdown-editor {
     border-right: 1px dashed #ccc;
+    font-family: "Lucida Grande","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif
   }
   .post-editor-box {
     margin-top: 35px;
@@ -61,7 +64,36 @@
 </style>
 
 <script lang="ts">
-export default {
-  
-}
+import Vue from 'vue'
+import marked from '../utils/render'
+
+export default Vue.extend({
+  data: () => ({
+    tirgger: "",
+    mdText: "",
+  }),
+  computed: {
+    markdownText(): string {
+      return marked(this.mdText)
+    }
+  },
+  methods: {
+    // 让两边滚动条移动相同比例的距离
+    scroll(who: string ,e: any) {
+      // 防止两个滚动条相互调用
+        console.log(who)
+      if (who != this.tirgger) {
+        this.tirgger = who
+        return
+      }
+      const [target, mdEditor, mdPreview] = [e.target, this.$refs.mdEditor, this.$refs.mdPreview]
+      const otherScroll: any = target == mdEditor ? mdPreview : mdEditor
+      // 当前滚动条移动的比例
+      let proporation = target.scrollTop / (target.scrollHeight - target.clientHeight)
+      // 另一条滚动条需要移动的距离
+      otherScroll.scrollTop = (otherScroll.scrollHeight - otherScroll.clientHeight) * proporation
+    }
+  }
+})
 </script>
+
