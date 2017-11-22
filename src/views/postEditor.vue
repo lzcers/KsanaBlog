@@ -75,10 +75,12 @@ export default Vue.extend({
     tirgger: string,
     mdText: string,
     mdMeta: any
+    postID: string,
   } => ({
     tirgger: "",
     mdText: "",
     mdMeta: {},
+    postID: ""
   }),
   computed: {
     markdownText(): string {
@@ -89,11 +91,25 @@ export default Vue.extend({
   },
   methods: {
     savePost() {
+      if (this.postID != "") {
+        this.updatePost(this.postID)
+        return
+      }
       axios.post('/api/post/add', {
         Title: this.mdMeta.Title,
         Tags: this.mdMeta.Tags.split('|').map((i: string) => i.trim()),
         Content: this.mdText,
         PublishDate: new Date().toLocaleString(undefined,{hour12: false})
+      })
+      .then(res => this.postID = res.data)
+      .catch(err => console.log(err))
+    },
+    updatePost(id: string) {
+        axios.post('/api/post/update/' + id, {
+        Title: this.mdMeta.Title,
+        Tags: this.mdMeta.Tags.split('|').map((i: string) => i.trim()),
+        Content: this.mdText,
+        LastUpdate: new Date().toLocaleString(undefined,{hour12: false})
       })
       .then(res => console.log(res))
       .catch(err => console.log(err))
