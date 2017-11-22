@@ -4,10 +4,10 @@
     <ol class="post-list">
       <li class="post-item" v-for="(item, index) in currentPagePost" :key="index">
         <router-link class="site-text-plain" :to="'/post/'+item.ID">
-          <h4 class="post-list-title">{{ item.PostName }}</h4>
+          <h4 class="post-list-title">{{ item.Title }}</h4>
         </router-link>
         <div class="post-list-date"><i class="icon ion-calendar"></i> {{ item.PublishDate }}</div>
-        <p closs="post-body-slice">{{ item.Conent + '……' }}</p>
+        <p closs="post-body-slice">{{ item.Content + '……' }}</p>
       </li>
     </ol>
     <img src="../assets/loading.gif" class="loading" v-if="postListRenderFlag" ></img>
@@ -95,19 +95,17 @@
 
 <script lang="ts">
 import Vue from 'vue' 
-import { getPosts } from '../api'
-
+import { getPosts, getPostsByTag } from '../api'
 interface Post {
   ID: string,
+  Title: string,
   Tags: string[],
-  PostName: string,
   Content: string,
   PublishDate: string,
   LastUpdate: string
 }
 
 interface Data {
-  constPostList: Post[],
   postList: Post[],
   tagList: any,
   currentPagePost: Post[],
@@ -118,7 +116,6 @@ interface Data {
 
 export default Vue.extend({
   data: (): Data => ({
-    constPostList: [],
     postList: [],
     tagList: {},
     currentPagePost: [],
@@ -140,13 +137,13 @@ export default Vue.extend({
     $route: function(to, from) {
       const tagName = to.params.tagName
       if (tagName != undefined) {
-        const tag = this.tagList[tagName]
-        this.postList = this.constPostList.filter((i: Post) => tag.find((p: any) => p.PostName == i.PostName) != undefined ? true : false)
-      } else {
-        this.postList = this.constPostList
+        getPostsByTag(tagName)
+        .then((posts: any) => {
+          this.postList = posts
+          this.pageNumber = 0     
+          this.loadPagePosts(this.pageNumber)
+        })
       }
-      this.pageNumber = 0     
-      this.loadPagePosts(this.pageNumber)
     }
   },
   methods: {
@@ -164,9 +161,9 @@ export default Vue.extend({
   },
   created() {
     getPosts().then((list: Post[]) => {
-      debugger;
       this.postList = list
-      this.postListRenderFlag = true
+      this.currentPagePost = list
+      this.postListRenderFlag = false
     })
   }  
 })

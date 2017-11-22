@@ -67,6 +67,7 @@ export {
   getPostByID,
   getTags
 }
+
 export default {
   getPosts,
   getPostsByTag,
