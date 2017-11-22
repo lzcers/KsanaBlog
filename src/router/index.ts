@@ -7,7 +7,7 @@ import PostEditor from '../views/PostEditor.vue'
 const routes: any = [
   { path: '/', component: PostList },
   { path: '/tags/:tagName', component: PostList },
-  { path: '/post/:sha', component: Post },
+  { path: '/post/:id', component: Post },
   { path: '/aboutme', component: AboutMe },
   { path: '/project', component: Project },
   { path: '/posteditor', component: PostEditor }

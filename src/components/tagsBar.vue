@@ -40,18 +40,12 @@
 import Vue from 'vue'
 import { getTags } from '../api'
 
-interface Data {
-  tags: string[]
-}
-
 export default Vue.extend({
-  data: (): Data => ({
+  data: (): { tags: string[] } => ({
     tags: []
   }),
   created() {
-    getTags().then(tags => {
-      this.tags = Object.keys(tags)
-    })
+    getTags().then(tags => this.tags = tags).catch(e => console.log(e))
   }
 })
 </script>

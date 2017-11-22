@@ -40,14 +40,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { getPostBySHA } from '../api'
+import { getPostByID } from '../api'
 import marked from '../utils/render'
 import 'highlight.js/styles/tomorrow.css'
 
 interface Post {
-  title: string,
-  date: string,
-  body: string
+  ID: string,
+  Tags: string[],
+  PostName: string,
+  Content: string,
+  PublishDate: string,
+  LastUpdate: string
 }
 
 export default Vue.extend({
@@ -57,22 +60,18 @@ export default Vue.extend({
   }),
   computed: {
     markedownResult(): string {
-      return this.post != null ? marked(this.post.body) : ""
+      return this.post != null ? marked(this.post.Content) : ""
     }
   },
   methods: {
-    loadPost(sha: string) {
-      return getPostBySHA(sha).then(({attributes, body}: any) => ({
-        title: attributes.Title,
-        date: attributes.Date,
-        body: body
-      }))
+    loadPost(id: string) {
+      return getPostByID(id).then((post: Post) => post)
     }
   },
   created() {
-    this.loadPost(this.$route.params.sha)
+    this.loadPost(this.$route.params.id)
     .then((post: Post) => this.post = post)
-    .catch(e => console.log(e))
+    .catch((e: Error) => console.log(e))
   }
 })
 </script>

@@ -3,11 +3,11 @@
     <!-- <h3 class="post-header"><i>Posts</i></h3> -->
     <ol class="post-list">
       <li class="post-item" v-for="(item, index) in currentPagePost" :key="index">
-        <router-link class="site-text-plain" :to="'/post/'+item.sha">
-          <h4 class="post-list-title">{{ item.name }}</h4>
+        <router-link class="site-text-plain" :to="'/post/'+item.ID">
+          <h4 class="post-list-title">{{ item.PostName }}</h4>
         </router-link>
-        <div class="post-list-date"><i class="icon ion-calendar"></i> {{ item.date }}</div>
-        <p closs="post-body-slice">{{ item.slice + '……' }}</p>
+        <div class="post-list-date"><i class="icon ion-calendar"></i> {{ item.PublishDate }}</div>
+        <p closs="post-body-slice">{{ item.Conent + '……' }}</p>
       </li>
     </ol>
     <img src="../assets/loading.gif" class="loading" v-if="postListRenderFlag" ></img>
@@ -95,14 +95,17 @@
 
 <script lang="ts">
 import Vue from 'vue' 
-import { getPostListFromFiles, getTags } from '../api'
+import { getPosts } from '../api'
 
 interface Post {
-  name: string,
-  date: string,
-  sha: string,
-  slice: string
+  ID: string,
+  Tags: string[],
+  PostName: string,
+  Content: string,
+  PublishDate: string,
+  LastUpdate: string
 }
+
 interface Data {
   constPostList: Post[],
   postList: Post[],
@@ -138,7 +141,7 @@ export default Vue.extend({
       const tagName = to.params.tagName
       if (tagName != undefined) {
         const tag = this.tagList[tagName]
-        this.postList = this.constPostList.filter((i: Post) => tag.find((p: any) => p.name == i.name) != undefined ? true : false)
+        this.postList = this.constPostList.filter((i: Post) => tag.find((p: any) => p.PostName == i.PostName) != undefined ? true : false)
       } else {
         this.postList = this.constPostList
       }
@@ -149,7 +152,7 @@ export default Vue.extend({
   methods: {
     sortPostList(postList: Post[]): Post[] {
       return postList.sort((a, b) => {
-        return new Date(a.date) < new Date(b.date) ? 1 : -1
+        return new Date(a.PublishDate) < new Date(b.PublishDate) ? 1 : -1
       })
     },
     loadPagePosts(number: number) {
@@ -160,42 +163,11 @@ export default Vue.extend({
     }
   },
   created() {
-    getPostListFromFiles().then((postList: Post[]) => {
-      // 取标题中的日期然后排序
-      this.postList = this.sortPostList(postList.filter(i => i.name != "tags.json").map(i => {
-        const matchDate = /\d{4}-\d{1,2}-\d{1,2}/.exec(i.name.trim())
-        i.date = matchDate == null ? "" : matchDate[0]
-        i.name = i.name.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, "").replace(".md", "")
-        i.slice = ""
-        return i
-      }))
-      getTags().then(tagList => {
-        this.tagList = tagList
-        this.postList.map(i => {
-          for (const tagName of Object.keys(tagList)) {
-            let findFlag = false
-            if (findFlag) break
-            for (const p of tagList[tagName]) {
-              if (p.name == i.name) {
-                i.slice = p.slice
-                findFlag = true
-                break
-              }
-            }
-          }
-        })
-        this.constPostList = this.postList        
-        const tagName = this.$route.params.tagName
-        if (tagName) {
-          const tag = tagList[tagName].map((p: any) => p.name.trim().replace(/\d{4}-\d{1,2}-\d{1,2}#/, ""))
-          this.postList = this.constPostList.filter((i: Post) => tag.find((p: any) => p.name == i.name) != undefined ? true : false)
-        }
-        
-        this.loadPagePosts(this.pageNumber)
-        this.postListRenderFlag = false
-      });
+    getPosts().then((list: Post[]) => {
+      debugger;
+      this.postList = list
+      this.postListRenderFlag = true
     })
-    .catch(e => console.log(e))
   }  
 })
 </script>

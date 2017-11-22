@@ -81,7 +81,6 @@ export default Vue.extend({
     // 让两边滚动条移动相同比例的距离
     scroll(who: string ,e: any) {
       // 防止两个滚动条相互调用
-        console.log(who)
       if (who != this.tirgger) {
         this.tirgger = who
         return

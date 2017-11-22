@@ -66,6 +66,14 @@ const config = {
       }
     ]
   },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:9090',
+        pathRewrite: {'^/api': ''}
+      }
+    }
+  },
   devtool: isProd ? "" : "#source-map",
   plugins: [
     new HtmlWebpackPlugin({
