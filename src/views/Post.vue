@@ -1,12 +1,12 @@
 <template>
   <section class="post-container">
     <article class="post-view" v-if="post">
-      <h3 class="post-title flex-center">{{ post.title }}</h3>
-      <a class="post-date flex-center">{{ post.date }}</a>
+      <h3 class="post-title flex-center">{{ post.Title }}</h3>
+      <a class="post-date flex-center">{{ post.PublishDate }}</a>
       <div class="post-body" v-html="markedownResult">
       </div>
     </article> 
-      <img src="../assets/loading.gif" class="loading" v-if="!post" ></img>  
+      <!-- <img src="../assets/loading.gif" class="loading" v-if="!post" ></img>   -->
   </section>
 </template>
 
@@ -47,7 +47,7 @@ import 'highlight.js/styles/tomorrow.css'
 interface Post {
   ID: string,
   Tags: string[],
-  PostName: string,
+  Title: string,
   Content: string,
   PublishDate: string,
   LastUpdate: string
@@ -60,7 +60,7 @@ export default Vue.extend({
   }),
   computed: {
     markedownResult(): string {
-      return this.post != null ? marked(this.post.Content) : ""
+      return this.post != null ? marked(this.post.Content).html : ""
     }
   },
   methods: {

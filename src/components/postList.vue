@@ -7,7 +7,7 @@
           <h4 class="post-list-title">{{ item.Title }}</h4>
         </router-link>
         <div class="post-list-date"><i class="icon ion-calendar"></i> {{ item.PublishDate }}</div>
-        <p closs="post-body-slice">{{ item.Content + '……' }}</p>
+        <p closs="post-body-slice">{{ sliceContent(item.Content) + '……' }}</p>
       </li>
     </ol>
     <img src="../assets/loading.gif" class="loading" v-if="postListRenderFlag" ></img>
@@ -94,8 +94,11 @@
 </style>
 
 <script lang="ts">
+
 import Vue from 'vue' 
 import { getPosts, getPostsByTag } from '../api'
+import marked from '../utils/render'
+
 interface Post {
   ID: string,
   Title: string,
@@ -106,6 +109,7 @@ interface Post {
 }
 
 interface Data {
+  allPostList: Post[],
   postList: Post[],
   tagList: any,
   currentPagePost: Post[],
@@ -116,6 +120,7 @@ interface Data {
 
 export default Vue.extend({
   data: (): Data => ({
+    allPostList: [],
     postList: [],
     tagList: {},
     currentPagePost: [],
@@ -143,10 +148,17 @@ export default Vue.extend({
           this.pageNumber = 0     
           this.loadPagePosts(this.pageNumber)
         })
+      } else {
+        this.postList = this.allPostList
+        this.pageNumber = 0     
+        this.loadPagePosts(this.pageNumber)
       }
     }
   },
   methods: {
+    sliceContent(content: string) {
+      return marked(content).html.replace(/(<[^>]+>)|(\n)/g,"").slice(0, 250).trim()
+    },
     sortPostList(postList: Post[]): Post[] {
       return postList.sort((a, b) => {
         return new Date(a.PublishDate) < new Date(b.PublishDate) ? 1 : -1
@@ -163,6 +175,7 @@ export default Vue.extend({
     getPosts().then((list: Post[]) => {
       this.postList = list
       this.currentPagePost = list
+      this.allPostList = list
       this.postListRenderFlag = false
     })
   }  

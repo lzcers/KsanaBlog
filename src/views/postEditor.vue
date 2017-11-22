@@ -1,6 +1,7 @@
 <template>
     <div class="post-editor">
       <div class="post-toolbar">
+        <button @click="savePost" type="button">Save</button>
       </div>
       <div class="post-editor-box">
         <textarea ref="mdEditor" @scroll="scroll('mdEditor', $event)" class="post-markdown-editor scroll-style" v-model="mdText"></textarea>
@@ -18,6 +19,7 @@
     background: #fff;
     position: fixed;
     box-shadow: 0 1px 3px 0px #ccc; 
+    display: flex;
     height: 35px;
     width: 100%;
   }
@@ -65,19 +67,37 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import axios from 'axios'
 import marked from '../utils/render'
 
 export default Vue.extend({
-  data: () => ({
+  data: (): {
+    tirgger: string,
+    mdText: string,
+    mdMeta: any
+  } => ({
     tirgger: "",
     mdText: "",
+    mdMeta: {},
   }),
   computed: {
     markdownText(): string {
-      return marked(this.mdText)
+      const mdParseResult = marked(this.mdText)
+      this.mdMeta = mdParseResult.meta
+      return mdParseResult.html
     }
   },
   methods: {
+    savePost() {
+      axios.post('/api/post/add', {
+        Title: this.mdMeta.Title,
+        Tags: this.mdMeta.Tags.split('|').map((i: string) => i.trim()),
+        Content: this.mdText,
+        PublishDate: new Date().toLocaleString(undefined,{hour12: false})
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+    },
     // 让两边滚动条移动相同比例的距离
     scroll(who: string ,e: any) {
       // 防止两个滚动条相互调用

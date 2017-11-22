@@ -12,7 +12,6 @@ const resolve = (...dir) => path.resolve(__dirname, ...dir);
 const config = {
   entry: {
     hilight: "highlight.js",
-    frontMatter: "front-matter",
     coreJs: 'core-js',
     marked: "marked",
     vue: ["vue", "vue-router"],
@@ -101,7 +100,7 @@ const config = {
     //   }
     // ]),
     new CommonsChunkPlugin({
-      names: ["hilight", 'vue', 'frontMatter', 'marked', 'coreJs']
+      names: ["hilight", 'vue', 'marked', 'coreJs']
     })
   ]
 };

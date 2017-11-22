@@ -4,22 +4,22 @@
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --content-base ./dist/",
-    "build": "cross-env NODE_ENV=production webpack -p --progress --hide-modules",
+    "build": "cross-env NODE_ENV=production webpack -p --progress --hide-modules"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@types/core-js": "^0.9.43",
     "axios": "^0.16.2",
     "core-js": "^2.5.1",
-    "front-matter": "^2.3.0",
     "highlight.js": "^9.12.0",
+    "js-yaml": "^3.10.0",
     "marked": "^0.3.6",
-    "mavon-editor": "^2.3.1",
     "vue": "^2.5.3",
     "vue-router": "^2.8.1"
   },
   "devDependencies": {
+    "@types/core-js": "^0.9.43",
+    "@types/js-yaml": "^3.10.0",
     "@types/highlight.js": "^9.12.1",
     "@types/marked": "^0.3.0",
     "copy-webpack-plugin": "^4.2.0",

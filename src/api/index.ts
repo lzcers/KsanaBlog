@@ -37,8 +37,8 @@ function getPostByID(id: string) {
   if (cache.has(id)) {
     return Promise.resolve(cache.get(id))
   }
-  return axios.get(postsUrl + 'id')
-  .then(res => res.data)
+  return axios.get(postsUrl + id)
+  .then(res => res.data[0])
   .then(raw => {
     cache.set(id, raw)
     return raw
