@@ -4,6 +4,17 @@ import 'core-js/shim'
 const tagsUrl = '/api/tags/get'
 const postsUrl = '/api/post/get/'
 const postsByTagUrl = '/api/post/getByTag/'
+const postAddUrl = '/api/post/add'
+const updatePostByIDUrl = '/api/post/update/'
+
+interface Post {
+  ID?: string,
+  Title: string,
+  Tags: string[],
+  Content: string,
+  PublishDate?: string,
+  LastUpdate?: string,
+}
 
 const cache = {
   get: (key: string) => {
@@ -34,15 +45,8 @@ function getPosts() {
 }
 
 function getPostByID(id: string) {
-  if (cache.has(id)) {
-    return Promise.resolve(cache.get(id))
-  }
   return axios.get(postsUrl + id)
   .then(res => res.data[0])
-  .then(raw => {
-    cache.set(id, raw)
-    return raw
-  })
 }
 
 function getPostsByTag(tag: string) {
@@ -61,7 +65,15 @@ function getTags() {
   .then(data => data.Tags)
 }
 
+function addPost(p: Post) {
+  return axios.post('/api/post/add', p)
+}
+function updatePostByID(id: string, p: Post) {
+  return axios.post(updatePostByIDUrl + id, p)
+}
 export {
+  addPost,
+  updatePostByID,
   getPosts,
   getPostsByTag,
   getPostByID,
@@ -69,6 +81,8 @@ export {
 }
 
 export default {
+  addPost,
+  updatePostByID,
   getPosts,
   getPostsByTag,
   getPostByID,

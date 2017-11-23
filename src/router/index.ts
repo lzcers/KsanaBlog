@@ -10,7 +10,8 @@ const routes: any = [
   { path: '/post/:id', component: Post },
   { path: '/aboutme', component: AboutMe },
   { path: '/project', component: Project },
-  { path: '/posteditor', component: PostEditor }
+  { path: '/posteditor', component: PostEditor },
+  { path: '/posteditor/:id', component: PostEditor }
 ]
 
 export default routes;

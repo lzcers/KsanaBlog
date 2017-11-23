@@ -172,10 +172,13 @@ export default Vue.extend({
     }
   },
   created() {
-    getPosts().then((list: Post[]) => {
+    getPosts()
+    .then((posts: Post[]) => posts.sort((a, b) => new Date(a.PublishDate) < new Date(b.PublishDate) ? 1 : -1))
+    .then((list: Post[]) => {
       this.postList = list
       this.currentPagePost = list
       this.allPostList = list
+      this.loadPagePosts(0)
       this.postListRenderFlag = false
     })
   }  

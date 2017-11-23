@@ -67,8 +67,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import axios from 'axios'
+import { getPostByID, addPost, updatePostByID } from '../api'
 import marked from '../utils/render'
+
+interface Post {
+  ID: string,
+  Tags: string[],
+  Title: string,
+  Content: string,
+  PublishDate: string,
+  LastUpdate: string
+}
 
 export default Vue.extend({
   data: (): {
@@ -76,11 +85,13 @@ export default Vue.extend({
     mdText: string,
     mdMeta: any
     postID: string,
+    post: Post | null
   } => ({
     tirgger: "",
     mdText: "",
     mdMeta: {},
-    postID: ""
+    postID: "",
+    post: null
   }),
   computed: {
     markdownText(): string {
@@ -90,28 +101,33 @@ export default Vue.extend({
     }
   },
   methods: {
+    getPost() {
+      return getPostByID(this.postID)
+    },
     savePost() {
-      if (this.postID != "") {
-        this.updatePost(this.postID)
-        return
-      }
-      axios.post('/api/post/add', {
+      this.postID == '' ? this.addPost() : this.updatePost()
+    },
+    addPost() {
+      addPost({
         Title: this.mdMeta.Title,
         Tags: this.mdMeta.Tags.split('|').map((i: string) => i.trim()),
         Content: this.mdText,
         PublishDate: new Date().toLocaleString(undefined,{hour12: false})
       })
-      .then(res => this.postID = res.data)
+      .then(res => {
+        this.postID = res.data
+        console.log("add Post: " + this.postID)
+      })
       .catch(err => console.log(err))
     },
-    updatePost(id: string) {
-        axios.post('/api/post/update/' + id, {
+    updatePost() {
+      updatePostByID(this.postID, {
         Title: this.mdMeta.Title,
         Tags: this.mdMeta.Tags.split('|').map((i: string) => i.trim()),
         Content: this.mdText,
         LastUpdate: new Date().toLocaleString(undefined,{hour12: false})
       })
-      .then(res => console.log(res))
+      .then(res => console.log("updatePost: " + this.postID))
       .catch(err => console.log(err))
     },
     // 让两边滚动条移动相同比例的距离
@@ -128,7 +144,20 @@ export default Vue.extend({
       // 另一条滚动条需要移动的距离
       otherScroll.scrollTop = (otherScroll.scrollHeight - otherScroll.clientHeight) * proporation
     }
-  }
+  },
+  created() {
+    const urlID = this.$route.params.id
+    if (urlID != undefined) {
+      this.postID = urlID
+      this.getPost()
+      .then((post: Post) => {
+        this.post = post
+        this.mdText = post.Content
+        console.log("getPost")
+      })
+      .catch(err => console.log(err))
+    }
+  }    
 })
 </script>
 
