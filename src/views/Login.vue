@@ -44,9 +44,10 @@ export default Vue.extend({
     authorizationCheck()
     .then(res => res.data)
     .then(data => {
-      if (data.result == true)
-      this.logedin = true 
-      setTimeout(() => this.$router.push('/'), 2000)
+      if (data.result == true) {
+        this.logedin = true 
+        setTimeout(() => this.$router.push('/'), 2000)
+      }
     })
   }
 })
