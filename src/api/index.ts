@@ -6,6 +6,8 @@ const postsUrl = '/api/post/get/'
 const postsByTagUrl = '/api/post/getByTag/'
 const postAddUrl = '/api/post/add'
 const updatePostByIDUrl = '/api/post/update/'
+const loginUrl = '/api/login'
+const authorizationCheckUrl = '/api/authorizationCheck'
 
 interface Post {
   ID?: string,
@@ -57,7 +59,12 @@ function getPostsByTag(tag: string) {
     return raw
   })
 }
-
+function login(userinfo: {username: string, password: string}) {
+  return axios.post(loginUrl, userinfo)
+}
+function authorizationCheck() {
+  return axios.get(authorizationCheckUrl)
+}
 
 function getTags() {
   return axios.get(tagsUrl)
@@ -71,13 +78,16 @@ function addPost(p: Post) {
 function updatePostByID(id: string, p: Post) {
   return axios.post(updatePostByIDUrl + id, p)
 }
+
 export {
   addPost,
   updatePostByID,
   getPosts,
   getPostsByTag,
   getPostByID,
-  getTags
+  getTags,
+  login,
+  authorizationCheck
 }
 
 export default {
@@ -86,5 +96,7 @@ export default {
   getPosts,
   getPostsByTag,
   getPostByID,
-  getTags
+  getTags,
+  login,
+  authorizationCheck
 }
