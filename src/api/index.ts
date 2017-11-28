@@ -1,4 +1,6 @@
 import axios from 'axios'
+import './errorHandler'
+
 import 'core-js/shim'
 
 const tagsUrl = '/api/tags/get'
