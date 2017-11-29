@@ -112,7 +112,7 @@ export default Vue.extend({
         Title: this.mdMeta.Title,
         Tags: this.mdMeta.Tags.split('|').map((i: string) => i.trim()),
         Content: this.mdText,
-        PublishDate: new Date().toLocaleString(undefined,{hour12: false})
+        PublishDate: this.mdMeta.PublishDate || new Date().toLocaleString(undefined,{hour12: false})
       })
       .then(res => {
         this.postID = res.data

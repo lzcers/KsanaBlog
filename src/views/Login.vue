@@ -21,11 +21,15 @@
   }
 </style>
 
-<script>
+<script lang="ts">
 import Vue from 'vue'
 import { login, authorizationCheck } from '../api'
 export default Vue.extend({
-  data: () => ({
+  data: (): {
+    logedin: boolean,
+    username: string,
+    password: string
+  } => ({
     logedin: false,
     username: "",
     password: ""
