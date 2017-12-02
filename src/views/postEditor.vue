@@ -30,6 +30,15 @@
 			padding: 15px;
 		}
 	}
+  @media screen and (max-device-width: 1280px) {
+    .post-toolbar {
+      position: static !important;
+    }
+    .post-editor-box  {
+      margin-top: 1px !important;
+    }
+  }
+
   .post-toolbar {
     background: #fff;
     position: fixed;
@@ -98,7 +107,6 @@
 import Vue from 'vue'
 import { getPostByID, addPost, updatePostByID } from '../api'
 import marked from '../utils/render'
-import "github-markdown-css"
 
 interface Post {
   ID: string,

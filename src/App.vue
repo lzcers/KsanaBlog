@@ -66,6 +66,8 @@
 import Vue from 'vue'
 import headerBar from './components/headerBar.vue'
 import footerBar from './components/footerBar.vue'
+import { authorizationCheck } from './api'
+
 export default Vue.extend({
   name: "App",
   components: {
@@ -74,6 +76,12 @@ export default Vue.extend({
   },
   data: () => ({
 
-  })
+  }),
+  created() {
+    // 初始化登录状态
+    authorizationCheck()
+    .then(res => res.data)
+    .then(({result}) => this.$$app.logedin = result)
+  }
 })
 </script>

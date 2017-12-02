@@ -1,7 +1,7 @@
 <template>
   <section class="post-container">
     <article class="post-view" v-if="post">
-      <h3 class="post-title flex-center">{{ post.Title }}</h3>
+      <h3 class="post-title flex-center">{{ post.Title }} <router-link v-if="$$app.logedin" :to="'/posteditor/'+$route.params.id"><i class="ion-edit"></i></router-link> </h3>
       <a class="post-date flex-center">{{ post.PublishDate }}</a>
       <div class="post-body markdown-body" v-html="markedownResult">
       </div>
@@ -24,6 +24,9 @@
     margin-top: 5px;
     margin-bottom: 5px;
   } 
+  .post-title i {
+    margin-left: 20px;
+  }
   a.post-date {
     color: #777;
     text-decoration: none;
@@ -43,8 +46,6 @@
 import Vue from 'vue'
 import { getPostByID } from '../api'
 import marked from '../utils/render'
-import 'highlight.js/styles/tomorrow.css'
-import "github-markdown-css"
 
 interface Post {
   ID: string,

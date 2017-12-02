@@ -39,8 +39,10 @@ export default Vue.extend({
       login({username: this.username, password: this.password})
       .then(res => res.data)
       .then(data => {
-        if (data.result == true)
-        this.$router.push(this.$route.query.redirect || '/')
+        if (data.result == true) {
+          this.$$app.logedin = true
+          this.$router.push(this.$route.query.redirect || '/')
+        }
       })
     }
   },
@@ -50,6 +52,7 @@ export default Vue.extend({
     .then(data => {
       if (data.result == true) {
         this.logedin = true 
+        this.$$app.logedin = true
         setTimeout(() => this.$router.push('/'), 2000)
       }
     })
