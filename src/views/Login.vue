@@ -2,11 +2,15 @@
   <div class="login">
     <div v-if="logedin">您已经登陆！</div>
     <div v-else>
-      用户名:
-      <input type="text" v-model="username" name="userName">
-      密码:
-      <input type="password" v-model="password" name="password">
-      <button @click="login">登陆</button>
+      <div class="login-form">
+        用户名:<input type="text" v-model="username" name="userName">
+      </div>
+      <div class="login-form">
+        密码:<input type="password" v-model="password" name="password">
+      </div>
+      <div class="login-form">
+        <button @click="login">登陆</button>
+      </div>
     </div>
   </div>
 </template>
@@ -18,6 +22,10 @@
     justify-content: center;
     align-content: center;
     align-items: center;
+  }
+  .login .login-form {
+    text-align: right;
+    margin-top: 10px;
   }
 </style>
 

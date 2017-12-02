@@ -121,15 +121,17 @@ export default Vue.extend({
   data: (): {
     tirgger: string,
     mdText: string,
-    mdMeta: any
+    mdMeta: any,
     postID: string,
-    editorModeFlag: boolean
+    editorModeFlag: boolean,
+    autoSaveFuncID: number
   } => ({
     tirgger: "",
     mdText: "",
     mdMeta: {},
     postID: "",
-    editorModeFlag: false
+    editorModeFlag: false,
+    autoSaveFuncID: 0
   }),
   computed: {
     markdownText(): string {
@@ -215,7 +217,10 @@ export default Vue.extend({
       .catch(err => console.log(err))
     }
     // 五秒钟自动保存一次
-    setInterval(this.saveToLocalStorage, 5000)
+    this.autoSaveFuncID = setInterval(this.saveToLocalStorage, 5000)
+  },
+  destroyed() {
+    clearInterval(this.autoSaveFuncID)
   }    
 })
 </script>

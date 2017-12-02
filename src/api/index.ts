@@ -54,10 +54,13 @@ function getPostByID(id: string) {
 }
 
 function getPostsByTag(tag: string) {
+  if (cache.has("postByTag" + tag)) {
+    return Promise.resolve(cache.get("postByTag" + tag))
+  }
   return axios.get(postsByTagUrl + tag)
   .then(res => res.data)
   .then(raw => {
-    cache.set(tag, raw)
+    cache.set("postByTag" + tag, raw)
     return raw
   })
 }
@@ -69,9 +72,15 @@ function authorizationCheck() {
 }
 
 function getTags() {
+  if (cache.has("tags")) {
+    return Promise.resolve(cache.get("tags"))
+  }
   return axios.get(tagsUrl)
   .then(res => res.data)
-  .then(data => data.Tags)
+  .then(data => {
+    cache.set("tags", data.Tags)
+    return data.Tags
+  })
 }
 
 function addPost(p: Post) {
