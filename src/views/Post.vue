@@ -3,7 +3,7 @@
     <article class="post-view" v-if="post">
       <h3 class="post-title flex-center">{{ post.Title }}</h3>
       <a class="post-date flex-center">{{ post.PublishDate }}</a>
-      <div class="post-body" v-html="markedownResult">
+      <div class="post-body markdown-body" v-html="markedownResult">
       </div>
     </article> 
       <!-- <img src="../assets/loading.gif" class="loading" v-if="!post" ></img>   -->
@@ -43,6 +43,7 @@ import Vue from 'vue'
 import { getPostByID } from '../api'
 import marked from '../utils/render'
 import 'highlight.js/styles/tomorrow.css'
+import "github-markdown-css"
 
 interface Post {
   ID: string,

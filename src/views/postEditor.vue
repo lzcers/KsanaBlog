@@ -6,7 +6,7 @@
       </div>
       <div class="post-editor-box">
         <textarea ref="mdEditor" @scroll="scroll('mdEditor', $event)" class="post-markdown-editor scroll-style" v-model="mdText"></textarea>
-        <div v-if="editorModeFlag" ref="mdPreview"  @scroll="scroll('mdPreview', $event)" class="post-markdown-preview scroll-style" v-html="markdownText"></div>
+        <div v-if="editorModeFlag" ref="mdPreview"  @scroll="scroll('mdPreview', $event)" class="markdown-body post-markdown-preview scroll-style" v-html="markdownText"></div>
       </div>
     </div>
 </template>
@@ -16,6 +16,20 @@
     width: 100%;
     min-height: 100%;
   }
+
+  .markdown-body {
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
   .post-toolbar {
     background: #fff;
     position: fixed;
@@ -84,6 +98,7 @@
 import Vue from 'vue'
 import { getPostByID, addPost, updatePostByID } from '../api'
 import marked from '../utils/render'
+import "github-markdown-css"
 
 interface Post {
   ID: string,
@@ -161,7 +176,7 @@ export default Vue.extend({
     // 让两边滚动条移动相同比例的距离
     scroll(who: string ,e: any) {
       // 防止两个滚动条相互调用
-      if (who != this.tirgger) {
+      if (who != this.tirgger || !this.editorModeFlag) {
         this.tirgger = who
         return
       }
