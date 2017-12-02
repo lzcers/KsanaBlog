@@ -1,11 +1,12 @@
 <template>
     <div class="post-editor">
       <div class="post-toolbar">
-        <button @click="savePost" type="button">Save</button>
+        <button @click="savePost" type="button"><i class="ion-cube"></i><span>save</span></button>
+        <button @click="editorMode" type="button"><i class="ion-cube"></i><span>editor mode</span></button>
       </div>
       <div class="post-editor-box">
         <textarea ref="mdEditor" @scroll="scroll('mdEditor', $event)" class="post-markdown-editor scroll-style" v-model="mdText"></textarea>
-        <div ref="mdPreview"  @scroll="scroll('mdPreview', $event)" class="post-markdown-preview scroll-style" v-html="markdownText"></div>
+        <div v-if="editorModeFlag" ref="mdPreview"  @scroll="scroll('mdPreview', $event)" class="post-markdown-preview scroll-style" v-html="markdownText"></div>
       </div>
     </div>
 </template>
@@ -23,7 +24,21 @@
     height: 35px;
     width: 100%;
   }
+  .post-toolbar button {
+    border-color: transparent;
+    background: transparent;
+  }
+   .post-toolbar button:focus {
+    outline: none;
+  }
+  .post-toolbar button i {
+    margin-left: 2px;
+    margin-right: 2px;
+  }
   .post-markdown-editor, .post-markdown-preview {
+    font-size: 16px; 
+    line-height: 27px; 
+    font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
     overflow-y: scroll;
     overflow-x: hidden;
     background: #fff;
@@ -31,7 +46,7 @@
     border: none;
     outline: none 0;
     resize: none;
-    width: 50%;
+    flex:1;
   }
   .scroll-style::-webkit-scrollbar {
     width: 6px;
@@ -85,13 +100,13 @@ export default Vue.extend({
     mdText: string,
     mdMeta: any
     postID: string,
-    post: Post | null
+    editorModeFlag: boolean
   } => ({
     tirgger: "",
     mdText: "",
     mdMeta: {},
     postID: "",
-    post: null
+    editorModeFlag: false
   }),
   computed: {
     markdownText(): string {
@@ -101,11 +116,24 @@ export default Vue.extend({
     }
   },
   methods: {
+    editorMode() {
+      this.editorModeFlag = !this.editorModeFlag
+    },
     getPost() {
       return getPostByID(this.postID)
     },
     savePost() {
+      this.mdMeta = marked(this.mdText).meta
       this.postID == '' ? this.addPost() : this.updatePost()
+    },
+    saveToLocalStorage() {
+      if (window.localStorage == undefined) {
+        console.log("auto Save disabled!")
+        return 
+      } 
+      console.log("auto Save to local storage...")
+      this.postID != "" ? localStorage.setItem('tempPost'+this.postID, this.mdText) 
+      : localStorage.setItem('tempPost', this.mdText)
     },
     addPost() {
       addPost({
@@ -146,17 +174,25 @@ export default Vue.extend({
     }
   },
   created() {
-    const urlID = this.$route.params.id
-    if (urlID != undefined) {
-      this.postID = urlID
+    this.postID = this.$route.params.id
+    let content = ""
+    // 先从本地 localStorage 找
+    if (window.localStorage != undefined) {
+      content = (this.postID != undefined ? localStorage.getItem('tempPost'+this.postID)
+      : localStorage.getItem('tempPost')) || ""
+      if (content != "") this.mdText = content
+    } 
+    // 本地缓存没有，且 postID 非空则去后端取
+    if (content  == "" && this.postID != undefined) {
       this.getPost()
       .then((post: Post) => {
-        this.post = post
         this.mdText = post.Content
         console.log("getPost")
       })
       .catch(err => console.log(err))
     }
+    // 五秒钟自动保存一次
+    setInterval(this.saveToLocalStorage, 5000)
   }    
 })
 </script>
