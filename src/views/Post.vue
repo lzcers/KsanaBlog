@@ -12,12 +12,13 @@
 
 <style>
   .post-container {
+    box-sizing: border-box;
     color: #333;
     width: 100%;
     background: #fff;
     border: 1px solid #eee;
     box-shadow: 1px 1px 3px #eee;
-    padding: 30px;
+    padding: 15px;
   }
   .post-title {
     margin-top: 5px;
