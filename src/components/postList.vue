@@ -6,8 +6,14 @@
         <router-link class="site-text-plain" :to="'/post/'+item.ID">
           <h4 class="post-list-title">{{ item.Title }}</h4>
         </router-link>
-        <div class="post-list-date"><i class="icon ion-calendar"></i> {{ item.PublishDate }}</div>
         <p closs="post-body-slice">{{ sliceContent(item.Content) + '……' }}</p>
+        <div>
+          <div class="post-list-date"><i class="icon ion-calendar"></i> {{ item.PublishDate }}</div>
+          <div class="post-list-tags">
+            <i class="icon ion-pricetags"></i>
+            <router-link v-for="tagName in item.Tags" :key="tagName" class="site-text-plain" :to="'/tags/' + tagName">{{ tagName + " " }}</router-link>
+          </div>
+        </div>
       </li>
     </ol>
     <img src="../assets/loading.gif" class="loading" v-if="postListRenderFlag" ></img>
@@ -39,16 +45,18 @@
     padding: 0 20px;
   }
   .post-item {
-    margin: 5px 0px;
+    padding-bottom: 5px;
     border-bottom: 1px solid #eee;
   }
   .post-list-title {
     color: #5f5f5f;
     margin-bottom: 5px;
   }
-  .post-list-date {
+  .post-list-date, .post-list-tags {
+    margin-right: 10px;
+    display:inline-block;
     color: #757575;
-  }
+  } 
   .post-pages {
     overflow: hidden;
     padding: 0 20px; 
@@ -100,22 +108,22 @@ import { getPosts, getPostsByTag } from '../api'
 import marked from '../utils/render'
 
 interface Post {
-  ID: string,
-  Title: string,
-  Tags: string[],
-  Content: string,
-  PublishDate: string,
-  LastUpdate: string
+  ID: string;
+  Title: string;
+  Tags: string[];
+  Content: string;
+  PublishDate: string;
+  LastUpdate: string;
 }
 
 interface Data {
-  allPostList: Post[],
-  postList: Post[],
-  tagList: any,
-  currentPagePost: Post[],
-  postListRenderFlag: boolean,
-  eachPage: number,
-  xpageNumber: number
+  allPostList: Post[];
+  postList: Post[];
+  tagList: any;
+  currentPagePost: Post[];
+  postListRenderFlag: boolean;
+  eachPage: number;
+  xpageNumber: number;
 }
 
 export default Vue.extend({

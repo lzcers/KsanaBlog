@@ -12,12 +12,12 @@ const loginUrl = '/api/login'
 const authorizationCheckUrl = '/api/authorizationCheck'
 
 interface Post {
-  ID?: string,
-  Title: string,
-  Tags: string[],
-  Content: string,
-  PublishDate?: string,
-  LastUpdate?: string,
+  ID?: string;
+  Title: string;
+  Tags: string[];
+  Content: string;
+  PublishDate?: string;
+  LastUpdate?: string;
 }
 
 const cache = {

@@ -109,22 +109,22 @@ import { getPostByID, addPost, updatePostByID } from '../api'
 import marked from '../utils/render'
 
 interface Post {
-  ID: string,
-  Tags: string[],
-  Title: string,
-  Content: string,
-  PublishDate: string,
-  LastUpdate: string
+  ID: string;
+  Tags: string[];
+  Title: string;
+  Content: string;
+  PublishDate: string;
+  LastUpdate: string;
 }
 
 export default Vue.extend({
   data: (): {
-    tirgger: string,
-    mdText: string,
-    mdMeta: any,
-    postID: string,
-    editorModeFlag: boolean,
-    autoSaveFuncID: number
+    tirgger: string;
+    mdText: string;
+    mdMeta: any;
+    postID: string;
+    editorModeFlag: boolean;
+    autoSaveFuncID: number;
   } => ({
     tirgger: "",
     mdText: "",
