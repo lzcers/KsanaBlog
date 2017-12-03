@@ -32,8 +32,8 @@
 
 <style>
   .posts {
-    background: #fff;
-    box-shadow: 1px 1px 3px #eee;
+    /* background: #fff; */
+    /* box-shadow: 1px 1px 3px #eee; */
     padding: 10px;
   }
   .post-header {

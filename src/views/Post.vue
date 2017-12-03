@@ -1,6 +1,6 @@
 <template>
 <div class="post-wrap">
-  <div class="post-toc">
+  <div class="post-toc" v-if="tocTree != undefined && tocTree.childrenNode.length != 0">
     <div class="toc-header">目录：</div>
     <md-toc :tocTree="tocTree"></md-toc>
   </div>
@@ -50,13 +50,16 @@
   }
   @media screen and (min-device-width: 1280px) {
     .post-container {
-      flex: 0.7;
+      flex: 1;
     }
     .post-toc {
       height: fit-content;
       position: sticky;
       top: 0px;
-      flex: 0.3;
+      flex: 0.2;
+    }
+    .post-toc ol {
+      padding-left: 20px;
     }
   }
   .toc-header {

@@ -9,7 +9,6 @@
           <router-view></router-view>
         <!-- </transition> -->
       </div>
-      <footerBar></footerBar> 
     </div>  
   </div>
 </template>
@@ -33,7 +32,7 @@
     font-weight: bold;
   }
   .content { 
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh);
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -65,14 +64,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import headerBar from './components/headerBar.vue'
-import footerBar from './components/footerBar.vue'
 import { authorizationCheck } from './api'
 
 export default Vue.extend({
   name: "App",
   components: {
-    headerBar,
-    footerBar
+    headerBar
   },
   data: () => ({
 

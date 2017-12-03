@@ -15,6 +15,7 @@
           <li><router-link to="/aboutme">About</router-link></li>
         </nav>
     </div>
+    <!-- <footerBar></footerBar>  -->
   </header>
 </template>
 
@@ -66,7 +67,11 @@
 
 <script ts>
 import Vue from 'vue'
+// import footerBar from './footerBar.vue'
 
 export default Vue.extend({
+  components: {
+    // footerBar
+  }
 })
 </script>
