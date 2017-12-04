@@ -52,6 +52,9 @@
     .wrap {
       flex-flow: column nowrap;
     }
+    .content {
+      width: 100%;
+    }
   }
   @media screen and (min-device-width: 1280px) {
     .wrap {
