@@ -41,8 +41,8 @@
 
   .post-toolbar {
     background: #fff;
-    position: fixed;
-    box-shadow: 0 1px 3px 0px #ccc; 
+    position: static;
+    box-shadow: 0 0 3px 0 #ccc; 
     display: flex;
     height: 35px;
     width: 100%;
@@ -96,8 +96,8 @@
     font-family: "Lucida Grande","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif
   }
   .post-editor-box {
-    margin-top: 35px;
     height: calc(100vh - 95px);
+    padding-top: 10px;
     display: flex;
     flex-flow: row nowrap;
   }
