@@ -9,7 +9,8 @@
           <router-view></router-view>
         <!-- </transition> -->
       </div>
-    </div>  
+      <footerBar></footerBar> 
+    </div>
   </div>
 </template>
 
@@ -32,7 +33,7 @@
     font-weight: bold;
   }
   .content { 
-    min-height: calc(100vh);
+    min-height: calc(100vh - 50px);
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -52,9 +53,6 @@
     }
   }
   @media screen and (min-device-width: 1280px) {
-    .main {
-      margin-left: 600px;
-    }
     .wrap {
       flex-flow: row nowrap;
     }
@@ -65,11 +63,13 @@
 import Vue from 'vue'
 import headerBar from './components/headerBar.vue'
 import { authorizationCheck } from './api'
+import footerBar from './components/footerBar.vue'
 
 export default Vue.extend({
   name: "App",
   components: {
-    headerBar
+    headerBar,
+    footerBar
   },
   data: () => ({
 

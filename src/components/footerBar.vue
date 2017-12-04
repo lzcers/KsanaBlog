@@ -6,9 +6,11 @@
 
 <style>
   .footer-bar {
-    text-align: center;
+    width: 100%;
     color: #000;
     height: 50px;
+    text-align: center;
+    position: relative;
   }
 </style>
 
