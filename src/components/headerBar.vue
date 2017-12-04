@@ -59,6 +59,9 @@
       .header-box {
         margin: 20px auto;
       }
+      .header-nav li {
+        display: inline-block;
+      }
   }
   .header-box {
     width: 160px;
@@ -77,7 +80,6 @@
   }
   .header-nav li {
     margin:0 10px;
-    display: block;    
   }
 </style>
 

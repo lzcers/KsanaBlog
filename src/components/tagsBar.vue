@@ -27,9 +27,11 @@
   .tags-list {
     padding-left: 15px;
     list-style: none;
+    margin: 0;
   }
   .tags {
-    border: 1px solid #eee;
+    height: 40px;
+    line-height: 40px;
     background: #fff;
     box-shadow: 1px 1px 1px #eee;
   }

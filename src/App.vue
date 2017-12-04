@@ -37,6 +37,7 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
+    margin: 0 auto;
   }
   .wrap {
     display: flex;
@@ -55,6 +56,9 @@
   @media screen and (min-device-width: 1280px) {
     .wrap {
       flex-flow: row nowrap;
+    }
+    .content {
+      width: 80%;
     }
   }
 </style>
