@@ -15,6 +15,9 @@
 </template>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
   html, body, .wrap {
     margin: 0;
     padding: 0;

@@ -33,7 +33,7 @@
     height: 40px;
     line-height: 40px;
     background: #fff;
-    box-shadow: 1px 1px 1px #eee;
+    box-shadow: 0 2px 2px #ccc
   }
 </style>
 

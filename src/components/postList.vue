@@ -33,7 +33,7 @@
 <style>
   .posts {
     margin-top: 15px;
-    box-shadow: 0.5px 0.5px 2px #eee;
+    box-shadow: 0 2px 4px #ccc;
     background: #fff;
     padding: 10px;
   }
@@ -47,7 +47,7 @@
   }
   .post-item {
     padding-bottom: 5px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px dashed #ccc;
   }
   .post-list-title {
     color: #5f5f5f;
