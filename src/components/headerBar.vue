@@ -27,10 +27,10 @@
         <nav class="header-nav">
           <div class="header-nav-dashed"></div>
           <!-- <li><router-link to="/post">Post</router-link></li> -->
+          <li><router-link to="/archives">Archives</router-link></li>
           <li><router-link to="/project">Project</router-link></li>
           <!-- <li><router-link to="/project">Galleray</router-link></li> -->
           <li><router-link to="/aboutme">About</router-link></li>
-          <li><router-link to="/archives">Archives</router-link></li>
         </nav>
       <!-- </div> -->
   </header>

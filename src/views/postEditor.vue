@@ -164,6 +164,7 @@ export default Vue.extend({
         PublishDate: this.mdMeta.PublishDate || new Date().toLocaleString(undefined,{hour12: false})
       })
       .then(res => {
+        alert("add！")        
         this.postID = res.data
         console.log("add Post: " + this.postID)
       })
@@ -177,7 +178,10 @@ export default Vue.extend({
         PublishDate: this.mdMeta.PublishDate || new Date().toLocaleString(undefined,{hour12: false}),
         LastUpdate: new Date().toLocaleString(undefined,{hour12: false})
       })
-      .then(res => console.log("updatePost: " + this.postID))
+      .then(res => {
+        alert("update！")
+        console.log("updatePost: " + this.postID)
+      })
       .catch(err => console.log(err))
     },
     // 让两边滚动条移动相同比例的距离
