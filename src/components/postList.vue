@@ -6,7 +6,8 @@
         <router-link class="site-text-plain" :to="'/post/'+item.ID">
           <h4 class="post-list-title">{{ item.Title }}</h4>
         </router-link>
-        <p closs="post-body-slice">{{ sliceContent(item.Content) + '……' }}</p>
+        <!-- <p closs="post-body-slice">{{ sliceContent(item.Content) + '……' }}</p> -->
+        <p closs="post-body-slice" v-html="sliceContent(item.Content)"></p>
         <div>
           <div class="post-list-date"><i class="icon ion-calendar"></i> {{ item.PublishDate }}</div>
           <div class="post-list-tags">
@@ -50,7 +51,7 @@
     border-bottom: 1px dashed #ccc;
   }
   .post-list-title {
-    color: #5f5f5f;
+    color: #333;
     margin-bottom: 5px;
   }
   .post-list-date, .post-list-tags {
@@ -153,7 +154,7 @@ export default Vue.extend({
       if (tagName != undefined) {
         getPostsByTag(tagName)
         .then((posts: any) => {
-          this.postList = posts
+          this.postList = this.sortPostList(posts)
           this.pageNumber = 0     
           this.loadPagePosts(this.pageNumber)
         })
@@ -166,7 +167,10 @@ export default Vue.extend({
   },
   methods: {
     sliceContent(content: string) {
-      return marked(content).html.replace(/(<[^>]+>)|(\n)/g,"").slice(0, 250).trim()
+      // 把内容按句号分段，取前10段
+      const strSlice = content.split(/(。)/g, 10).join("") + '……'
+      return marked(strSlice).html
+      // return marked(content).html.replace(/(<[^>]+>)|(\n)/g,"").slice(0, 250).trim()
     },
     sortPostList(postList: Post[]): Post[] {
       return postList.sort((a, b) => {
@@ -182,7 +186,7 @@ export default Vue.extend({
   },
   created() {
     getPosts()
-    .then((posts: Post[]) => posts.sort((a, b) => new Date(a.PublishDate) < new Date(b.PublishDate) ? 1 : -1))
+    .then((posts: Post[]) => this.sortPostList(posts))
     .then((list: Post[]) => {
       this.postList = list
       this.currentPagePost = list

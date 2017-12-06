@@ -4,7 +4,7 @@
         <div class="header-box">
           <div class="header-title">
             <router-link to="/">
-              <img class="site-author" src="../assets/header-pic.png" />
+              <img class="site-author" src="../assets/header-pic.jpg" />
               <h1 class="site-name">KSANA</h1>     
             </router-link>
           </div>
