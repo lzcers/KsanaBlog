@@ -6,7 +6,7 @@
         <router-link class="site-text-plain" :to="'/post/'+item.ID">
           <h4 class="post-list-title">{{ item.Title }}</h4>
         </router-link>
-        <div closs="post-body-slice markdown-body" v-html="sliceContent(item.Content)"></div>
+        <div class="markdown-body post-body-slice" v-html="sliceContent(item.Content)"></div>
         <div>
           <div class="post-list-date"><i class="icon ion-calendar"></i> {{ item.PublishDate }}</div>
           <div class="post-list-tags">
@@ -31,10 +31,6 @@
 </template>
 
 <style>
-  .markdown-body img {
-    max-width: 100%;
-    display: block;
-  }
   .posts {
     margin-top: 15px;
     box-shadow: 0 2px 4px #ccc;
@@ -107,7 +103,6 @@
 </style>
 
 <script lang="ts">
-
 import Vue from 'vue' 
 import { getPosts, getPostsByTag } from '../api'
 import marked from '../utils/render'
