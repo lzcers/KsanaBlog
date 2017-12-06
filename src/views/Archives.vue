@@ -1,14 +1,17 @@
 <template>
   <div class="archives">
     <ul class="archives-tags">
+      <li>
+        <a @click="getPostsListByTtag('all')">全部</a>
+      </li>
       <li v-for="tag in tags" :key="tag">
         <a @click="getPostsListByTtag(tag)">{{ tag }}</a>
       </li>
     </ul>
     <ol class="archives-date">
-      <li v-for="post in postList" :key="post.ID">
+      <li v-for="(post, index) in postList" :key="post.ID">
         <router-link class="site-text-plain" :to="'/post/'+post.ID">
-          <span>{{ post.Title }}</span>
+          <span>{{ index + 1 + '. ' + post.Title }}</span>
           <span>{{ new Date(post.PublishDate).toLocaleDateString("en-US") }}</span>
         </router-link>
       </li>
@@ -70,11 +73,13 @@ interface Post {
   LastUpdate: string;
 }
 interface Data {
-  postList: Post[]
-  tags: string[]
+  allPostList: Post[];
+  postList: Post[];
+  tags: string[];
 }
 export default Vue.extend({
   data: (): Data => ({
+    allPostList: [],
     postList: [],
     tags: []
   }),
@@ -85,6 +90,7 @@ export default Vue.extend({
       })
     },
     getPostsListByTtag(tag: string) {
+      if (tag == 'all') this.postList = this.allPostList
       getPostsByTag(tag)
       .then((posts: any) => {
         this.postList = this.sortPostList(posts)
@@ -95,6 +101,7 @@ export default Vue.extend({
     getPosts()
     .then((posts: Post[]) => this.sortPostList(posts))
     .then((list: Post[]) => {
+      this.allPostList = list
       this.postList = list
     })
     getTags().then(tags => this.tags = tags).catch(e => console.log(e))
