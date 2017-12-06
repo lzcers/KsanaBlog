@@ -161,8 +161,8 @@ export default Vue.extend({
         return 
       } 
       console.log("auto Save to local storage...")
-      this.postID != "" ? localStorage.setItem('tempPost'+this.postID, this.mdText) 
-      : localStorage.setItem('tempPost', this.mdText)
+      // postID 如果为 undefined 那就存tempPostundefined， 没毛病
+      localStorage.setItem('tempPost'+this.postID, this.mdText)
     },
     addPost() {
       addPost({
@@ -182,6 +182,7 @@ export default Vue.extend({
         Title: this.mdMeta.Title,
         Tags: this.mdMeta.Tags.split('|').map((i: string) => i.trim()),
         Content: this.mdText,
+        PublishDate: this.mdMeta.PublishDate || new Date().toLocaleString(undefined,{hour12: false}),
         LastUpdate: new Date().toLocaleString(undefined,{hour12: false})
       })
       .then(res => console.log("updatePost: " + this.postID))
@@ -207,8 +208,7 @@ export default Vue.extend({
     let content = ""
     // 先从本地 localStorage 找
     if (window.localStorage != undefined) {
-      content = (this.postID != undefined ? localStorage.getItem('tempPost'+this.postID)
-      : localStorage.getItem('tempPost')) || ""
+      content = localStorage.getItem('tempPost'+this.postID) || ""
       if (content != "") this.mdText = content
     } 
     // 本地缓存没有，且 postID 非空则去后端取
