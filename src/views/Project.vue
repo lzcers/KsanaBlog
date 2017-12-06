@@ -8,9 +8,14 @@
 </template>
 
 <style>
+  @media screen and (min-device-width: 1280px) {
+    .project-list {
+      width: 80% !important;
+    }
+  }
   .project-list {
+    width: 100%;
     margin-top: 20px;
-    width: 80%;
     color: #333;
     background: #fff;
     border: 1px solid #eee;

@@ -23,9 +23,14 @@
 </template>
 
 <style>
+  @media screen and (min-device-width: 1280px) {
+    .aboutme-container {
+      width: 80% !important;
+    }
+  }
   .aboutme-container {
+    width: 100%;    
     margin-top: 20px;
-    width: 80%;
     color: #333;
     background: #fff;
     border: 1px solid #eee;

@@ -17,9 +17,14 @@
 </template>
 
 <style>
+  @media screen and (min-device-width: 1280px) {
+    .archives {
+      width: 80% !important;
+    }
+  }
   .archives {
+    width: 100%;
     margin-top: 20px;
-    width: 80%;
     color: #333;
     background: #fff;
     border: 1px solid #eee;
