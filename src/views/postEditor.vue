@@ -145,7 +145,7 @@ export default Vue.extend({
     },
     savePost() {
       this.mdMeta = marked(this.mdText).meta
-      this.postID == '' || undefined ? this.addPost() : this.updatePost()
+      this.postID == '' || this.postID == undefined ? this.addPost() : this.updatePost()
     },
     saveToLocalStorage() {
       if (window.localStorage == undefined) {
