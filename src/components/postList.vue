@@ -31,6 +31,10 @@
 </template>
 
 <style>
+  .post-body-slice {
+    padding: 15px 0;
+  }
+  
   .posts {
     margin-top: 15px;
     box-shadow: 0 2px 4px #ccc;
