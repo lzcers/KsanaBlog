@@ -51,6 +51,10 @@
     border-color: transparent;
     background: transparent;
   }
+  .post-toolbar button:hover {
+    font-weight: bold;    
+    background: #eee;
+  }
    .post-toolbar button:focus {
     outline: none;
   }

@@ -8,6 +8,9 @@
 </template>
 
 <style>
+  .toc-li {
+    list-style: none;
+  }
   .anchor {
     cursor: pointer;
   }

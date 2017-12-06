@@ -25,9 +25,6 @@
     box-sizing: border-box;
     font-family: "Lucida Grande","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif;
   }
-  li {
-    list-style: none;
-  }
   a:hover, a:visited, a:link, a:active {
     text-decoration: none;
     color: #000;  

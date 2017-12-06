@@ -6,8 +6,7 @@
         <router-link class="site-text-plain" :to="'/post/'+item.ID">
           <h4 class="post-list-title">{{ item.Title }}</h4>
         </router-link>
-        <!-- <p closs="post-body-slice">{{ sliceContent(item.Content) + '……' }}</p> -->
-        <p closs="post-body-slice" v-html="sliceContent(item.Content)"></p>
+        <div closs="post-body-slice markdown-body" v-html="sliceContent(item.Content)"></div>
         <div>
           <div class="post-list-date"><i class="icon ion-calendar"></i> {{ item.PublishDate }}</div>
           <div class="post-list-tags">
@@ -168,7 +167,7 @@ export default Vue.extend({
   methods: {
     sliceContent(content: string) {
       // 把内容按句号分段，取前10段
-      const strSlice = content.split(/(。)/g, 10).join("") + '……'
+      const strSlice = content.split(/(。)/g, 10).join("") + '<strong>……</strong>'
       return marked(strSlice).html
       // return marked(content).html.replace(/(<[^>]+>)|(\n)/g,"").slice(0, 250).trim()
     },

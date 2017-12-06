@@ -24,11 +24,13 @@
 
 <style>
   .aboutme-container {
-    width: 100%;
+    margin-top: 20px;
+    width: 80%;
+    color: #333;
     background: #fff;
     border: 1px solid #eee;
     box-shadow: 1px 1px 3px #eee;
-    padding: 30px;
+    padding: 5% 5%;
   }
 </style>
 

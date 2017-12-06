@@ -15,7 +15,14 @@
             <span class="header-separator">//</span>
             全干攻城狮🐶
           </aside>   
-          <!-- <aside class="header-p">咫尺天涯</aside>   -->
+          <aside class="header-link">
+            <a href="https://github.com/lzcers">
+              <i class="enterlink ion-social-github"></i>
+            </a>
+            <a href="mailto:lzcers@gmail.com">
+              <i class="enterlink ion-ios-email"></i>
+            </a>
+          </aside>  
         </div>
         <nav class="header-nav">
           <div class="header-nav-dashed"></div>
@@ -23,12 +30,29 @@
           <li><router-link to="/project">Project</router-link></li>
           <!-- <li><router-link to="/project">Galleray</router-link></li> -->
           <li><router-link to="/aboutme">About</router-link></li>
+          <li><router-link to="/archives">Archives</router-link></li>
         </nav>
       <!-- </div> -->
   </header>
 </template>
 
 <style>
+  .header-link {
+    width: 100%;
+    height: 40px;
+    font-size: 30px;
+    line-height: 30px;
+    padding: 5px;
+    text-align: center;
+    margin: 20px 0; 
+  }
+  .header-link a {
+    color: #333;
+    margin: 0 5px;
+  }
+  .enterlink:hover {
+    color: #000;
+  }
   .header-nav-dashed {
     margin: 20px 20px;
     border-top: 1px dashed #ccc;
@@ -107,7 +131,8 @@
     text-align: center;
   }
   .header-nav li {
-    padding: 0 10px
+    padding: 0 10px;
+    list-style: none;
   }
   .header-nav li:hover {
     background: #eee;

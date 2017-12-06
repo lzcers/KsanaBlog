@@ -6,12 +6,14 @@
   </div>
   <section class="post-container">
     <article class="post-view" v-if="post">
-      <h3 class="post-title">{{ post.Title }} <router-link v-if="$$app.logedin" :to="'/posteditor/'+$route.params.id"><i class="ion-edit"></i></router-link> </h3>
-      <div>
-        <div class="post-date"><i class="icon ion-calendar"></i> {{ post.PublishDate }}</div>
-        <div class="post-tags">
-          <i class="icon ion-pricetags"></i>
-          <router-link v-for="tagName in post.Tags" :key="tagName" class="site-text-plain" :to="'/tags/' + tagName">{{ tagName + " " }}</router-link>
+      <div class="post-view-header">
+        <h3 class="post-title">{{ post.Title }} <router-link v-if="$$app.logedin" :to="'/posteditor/'+$route.params.id"><i class="ion-edit"></i></router-link> </h3>
+        <div>
+          <div class="post-date"><i class="icon ion-calendar"></i> {{ post.PublishDate }}</div>
+          <div class="post-tags">
+            <i class="icon ion-pricetags"></i>
+            <router-link v-for="tagName in post.Tags" :key="tagName" class="site-text-plain" :to="'/tags/' + tagName">{{ tagName + " " }}</router-link>
+          </div>
         </div>
       </div>
       <div class="post-body markdown-body" v-html="mdHtml">
@@ -27,13 +29,16 @@
     display: flex;
     flex: 1;
   }
+  .post-view-header {
+    margin: 2.5% auto;
+  }
   .post-container {
     box-sizing: border-box;
     color: #333;
     background: #fff;
     border: 1px solid #eee;
     box-shadow: 1px 1px 3px #eee;
-    padding: 15px;
+    padding: 0 5%;
   }
   @media screen and (max-device-width: 1280px) {
     .post-wrap {
@@ -63,7 +68,9 @@
     }
   }
   .toc-header {
-    padding: 5px 15px;
+    font-weight: bold;
+    margin: 5px 15px;
+    padding: 15px 0;
     border-bottom: 1px solid #ccc;
   }
   .post-title {
@@ -79,7 +86,7 @@
   }
   .post-body {
     max-width: 100%;
-    margin-top: 5px
+    margin-top: 25px
   } 
   .post-body img {
     max-width: 100%;
