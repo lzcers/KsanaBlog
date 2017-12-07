@@ -23,15 +23,13 @@
               <i class="enterlink ion-ios-email"></i>
             </a>
           </aside>  
+          <nav class="header-nav">
+            <li><router-link to="/archives">Archives</router-link></li>
+            <li><router-link to="/project">Project</router-link></li>
+            <li><router-link to="/aboutme">About</router-link></li>
+          </nav>
+          <lifegame></lifegame>
         </div>
-        <nav class="header-nav">
-          <div class="header-nav-dashed"></div>
-          <!-- <li><router-link to="/post">Post</router-link></li> -->
-          <li><router-link to="/archives">Archives</router-link></li>
-          <li><router-link to="/project">Project</router-link></li>
-          <!-- <li><router-link to="/project">Galleray</router-link></li> -->
-          <li><router-link to="/aboutme">About</router-link></li>
-        </nav>
       <!-- </div> -->
   </header>
 </template>
@@ -52,10 +50,6 @@
   }
   .enterlink:hover {
     color: #000;
-  }
-  .header-nav-dashed {
-    margin: 20px 20px;
-    border-top: 1px dashed #ccc;
   }
   .header-separator {
     color: #E54028;
@@ -110,9 +104,6 @@
       .header-box {
         margin: 20px auto;
       }
-      .header-nav li {
-        display: inline-block;
-      }
   }
   .header-box {
     display: flex;
@@ -127,12 +118,14 @@
     margin-bottom: 0;
   }
   .header-nav {
-    line-height: 50px;
+    line-height: 20px;
     text-align: center;
   }
   .header-nav li {
     padding: 0 10px;
+    display: inline-block;
     list-style: none;
+    border-bottom: 1px dashed #ccc;
   }
   .header-nav li:hover {
     background: #eee;
@@ -141,7 +134,11 @@
 
 <script ts>
 import Vue from 'vue'
+import lifegame from './lifegame.vue'
 
 export default Vue.extend({
+  components: {
+    lifegame
+  }
 })
 </script>
