@@ -87,9 +87,6 @@
       background-repeat: no-repeat;
       background-position: center;        */
     }
-    .header-box {
-        margin: 150px auto;
-    }
   }
   @media screen and (max-device-width: 1280px) {
       .header { 
@@ -101,11 +98,10 @@
       background-repeat: no-repeat;
       background-position: center;        */
       }
-      .header-box {
-        margin: 20px auto;
-      }
   }
   .header-box {
+    margin: 0 auto;
+    padding-top: 15%;
     display: flex;
     flex-flow: column wrap;
     justify-content: flex-start;
@@ -132,7 +128,7 @@
   }
 </style>
 
-<script ts>
+<script lang="ts">
 import Vue from 'vue'
 import lifegame from './lifegame.vue'
 

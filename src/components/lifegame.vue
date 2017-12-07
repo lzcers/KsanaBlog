@@ -8,7 +8,7 @@
   }
 </style>
 
-<script>
+<script lang="ts">
 import Vue from "vue"
 export default Vue.extend({
   data: () => ({
@@ -18,7 +18,8 @@ export default Vue.extend({
     const cellSize = 10
     const matrixSize = 35
     const canvasSize = 350
-    let myCanvas = document.getElementById("lifegame")
+    let myCanvas = <any>document.getElementById("lifegame")
+    if (myCanvas == null) return
     myCanvas.addEventListener("mousemove", mousePassCanvas)
     let c = myCanvas.getContext("2d")
     // 初始化细胞矩阵
@@ -33,7 +34,7 @@ export default Vue.extend({
       mapMatrix(cellMatrix)
     }
     // 初始化细胞矩阵
-    function initCellMatrix(size) {
+    function initCellMatrix(size: number) {
       let array = new Array(size)
       for (let i = 0; i < size; i++) {
         array[i] = new Array(size)
@@ -44,7 +45,7 @@ export default Vue.extend({
       }
       return array
     }
-    function deepcopy(obj) {
+    function deepcopy(obj: any): any {
       let out = [],
         length = obj.length
       for (let i = 0; i < length; i++) {
@@ -55,7 +56,7 @@ export default Vue.extend({
       return out
     }
     // 绘制网格
-    function drawGrid(interval, size) {
+    function drawGrid(interval: any, size: any) {
       for (let i = 0; i <= size; i += interval) {
         // 画行
         c.moveTo(0, i)
@@ -68,7 +69,7 @@ export default Vue.extend({
       }
     }
     // 细胞状态更新
-    function liveStatusUpdate(matrix) {
+    function liveStatusUpdate(matrix: any) {
       let length = matrix.length
       for (let i = 0; i < length; i++) {
         for (let j = 0; j < length; j++) {
@@ -76,7 +77,7 @@ export default Vue.extend({
         }
       }
     }
-    function liveRule(_x, _y, matrix) {
+    function liveRule(_x: any, _y: any, matrix: any) {
       // 规则1.如果一个细胞周围有三个细胞为生，则该细胞为生
       // 规则2.如果一个细胞周围有2个细胞为生，
       // 规则3.在其它情况下，该细胞为死（即该细胞若原先为生，则转为死，若原先为死，则保持不变）
@@ -87,14 +88,13 @@ export default Vue.extend({
           return 1
         case 2:
           return -1
-          break
         default:
           cellMatrix[_x][_y] = 0
           return 0
       }
     }
     // 细胞周围生存情况
-    function surroundCell(_x, _y, cellMatrix) {
+    function surroundCell(_x: any, _y: any, cellMatrix: any) {
       // 映射至细胞矩阵数组坐标
       let liveNumber = 0
       for (let i = _x - 1; i <= _x + 1; i++) {
@@ -113,18 +113,18 @@ export default Vue.extend({
     }
     // 绘制细胞
     // _x, _y 为细胞矩阵中的坐标，映射至canvas
-    function liveCell(_x, _y) {
+    function liveCell(_x: any, _y: any) {
       c.fillStyle = "#000000"
       c.fillRect(_x * cellSize, _y * cellSize, cellSize, cellSize)
     }
     // 杀死细胞
-    function killCell(_x, _y) {
+    function killCell(_x: any, _y: any) {
       //        c.fillStyle='#eeeeee' // 采用背景色填充
       c.fillStyle = "#ffffff"
       c.fillRect(_x * cellSize, _y * cellSize, cellSize, cellSize)
     }
     // 矩阵状态映射至canvas网格
-    function mapMatrix(matrix) {
+    function mapMatrix(matrix: any) {
       let length = matrix.length
       for (let x = 0; x < length; x++) {
         for (let y = 0; y < length; y++) {
@@ -132,10 +132,10 @@ export default Vue.extend({
         }
       }
     }
-    function mousePassCanvas(event) {
+    function mousePassCanvas(event: any) {
       let X = event.offsetX
       let Y = event.offsetY
-      
+
       let offsetMatrixX = Math.floor(X / cellSize)
       let offsetMatrixY = Math.floor(Y / cellSize)
       
@@ -147,8 +147,6 @@ export default Vue.extend({
   },
   destroyed() {
     clearInterval(this.intervalCode)
-    let myCanvas = document.getElementById("myCanvas")
-    myCanvas.removeEventListener("mousemove", mousePassCanvas)
   }
 })
 </script>
