@@ -1,16 +1,17 @@
 <template>
   <div class="lifegame-box">
-    <canvas id="lifegame" :width="canvasSize" :height="canvasSize"></canvas>
+    <canvas id="lifegame" :style="sizePX" :width="canvasSize" :height="canvasSize"></canvas>
   </div>
 </template>
 
 <style>
   .lifegame-box {
-    padding: 15px;
     width: 100%;
+    padding: 15px;
   }
   #lifegame {
     width: 100%;    
+    display: block;
   }
 </style>
 
@@ -21,10 +22,18 @@ export default Vue.extend({
     intervalCode: 0,
     canvasSize: 0
   }),
+  computed: {
+    sizePX():any {
+      if (this.canvasSize != 0)
+      return {height: this.canvasSize +'px', width: this.canvasSize +'px'}
+    }
+  },
   mounted() {
     let myCanvas = <any>document.getElementById("lifegame")
     const canvasSize = Math.round(myCanvas.offsetWidth / 10) * 10 // 减去 padding 占用的空间
     this.canvasSize = canvasSize
+    myCanvas.style.width = canvasSize
+    myCanvas.style.height = canvasSize
     const matrixSize = canvasSize / 10
     const cellSize = 10
     if (myCanvas == null) return
@@ -146,7 +155,7 @@ export default Vue.extend({
 
       let offsetMatrixX = Math.floor(X / cellSize)
       let offsetMatrixY = Math.floor(Y / cellSize)
-      
+
       if (offsetMatrixX < matrixSize && offsetMatrixY < matrixSize)
       cellMatrix[offsetMatrixX][offsetMatrixY] = 1
 
