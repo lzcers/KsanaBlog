@@ -1,10 +1,16 @@
 <template>
-  <canvas id="lifegame" width="380" height="380"></canvas>
+  <div class="lifegame-box">
+    <canvas id="lifegame" :width="canvasSize" :height="canvasSize"></canvas>
+  </div>
 </template>
 
 <style>
-  #lifegame {
+  .lifegame-box {
     padding: 15px;
+    width: 100%;
+  }
+  #lifegame {
+    width: 100%;    
   }
 </style>
 
@@ -13,12 +19,14 @@ import Vue from "vue"
 export default Vue.extend({
   data: () => ({
     intervalCode: 0,
+    canvasSize: 0
   }),
   mounted() {
-    const cellSize = 10
-    const matrixSize = 35
-    const canvasSize = 350
     let myCanvas = <any>document.getElementById("lifegame")
+    const canvasSize = Math.round(myCanvas.offsetWidth / 10) * 10 // 减去 padding 占用的空间
+    this.canvasSize = canvasSize
+    const matrixSize = canvasSize / 10
+    const cellSize = 10
     if (myCanvas == null) return
     myCanvas.addEventListener("mousemove", mousePassCanvas)
     let c = myCanvas.getContext("2d")
