@@ -10,7 +10,7 @@
   </li>
   <li>
     <a href="https://github.com/lzcers/KsanaRouter">KsanaRouter</a>
-    <span>基于前缀树的HTTP Router，学习 Golang 写的玩具，深坑，just for fun ...</span>
+    <span>基于前缀树的 HTTP Router，学习 Golang 写的玩具，深坑，just for fun ...</span>
   </li>
 </div>
 </template>
