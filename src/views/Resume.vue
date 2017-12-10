@@ -108,6 +108,7 @@ export default Vue.extend({
             border-bottom: 1px solid #ccc;
           }
           .resume-body {
+            font-family: "Lucida Grande","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif;
             width: 60%;            
             margin-top: 20px;
             color: #333;
