@@ -2,11 +2,11 @@
 <div class="project-list">
   <li>
     <a href="https://github.com/lzcers/KsanaRete"><strong>KsanaRete：</strong></a>
-    <span>基于Rete算法的规则引擎实现，采用 TypeScript 开发。</span>
+    <span>坑，以前为了项目需求研究学习的玩意，以后估计不大可能用上了，基于Rete算法的规则引擎实现，采用 TypeScript 开发。</span>
   </li>
   <li>
     <a href="https://github.com/lzcers/KsanaBlog"><strong>KsanaBlog：</strong></a>
-    <span>当然！这个博客的源码也是丢在 GitHub 上的，文章使用 md 编写，在前端通过 marked.js解析，自带一个简单的markdown编辑器，能够在线写博文，后端用的 go + mongodb, 也可以尝试使用早期版本的 GitHub API 模式。</span>
+    <span>当然！这个博客的源码也是丢在 GitHub 上的，文章使用 md 编写，在前端通过 marked.js 解析，自带一个简单的 markdown 编辑器，能够在线写博文，后端用的 go + mongodb, 也可以尝试本博客早期采用的 GitHub API 方式。</span>
   </li>
   <li>
     <a href="https://github.com/lzcers/KsanaRouter"><strong>KsanaRouter：</strong></a>

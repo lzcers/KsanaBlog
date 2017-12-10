@@ -5,11 +5,12 @@ import Project from '../views/Project.vue'
 import PostEditor from '../views/PostEditor.vue'
 import Login from '../views/Login.vue'
 import Archives from '../views/Archives.vue'
- 
+import Resume from '../views/Resume.vue' 
+
 import { authorizationCheck } from '../api'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes: any = [
   { path: '/', component: Posts },
@@ -19,6 +20,7 @@ const routes: any = [
   { path: '/aboutme', component: AboutMe },
   { path: '/project', component: Project },
   { path: '/archives', component: Archives },
+  { path: '/Resume', component: Resume },
   { 
     path: '/posteditor', 
     component: PostEditor,
