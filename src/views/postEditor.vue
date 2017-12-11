@@ -166,6 +166,8 @@ export default Vue.extend({
       .then(res => {
         alert("add！")        
         this.postID = res.data
+        //保存之后清除一次 tempPost
+        localStorage.removeItem('tempPostundefined')
         console.log("add Post: " + this.postID)
       })
       .catch(err => console.log(err))

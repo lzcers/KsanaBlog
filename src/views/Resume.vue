@@ -1,18 +1,29 @@
 <template>
   <div class="resume">
     <div ref="resumeBody" class="resume-body">
+      <div class="resume-header">
+        <h1 class="name">李志成</h1>
+        <div class="contact">
+          <li class="contact-wechat">
+            <i class="ion-chatbubbles"></i>
+            <span>avernusk</span>
+          </li>
+          <li class="contact-email">
+            <i class="ion-ios-email"></i>
+            <span>lzcers@gmail.com</span>
+          </li>
+          <li class="contact-phone">
+            <i class="ion-android-phone-portrait"></i>
+            <span>17603050797</span>
+          </li>
+        </div>
+      </div>
       <div class="basicinfo">
-        <h3 class="title">个人信息</h3>
-          <li>个人信息：Zack / 男</li>
+          <li>个人信息：男 / 1993</li>
           <li>工作年限：3年</li>
           <li>博客： <a href="https://ksana.net">https://ksana.net</a></li>
           <li>职位： 前端工程师</li>
           <li>学历： 大专</li>
-      </div>
-      <div class="contact">
-        <h3 class="title">联系方式</h3>
-        <li><strong>微信:</strong> avernusk</li>
-        <li><strong>邮箱:</strong> lzcers@gmail.com</li>
       </div>
       <div class="skill">
         <h3 class="title">技能</h3>
@@ -72,6 +83,21 @@
 </template>
 
 <style>
+  .resume-header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+  .contact li{
+    list-style: none;
+    line-height: 30px;
+    text-align: left;
+  }
+  .contact li i{
+    font-size: 18px
+  }
   .title {
     padding-bottom: 5px;
     border-bottom: 1px solid #ccc;
@@ -101,8 +127,30 @@ export default Vue.extend({
     printme() {
       let f = <any>document.getElementById('printme')
       if (f != null) {
-        f.contentDocument.write(`
+        f.contentWindow.print()
+      }
+    } 
+  },
+  mounted() {
+    let f = <any>document.getElementById('printme')
+    if (f != null) {
+      f.contentDocument.write(`
         <style>
+          .resume-header {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+          }
+          .contact li{
+            list-style: none;
+            line-height: 30px;
+            text-align: left;
+          }
+          .contact li i{
+            font-size: 18px
+          }
           .title {
             padding-bottom: 5px;
             border-bottom: 1px solid #ccc;
@@ -115,13 +163,11 @@ export default Vue.extend({
             background: #fff;
             padding: 5% 5%;
           }
-        </style>` + (<any>this.$refs.resumeBody).innerHTML)
-        f.contentDocument.close()
-        f.contentWindow.print()
-      }
-      // document.body.innerHTML= (<any>this.$refs.resumeBody).innerHTML
-      // window.print()
-    } 
+        </style>
+        <link href="/assets/styles.026d6.css" rel="stylesheet">        
+      ` + (<any>this.$refs.resumeBody).innerHTML)
+      f.contentDocument.close()    
+    }
   }
 })
 </script>
