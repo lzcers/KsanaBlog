@@ -86,7 +86,8 @@
   }
   .post-body {
     max-width: 100%;
-    margin-top: 25px
+    margin-top: 25px;
+    margin-bottom: 25px;
   } 
   .post-body img {
     max-width: 100%;
