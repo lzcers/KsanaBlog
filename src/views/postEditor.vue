@@ -111,13 +111,14 @@ interface Post {
   Content: string;
   PublishDate: string;
   LastUpdate: string;
+  Published: boolean;
 }
 
 export default Vue.extend({
   data: (): {
     tirgger: string;
     mdText: string;
-    mdMeta: any;
+    mdMeta: Post | any;
     postID: string;
     editorModeFlag: boolean;
     autoSaveFuncID: number;
@@ -161,7 +162,8 @@ export default Vue.extend({
         Title: this.mdMeta.Title,
         Tags: this.mdMeta.Tags.split('|').map((i: string) => i.trim()),
         Content: this.mdText,
-        PublishDate: this.mdMeta.PublishDate || new Date().toLocaleString(undefined,{hour12: false})
+        PublishDate: this.mdMeta.PublishDate || new Date().toLocaleString(undefined,{hour12: false}),
+        Published: this.mdMeta.Published
       })
       .then(res => {
         alert("add！")        
@@ -178,7 +180,8 @@ export default Vue.extend({
         Tags: this.mdMeta.Tags.split('|').map((i: string) => i.trim()),
         Content: this.mdText,
         PublishDate: this.mdMeta.PublishDate || new Date().toLocaleString(undefined,{hour12: false}),
-        LastUpdate: new Date().toLocaleString(undefined,{hour12: false})
+        LastUpdate: new Date().toLocaleString(undefined,{hour12: false}),
+        Published: this.mdMeta.Published
       })
       .then(res => {
         alert("update！")

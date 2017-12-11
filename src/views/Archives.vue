@@ -85,6 +85,7 @@ export default Vue.extend({
   }),
   methods: {
     sortPostList(postList: Post[]): Post[] {
+      if (postList == null) throw "postlist is null!"
       return postList.sort((a, b) => {
         return new Date(a.PublishDate) < new Date(b.PublishDate) ? 1 : -1
       })

@@ -50,6 +50,7 @@ export default Vue.extend({
         if (data.result == true) {
           this.$$app.logedin = true
           this.$router.push(this.$route.query.redirect || '/')
+          window.sessionStorage.clear()
         }
       })
     }

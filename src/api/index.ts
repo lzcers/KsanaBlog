@@ -18,6 +18,7 @@ interface Post {
   Content: string;
   PublishDate?: string;
   LastUpdate?: string;
+  Published?: boolean;
 }
 
 const cache = {
