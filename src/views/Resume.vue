@@ -90,6 +90,7 @@
     margin-bottom: 20px;
   }
   .contact li{
+    text-decoration: none;
     list-style: none;
     line-height: 30px;
     text-align: left;
@@ -152,6 +153,10 @@ export default Vue.extend({
             list-style: none;
             line-height: 30px;
             text-align: left;
+          }
+          .contact a:hover, a:visited, a:link, a:active {
+            text-decoration: none;            
+            color: #000;            
           }
           .contact li i{
             font-size: 18px
