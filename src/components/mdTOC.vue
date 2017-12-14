@@ -8,6 +8,10 @@
 </template>
 
 <style>
+  .anchor:hover {
+    font-weight: normal;
+    border-bottom: 1px solid #000;
+  }
   .toc-li {
     margin: 5px;
     list-style: none;

@@ -58,10 +58,8 @@
       flex: 1;
     }
     .post-toc {
-      width: max-content;
+      min-width: max-content;
       height: fit-content;
-      position: sticky;
-      top: 0px;
     }
     .post-toc ol {
       padding-left: 20px;
