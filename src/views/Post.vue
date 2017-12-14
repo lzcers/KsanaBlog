@@ -58,7 +58,6 @@
       flex: 1;
     }
     .post-toc {
-      margin: 10px;
       width: max-content;
       height: fit-content;
       position: sticky;

@@ -163,7 +163,7 @@ export default Vue.extend({
         Tags: this.mdMeta.Tags.split('|').map((i: string) => i.trim()),
         Content: this.mdText,
         PublishDate: this.mdMeta.PublishDate || new Date().toLocaleString(undefined,{hour12: false}),
-        Published: this.mdMeta.Published
+        Published: this.mdMeta.Published == undefined ? true : this.mdMeta.Published
       })
       .then(res => {
         alert("add！")        
@@ -181,7 +181,7 @@ export default Vue.extend({
         Content: this.mdText,
         PublishDate: this.mdMeta.PublishDate || new Date().toLocaleString(undefined,{hour12: false}),
         LastUpdate: new Date().toLocaleString(undefined,{hour12: false}),
-        Published: this.mdMeta.Published
+        Published: this.mdMeta.Published == undefined ? true : this.mdMeta.Published
       })
       .then(res => {
         alert("update！")
