@@ -46,6 +46,7 @@
     background: #f9f9f9;
   }
   .main {
+    margin-left: 25%;    
     width: 100%;
     display: flex;
     flex-direction: column;

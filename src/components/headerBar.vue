@@ -77,9 +77,9 @@
   }
   @media screen and (min-device-width: 1280px) {
     .header { 
-      width: 25%;
+      width: 25vw;
       height: calc(100vh);  
-      position: sticky;
+      position: fixed;
       top: 0;
       background: #fff;  
       box-shadow: 0 0 3px #ccc;
