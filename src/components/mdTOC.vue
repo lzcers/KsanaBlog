@@ -9,6 +9,7 @@
 
 <style>
   .toc-li {
+    margin: 5px;
     list-style: none;
   }
   .anchor {

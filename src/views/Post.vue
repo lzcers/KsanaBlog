@@ -58,10 +58,11 @@
       flex: 1;
     }
     .post-toc {
+      margin: 10px;
+      width: max-content;
       height: fit-content;
       position: sticky;
       top: 0px;
-      flex: 0.2;
     }
     .post-toc ol {
       padding-left: 20px;

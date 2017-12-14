@@ -141,6 +141,7 @@ export default Vue.extend({
     let f = <any>document.getElementById('printme')
     if (f != null) {
       f.contentDocument.write(`
+        <link href="/assets/styles.fb8a7.css" rel="stylesheet">        
         <style>
           .resume-header {
             display: flex;
@@ -174,7 +175,6 @@ export default Vue.extend({
             padding: 5% 5%;
           }
         </style>
-        <link href="/assets/styles.026d6.css" rel="stylesheet">        
       ` + (<any>this.$refs.resumeBody).innerHTML)
       f.contentDocument.close()    
     }
