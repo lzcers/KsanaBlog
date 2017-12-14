@@ -45,8 +45,7 @@
     display: flex;
     background: #f9f9f9;
   }
-  .main {
-    margin-left: 25%;    
+  .main { 
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -60,6 +59,9 @@
     }
   }
   @media screen and (min-device-width: 1280px) {
+    .main {
+      margin-left: 25%;
+    }
     .wrap {
       flex-flow: row nowrap;
     }
