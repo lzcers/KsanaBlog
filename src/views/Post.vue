@@ -24,7 +24,7 @@
 </div>
 </template>
 
-<style>
+<style lang="less">
   .post-wrap {
     display: flex;
     flex: 1;
@@ -60,9 +60,9 @@
     .post-toc {
       min-width: max-content;
       height: fit-content;
-    }
-    .post-toc ol {
-      padding-left: 20px;
+      ol {
+        padding-left: 20px;
+      }
     }
   }
   .toc-header {
@@ -74,10 +74,10 @@
   .post-title {
     margin-top: 5px;
     margin-bottom: 5px;
+    i {
+      margin-left: 20px;
+    }
   } 
-  .post-title i {
-    margin-left: 20px;
-  }
   .post-date, .post-tags {
     display: inline-block;
     margin-right: 10px;    

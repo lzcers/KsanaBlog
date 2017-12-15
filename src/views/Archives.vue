@@ -19,45 +19,44 @@
   </div>
 </template>
 
-<style>
-  @media screen and (min-device-width: 1280px) {
-    .archives {
-      width: 80% !important;
-    }
-  }
+<style lang="less">
   .archives {
-    width: 100%;
     margin-top: 20px;
-    color: #333;
     background: #fff;
     border: 1px solid #eee;
     box-shadow: 1px 1px 3px #eee;
     padding: 0 5%;
-  }
-  .archives-tags {
-    display: flex;
-    padding-left: 0px;
-    list-style: none;
-    padding-bottom: 10px; 
-    border-bottom: 1px solid #ccc;
-  }  
-  .archives-tags li {
-    cursor: pointer;
-    padding-right: 10px;
-  }  
-  .archives-date {
-    padding-left: 0;    
-  }
-  .archives-date li {
-    line-height: 30px;
-    list-style: none;    
-  }
-  .archives-date a{
-    display: flex;
-    justify-content: space-between;
-  }
-  .archives-date span {
-    display: inline-block;
+    @media screen and (min-device-width: 1280px) {
+      width: 80%;
+    }
+    @media screen and (max-device-width: 1280px) {
+      width: 100%;
+    }
+    &-tags {
+      display: flex;
+      padding-left: 0px;
+      list-style: none;
+      padding-bottom: 10px; 
+      border-bottom: 1px solid #ccc;
+    }
+    &-tags li {
+      cursor: pointer;
+      padding-right: 10px;
+    }
+    &-date {
+      padding-left: 0;
+      li {
+        line-height: 30px;
+        list-style: none;       
+      }
+      a {
+        display: flex;
+        justify-content: space-between;        
+      }
+      span {
+        display: inline-block;
+      }
+    }
   }
 </style>
 

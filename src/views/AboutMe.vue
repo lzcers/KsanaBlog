@@ -22,12 +22,7 @@
   </div>
 </template>
 
-<style>
-  @media screen and (min-device-width: 1280px) {
-    .aboutme-container {
-      width: 80% !important;
-    }
-  }
+<style lang="less">
   .aboutme-container {
     width: 100%;    
     margin-top: 20px;
@@ -36,6 +31,9 @@
     border: 1px solid #eee;
     box-shadow: 1px 1px 3px #eee;
     padding: 5% 5%;
+    @media screen and (min-device-width: 1280px) {
+      width: 80%;
+    }
   }
 </style>
 

@@ -15,17 +15,17 @@
   </div>
 </template>
 
-<style>
+<style lang="less">
   .login {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-content: center;
     align-items: center;
-  }
-  .login .login-form {
-    text-align: right;
-    margin-top: 10px;
+    .login-form {
+      text-align: right;
+      margin-top: 10px;
+    }
   }
 </style>
 

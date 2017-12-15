@@ -11,7 +11,7 @@
     </div>
 </template>
 
-<style>
+<style lang="less">
   .post-editor {
     width: 100%;
     min-height: 100%;
@@ -38,22 +38,23 @@
     display: flex;
     height: 35px;
     width: 100%;
+    button {
+      border-color: transparent;
+      background: transparent;    
+      &:hover {
+        font-weight: bold;    
+        background: #eee;
+      }
+      &:focus {
+        outline: none;
+      }
+      & i {
+        margin-left: 2px;
+        margin-right: 2px;
+      }
+    }
   }
-  .post-toolbar button {
-    border-color: transparent;
-    background: transparent;
-  }
-  .post-toolbar button:hover {
-    font-weight: bold;    
-    background: #eee;
-  }
-   .post-toolbar button:focus {
-    outline: none;
-  }
-  .post-toolbar button i {
-    margin-left: 2px;
-    margin-right: 2px;
-  }
+
   .post-markdown-editor, .post-markdown-preview {
     font-size: 16px; 
     line-height: 27px; 
@@ -67,24 +68,24 @@
     resize: none;
     flex:1;
   }
-  .scroll-style::-webkit-scrollbar {
-    width: 6px;
-    background-color: #e5e5e5;
-  }
-  .scroll-style::-webkit-scrollbar-thumb {
-    background-color: #b7b7b7;
-    border-radius: 3px;
-  }
-
-  .scroll-style::-webkit-scrollbar-thumb:hover {
-    background-color: #a1a1a1;
-  }
-  .scroll-style::-webkit-scrollbar-thumb:active {
-    background-color: #a1a1a1;
-  }
-  
-  .scroll-style::-webkit-scrollbar-track {
-    box-shadow: 0 0 0px #808080 inset;
+  .scroll-style {
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: #e5e5e5;    
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #b7b7b7;
+      border-radius: 3px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #a1a1a1;
+    }
+    &::-webkit-scrollbar-thumb:active {
+      background-color: #a1a1a1;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: 0 0 0px #808080 inset;
+    }
   }
 
   .post-markdown-editor {
@@ -92,7 +93,7 @@
     font-family: "Lucida Grande","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif
   }
   .post-editor-box {
-    height: calc(100vh - 95px);
+    height: calc(~"100vh - 95px");
     padding-top: 10px;
     display: flex;
     flex-flow: row nowrap;

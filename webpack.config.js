@@ -45,10 +45,17 @@ const config = {
         }
       },
       {
-        test:/\.css$/,
+        test: /\.css$/,
         loader: ExtractTextPlugin.extract({
-          use: 'css-loader',
+          use: "css-loader",
           fallback: 'vue-style-loader'
+        })
+      },
+      {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract({
+          use: "css?importLoaders=1!less",
+          fallback: 'vue-style-loader'          
         })
       },
       {
