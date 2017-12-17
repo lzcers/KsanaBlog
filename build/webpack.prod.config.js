@@ -4,12 +4,6 @@ const UglifyJSPlugin = webpack.optimize.UglifyJsPlugin
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-
-const fs = require('fs')
-const path = require('path')
-const resolve = (...dir) => path.resolve(__dirname, ...dir)
 
 module.exports = {
   devtool: "#source-map",
@@ -37,19 +31,6 @@ module.exports = {
         "NODE_ENV": "production"
       }
     }),
-    new HtmlWebpackPlugin({
-      template: resolve('../src', 'index.html'),
-      filename: 'index.html',
-      // favicon: require('./src/config').favicon || false,
-      minify: {
-        // https://github.com/kangax/html-minifier#options-quick-reference
-        removeComments: true,
-        collapseWhitespace: true
-      },
-      chunksSortMode: 'dependency',
-      serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
-        '../src/serviceWorker/serviceWorkerRegister.js'))}</script>`
-    }),
     new ExtractTextPlugin({      
       // filename: isProd ? 'build.[chunkhash:5].css' : 'build-css.css',
       filename: 'assets/styles.[chunkhash:5].css',
@@ -75,14 +56,6 @@ module.exports = {
       cssProcessorOptions: {
         safe: true
       }
-    }),
-    // service worker caching
-    new SWPrecacheWebpackPlugin({
-      cacheId: 'ksana',
-      filename: 'serviceWorker.js',
-      staticFileGlobs: ['dist/*.{js,html,css}'],
-      minify: true,
-      stripPrefix: 'dist/'
     }),
     new BundleAnalyzerPlugin()
   ]

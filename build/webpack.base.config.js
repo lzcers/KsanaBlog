@@ -4,6 +4,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+
 const path = require('path')
 const fs = require('fs')
 const resolve = (...dir) => path.resolve(__dirname, ...dir)
@@ -75,7 +76,9 @@ module.exports = {
         removeComments: true,
         collapseWhitespace: true
       },
-      chunksSortMode: 'dependency'
+      chunksSortMode: 'dependency',
+      serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
+        '../src/serviceWorker/serviceWorkerRegister.js'))}</script>`
     }),
     new CopyWebpackPlugin([
       {
@@ -83,6 +86,13 @@ module.exports = {
         to: resolve('../dist/static'),
         ignore: ['.*']
       }
-    ])
+    ]),
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'ksana',
+      filename: 'serviceWorker.js',
+      staticFileGlobs: ['dist/*.{js,html,css}'],
+      minify: true,
+      stripPrefix: 'dist/'
+    })
   ]
 }
