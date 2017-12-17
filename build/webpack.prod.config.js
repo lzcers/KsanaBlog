@@ -32,6 +32,11 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        "NODE_ENV": "production"
+      }
+    }),
     new HtmlWebpackPlugin({
       template: resolve('../src', 'index.html'),
       filename: 'index.html',
@@ -44,11 +49,6 @@ module.exports = {
       chunksSortMode: 'dependency',
       serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
         '../src/serviceWorker/serviceWorkerRegister.js'))}</script>`
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        "NODE_ENV": "production"
-      }
     }),
     new ExtractTextPlugin({      
       // filename: isProd ? 'build.[chunkhash:5].css' : 'build-css.css',
