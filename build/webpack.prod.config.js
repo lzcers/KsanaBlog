@@ -6,7 +6,6 @@ const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
-  devtool: "#source-map",
   module: {
     rules: [
       {
@@ -25,10 +24,11 @@ module.exports = {
       }
     ]
   },
+  devtool: "#source-map",  
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        "NODE_ENV": "production"
+        'NODE_ENV': '"production"'
       }
     }),
     new ExtractTextPlugin({      
@@ -37,8 +37,15 @@ module.exports = {
       disable: false,
       allChunks: true
     }),
+    // Compress extracted CSS. We are using this plugin so that possible
+    // duplicated CSS from different components can be deduped.
+    new OptimizeCSSPlugin({
+      cssProcessorOptions: {
+        safe: true
+      }
+    }),
     new CommonsChunkPlugin({
-      names: ["hilight", 'vue', 'marked', 'coreJs']
+      names: ["hilight", 'coreJs', 'vue', 'marked']
     }),
     new UglifyJSPlugin({
       compress: {
@@ -48,13 +55,6 @@ module.exports = {
       sourceMap: true,
       output: {
         comments: false
-      }
-    }),
-    // Compress extracted CSS. We are using this plugin so that possible
-    // duplicated CSS from different components can be deduped.
-    new OptimizeCSSPlugin({
-      cssProcessorOptions: {
-        safe: true
       }
     }),
     new BundleAnalyzerPlugin()
