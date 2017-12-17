@@ -3,8 +3,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJSPlugin = webpack.optimize.UglifyJsPlugin
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+
+const fs = require('fs')
+const path = require('path')
+const resolve = (...dir) => path.resolve(__dirname, ...dir)
 
 module.exports = {
   devtool: "#source-map",
@@ -27,6 +32,19 @@ module.exports = {
     ]
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: resolve('../src', 'index.html'),
+      filename: 'index.html',
+      // favicon: require('./src/config').favicon || false,
+      minify: {
+        // https://github.com/kangax/html-minifier#options-quick-reference
+        removeComments: true,
+        collapseWhitespace: true
+      },
+      chunksSortMode: 'dependency',
+      serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
+        '../src/serviceWorker/serviceWorkerRegister.js'))}</script>`
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         "NODE_ENV": "production"
@@ -38,13 +56,6 @@ module.exports = {
       disable: false,
       allChunks: true
     }),
-    // new CopyWebpackPlugin([
-    //   {
-    //     from: resolve('src/assets'),
-    //     to: resolve('dist/assets'),
-    //     ignore: ['.*']
-    //   }
-    // ]),
     new CommonsChunkPlugin({
       names: ["hilight", 'vue', 'marked', 'coreJs']
     }),
@@ -64,6 +75,14 @@ module.exports = {
       cssProcessorOptions: {
         safe: true
       }
+    }),
+    // service worker caching
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'ksana',
+      filename: 'serviceWorker.js',
+      staticFileGlobs: ['dist/*.{js,html,css}'],
+      minify: true,
+      stripPrefix: 'dist/'
     }),
     new BundleAnalyzerPlugin()
   ]

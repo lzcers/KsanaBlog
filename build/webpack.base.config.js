@@ -2,7 +2,10 @@
   webpack 打包的基础配置
 */
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const path = require('path')
+const fs = require('fs')
 const resolve = (...dir) => path.resolve(__dirname, ...dir)
 
 module.exports = {
@@ -73,6 +76,13 @@ module.exports = {
         collapseWhitespace: true
       },
       chunksSortMode: 'dependency'
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: resolve('../src/static'),
+        to: resolve('../dist/static'),
+        ignore: ['.*']
+      }
+    ])
   ]
 }
