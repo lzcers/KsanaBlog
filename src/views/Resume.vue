@@ -145,7 +145,7 @@ export default Vue.extend({
     let f = <any>document.getElementById('printme')
     if (f != null) {
       f.contentDocument.write(`
-        <link href="/assets/styles.fb8a7.css" rel="stylesheet">        
+        <link href="/assets/styles.16070.css" rel="stylesheet">        
         <style>
           .resume-header {
             display: flex;
