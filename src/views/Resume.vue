@@ -66,6 +66,7 @@
       <div class="other">
         <h3 class="title">其他</h3>
         <li>在华为期间参与过华为首届黑客马拉松拿了二等奖，拿过华为明日之星奖，参与过 Scrum 等技能培训，担任过部门总体技术组的执行秘书，组织会议、技术分享、讨论等活动。</li>
+        <br/>
         <li>在校期间自学了清华大学 MOOC 在线课程《数据结构》通过考试并取得了<strong><a href="http://www.xuetangx.com/check_credential/0e3e84c12f9e5f1666a76442733801ca">证书</a></strong>。</li>
         <br/>
         <li>在校期间看书《Orange’S:一个操作系统的实现》捣鼓过操作系统实现，并自学过汇编语言，用 Python 给学校做过微信公众号、资产管理系统等玩具。</li>
