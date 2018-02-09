@@ -22,8 +22,6 @@
     margin: 0;
     padding: 0;
     /* 避免滚动条出现导致跳动 */
-    width: 100vw;
-    overflow-x: hidden;
     box-sizing: border-box;
     font-family: "Lucida Grande","Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Zen Hei","WenQuanYi Micro Hei","Noto Sans CJK SC","Source Han Sans CN",SimSun,sans-serif;
   }
@@ -69,7 +67,9 @@
       width: 100%;
     }
     @media screen and (min-device-width: 1280px) {
-       width: 80%;
+       width: 100%;
+       padding-right: 50px;
+       padding-left: 50px;
     }
   }
 

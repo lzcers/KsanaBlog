@@ -17,9 +17,13 @@ module.exports = {
   // 开发环境需要将请求反向代理到本地的 Golang 后端
   devServer: {
     proxy: {
+      // '/api': {
+      //   target: 'http://localhost:9090',
+      //   pathRewrite: {'^/api': ''}
+      // },
       '/api': {
-        target: 'http://localhost:9090',
-        pathRewrite: {'^/api': ''}
+        target: 'https://ksana.net',
+        secure: false
       }
     }
   },

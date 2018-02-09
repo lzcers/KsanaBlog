@@ -1,9 +1,5 @@
 <template>
 <div class="post-wrap">
-  <div class="post-toc" v-if="tocTree != undefined && tocTree.childrenNode.length != 0">
-    <div class="toc-header">目录：</div>
-    <md-toc :tocTree="tocTree"></md-toc>
-  </div>
   <section class="post-container">
     <article class="post-view" v-if="post">
       <div class="post-view-header">
@@ -21,6 +17,10 @@
     </article> 
       <!-- <img src="../assets/loading.gif" class="loading" v-if="!post" ></img>   -->
   </section>
+  <div class="post-toc" v-if="tocTree != undefined && tocTree.childrenNode.length != 0">
+    <div class="toc-header">目录：</div>
+    <md-toc :tocTree="tocTree"></md-toc>
+  </div>
 </div>
 </template>
 
@@ -40,10 +40,11 @@
     box-shadow: 1px 1px 3px #eee;
     padding: 0 5%;
   }
+
   @media screen and (max-device-width: 1280px) {
     .post-wrap {
       width: 100%;
-      flex-flow: column nowrap;
+      flex-flow: column-reverse nowrap;
     }
     .post-toc {
       height: fit-content;
@@ -58,6 +59,8 @@
       flex: 1;
     }
     .post-toc {
+      position: sticky;
+      top: 0;
       min-width: max-content;
       height: fit-content;
       ol {
