@@ -1,8 +1,6 @@
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const UglifyJSPlugin = webpack.optimize.UglifyJsPlugin
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
@@ -25,6 +23,12 @@ module.exports = {
     ]
   },
   devtool: "#source-map",  
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
+    // minimize: true // 生产模式自动为 true
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -42,19 +46,6 @@ module.exports = {
     new OptimizeCSSPlugin({
       cssProcessorOptions: {
         safe: true
-      }
-    }),
-    new CommonsChunkPlugin({
-      names: ["hilight", 'coreJs', 'vue', 'marked']
-    }),
-    new UglifyJSPlugin({
-      compress: {
-        warnings: false,
-        drop_console: false
-      },
-      sourceMap: true,
-      output: {
-        comments: false
       }
     }),
     new BundleAnalyzerPlugin()
