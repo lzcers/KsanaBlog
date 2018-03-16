@@ -80,6 +80,7 @@ import Vue from 'vue'
 import headerBar from './components/headerBar.vue'
 import { authorizationCheck } from './api'
 import footerBar from './components/footerBar.vue'
+import { Object } from 'core-js/library/web/timers';
 
 export default Vue.extend({
   name: "App",

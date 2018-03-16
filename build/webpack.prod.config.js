@@ -25,8 +25,12 @@ module.exports = {
   devtool: "#source-map",  
   optimization: {
     splitChunks: {
-      chunks: 'all'
+      chunks: 'all',
+      name: 'common',
     },
+    runtimeChunk: {
+      name: 'runtime',
+    }
     // minimize: true // 生产模式自动为 true
   },
   plugins: [
@@ -48,6 +52,6 @@ module.exports = {
         safe: true
       }
     }),
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin()
   ]
 }
