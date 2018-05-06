@@ -1,5 +1,8 @@
 <template>
   <div class="aboutme-container">
+    <div class="lifegame">
+      <lifegame></lifegame>      
+    </div>
     <blockquote>
       <p>
       如果说艺术解释了我们的梦想，那么计算机就是以程序的名义执行着它们。<br />
@@ -24,6 +27,9 @@
 
 <style lang="less">
   .aboutme-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
     width: 100%;    
     margin-top: 20px;
     color: #333;
@@ -35,12 +41,19 @@
       width: 80%;
     }
   }
+  .lifegame {
+    width: 500px;
+    height: 500px;
+  }
 </style>
 
 <script lang="ts">
 import Vue from 'vue'
+import lifegame from '../components/lifegame.vue'
 
 export default Vue.extend({
-  
+  components: {
+    lifegame
+  }
 })
 </script>

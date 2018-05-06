@@ -28,7 +28,6 @@
             <li><router-link to="/project">Project</router-link></li>
             <li><router-link to="/aboutme">About</router-link></li>
           </nav>
-          <lifegame></lifegame>
         </div>
       <!-- </div> -->
   </header>
@@ -130,11 +129,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import lifegame from './lifegame.vue'
 
 export default Vue.extend({
-  components: {
-    lifegame
-  }
 })
 </script>
